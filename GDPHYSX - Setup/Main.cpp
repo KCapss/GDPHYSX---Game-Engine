@@ -10,6 +10,9 @@
 
 #include <string>
 #include <iostream>
+#include <cstdlib>
+
+using namespace std;
 
 
 glm::vec3 bunnyMove(0, 0, 0),
@@ -18,7 +21,17 @@ bunnyRotateAxis(0, 0, 0);
 
 float bunnyRadians(0);
 
-void updateInput(GLFWwindow* window, glm::vec3& position, glm::vec3& scale, glm::vec3& rotation, float* thetaX, float* thetaY, float time);
+void updateInput(GLFWwindow* window, glm::vec3& position, glm::vec3& scale, glm::vec3& rotation, float* thetaX, float* thetaY, float time, bool* isMoving, int* dir, bool* isGravity, bool* didReset);
+void applyForce(glm::vec3& position, int dir);
+void applyGravity(glm::vec3& position);
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
+// Physics variables for input listener
+bool isMoving = false;
+bool isGravity = false;
+bool didReset = false;
+int dir = 0;
 
 int main(void)
 {
@@ -62,8 +75,6 @@ int main(void)
 
     const char* fragSrc = fragStr.c_str();
     /*Defaul Parameters*/
-
-
 
     /* Initialize the library */
     if (!glfwInit())
@@ -172,8 +183,14 @@ int main(void)
 
     glm::mat4 viewMatrix = cameraOrientation * cameraPositionMatrix;
 
+    // Seed random number generator
+    srand((unsigned)time(NULL));
 
+    // Key callback
+    glfwSetKeyCallback(window, key_callback);
 
+    // Set initial position
+    glm::mat4 transform = glm::mat4(1.0f);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -185,16 +202,35 @@ int main(void)
         float deltaTime = currTime - lastTime;
 
         //Update the Latest Position in each perspective
-        updateInput(window, bunnyMove, bunnyScaleAxis, bunnyRotateAxis, &bunnyRadiansx, &bunnyRadiansy, deltaTime);
+        //updateInput(window, bunnyMove, bunnyScaleAxis, bunnyRotateAxis, &bunnyRadiansx, &bunnyRadiansy, deltaTime, &isMoving, &dir, &isGravity, &didReset);
 
         //Apply Linear Transformation
         glm::mat4 identity = glm::mat4(1.0f);
-        glm::mat4 transform = glm::translate(identity, bunnyMove);
-        transform = glm::translate(transform, glm::vec3(0, 0, -5.0f));//??
+
+        //glm::mat4 transform = glm::translate(identity, bunnyMove);
+
+        glm::mat4 transform = glm::mat4(1.0f);
+
+        if (didReset)
+        {
+            isMoving = false;
+            bunnyMove = { 0, 0, 0 };
+            didReset = false;
+        }
+        if (isGravity)
+        {
+            applyGravity(bunnyMove);
+        }
+        if (isMoving) {
+            applyForce(bunnyMove, dir);
+        }
+        transform = glm::translate(identity, bunnyMove);
+
+        //transform = glm::translate(transform, glm::vec3(0, 0, -5.0f));//??
 
 
         transform = glm::scale(transform, bunnyScaleAxis);
-        
+
         //Rotation
         transform = glm::rotate(transform, glm::radians(bunnyRadiansx), glm::vec3(0, 1, 0));
         transform = glm::rotate(transform, glm::radians(bunnyRadiansy), glm::vec3(1, 0, 0));
@@ -257,40 +293,75 @@ int main(void)
 }
 
 
-
-void updateInput(GLFWwindow* window, glm::vec3& position, glm::vec3& scale, glm::vec3& rotation, float* thetaX, float* thetaY, float time)
+/*
+void updateInput(GLFWwindow* window, glm::vec3& position, glm::vec3& scale, glm::vec3& rotation, float* thetaX, float* thetaY, float time, bool* isMoving, int* dir, bool* isGravity, bool* didReset)
 {
+    bool wPressed = false;
+
+    // Randomly select 1 of 4 directions, 0 - up, 1 - right, 2 - down, 3 - left
+    bool wCurrentlyPressed = glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS;
+
+    if(!wPressed && wCurrentlyPressed)
+    {
+        *dir = rand() % 4;
+        std::cout << "Number is " << *dir << std::endl;
+        *isMoving = !*isMoving;
+    }
+    wPressed = wCurrentlyPressed;
+
+    // Apply Gravity
+    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+    {
+        if (*isGravity == false)
+            *isGravity = true;
+        else if (*isGravity == true)
+        {
+            bunnyMove = { 0, 0, 0 };
+            *isGravity = false;
+        }
+    }
+
+    // Reset Position
+    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+    {
+        *didReset = true;
+    }
+
 
     //Translation (WASD)
+    /*
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-        position.x -= 1.0f * time;
-
+        //position.x -= 10.0f;
+        *isMoving = true;
     }
 
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-        position.x += 1.0f * time;
+        position.x += 10.0f * time;
+        *isMoving = !*isMoving;
 
     }
 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-        position.y += 1.0f * time;
+        position.y += 10.0f * time;
+        *isMoving = !*isMoving;
 
     }
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-        position.y -= 1.0f * time;
-
+        position.y -= 10.0f * time;
+        *isMoving = !*isMoving;
     }
 
     if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
-        position.z -= 20.0f * time;
-
+        position.z -= 10.0f * time;
+        *isMoving = !*isMoving;
     }
     if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
-        position.z += 20.0f * time;
-
+        position.z += 10.0f * time;
+        *isMoving = !*isMoving;
     }
+    */
 
-
+    /*
     //Scaling(Q/E)
     if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
         scale.x -= 0.5f * time;
@@ -327,9 +398,50 @@ void updateInput(GLFWwindow* window, glm::vec3& position, glm::vec3& scale, glm:
 
     }
 
-
-
-
-
 }
+*/
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if (key == GLFW_KEY_W && action == GLFW_PRESS)
+    {
+        dir = rand() % 4;
+        std::cout << "Number is " << dir << std::endl;
+        isMoving = true;
+    }
+    if (key == GLFW_KEY_E && action == GLFW_PRESS)
+    {
+        isGravity = !isGravity;
+    }
+    if (key == GLFW_KEY_Q && action == GLFW_PRESS)
+    {
+        didReset = !didReset;
+    }
+}
+
+void applyForce(glm::vec3& position, int dir)
+{
+    // Move Up
+    if (dir == 0) {
+        position.y += 0.2f;
+    }
+    // Move Right
+    else if (dir == 1) {
+        position.x += 0.2f;
+    }
+    // Move Down
+    else if (dir == 2) {
+        position.y -= 0.2f;
+    }
+    // Move Right
+    else if (dir == 3) {
+        position.x -= 0.2f;
+    }
+}
+
+void applyGravity(glm::vec3& position)
+{
+    position.y -= 0.05f;
+}
+
 
