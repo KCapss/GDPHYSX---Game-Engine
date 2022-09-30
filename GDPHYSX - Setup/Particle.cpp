@@ -8,7 +8,10 @@ Particle::Particle()
     this->mass = 0;
     this->position = vec3(0.0f);
     this->velocity = vec3(0.0f);
-    this->acceleration = vec3(0.f, -9.8f, 0.f);
+    this->acceleration = vec3(0.0f);
+
+    //Gravity
+    this->isGravityOn = false;
 }
 
 Particle::Particle(vec3 Pos, float Mass)
@@ -16,7 +19,10 @@ Particle::Particle(vec3 Pos, float Mass)
     this->mass = Mass;
     this->position = vec3(0.0f);
     this->velocity = vec3(0.0f);
-    this->acceleration = vec3(0.f, -9.8f, 0.f);
+    this->acceleration = vec3(0.0f);
+
+    //Gravity
+    this->isGravityOn = false;
 }
 
 
@@ -28,7 +34,10 @@ glm::mat4 Particle::computeTransform()
 
 void Particle::setMass(float mass)
 {
+    //Initial Proposal
     this->mass = mass;
+
+    //Can be later change to add or subract rather than replacing
 }
 
 float Particle::getMass()
@@ -47,8 +56,13 @@ void Particle::updateVelocity(vec3 velocity, float deltaTime)
 {
 
     //Assuming gravity is on
-    this->velocity = (this->velocity + (GRAVITY * deltaTime));
-
+    if (isGravityOn) {
+        this->velocity = (this->velocity + (GRAVITY * deltaTime)) + (velocity * deltaTime);
+    }
+    
+    else {
+        this->velocity = (this->velocity) + (velocity * deltaTime);
+    }
     
     cout << "velocity y:" << this->velocity.y << endl;
     updatePosition(deltaTime);
@@ -56,11 +70,21 @@ void Particle::updateVelocity(vec3 velocity, float deltaTime)
 
 void Particle::updateAcceleration(vec3 acceleration)
 {
-    //acceleration constant = gravity
+    //initial Proposal
     this->acceleration = acceleration;
 }
 
+
+//Still testing for error if it applied on multiple iteration
 void Particle::applyForce(vec3 Force)
 {
-    this->acceleration = Force / this->mass;
+
+    this->velocity +=  (Force / this->mass); // there can be an error if mass is 0
+}
+
+void Particle::toogleGravity(bool flag)
+{
+
+
+    this->isGravityOn = flag;
 }

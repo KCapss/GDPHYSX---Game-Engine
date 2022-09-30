@@ -29,18 +29,24 @@ public:
 	void updateAcceleration(vec3 acceleration);
 	void applyForce(vec3 Force);
 
+	//Constant Force
+	void toogleGravity(bool flag);
+
+
+
 	//Properties
 	glm::vec3 position;
 	glm::vec3 velocity;
 	glm::vec3 acceleration;
 
-	bool isGravityOn;
-	const float GRAVITY = 9.8f;
+	
+	
 
 private:
-	
+
+	bool isGravityOn;
 	float mass;
 
-
+	const float GRAVITY = 9.8f;
 };
 
