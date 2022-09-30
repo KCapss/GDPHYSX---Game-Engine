@@ -32,6 +32,7 @@ bool isMoving = false;
 bool isGravity = false;
 bool didReset = false;
 int dir = 0;
+int useZ = 0;
 
 int main(void)
 {
@@ -236,8 +237,6 @@ int main(void)
         transform = glm::rotate(transform, glm::radians(bunnyRadiansy), glm::vec3(1, 0, 0));
 
 
-
-
         glm::mat4 projection = glm::perspective(glm::radians(60.0f),
             height / width,
             0.0f,
@@ -405,8 +404,14 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 {
     if (key == GLFW_KEY_W && action == GLFW_PRESS)
     {
-        dir = rand() % 4;
-        std::cout << "Number is " << dir << std::endl;
+        // Select random cardinal direction
+        dir = rand() % 7;
+        std::cout << "Direction is " << dir << std::endl;
+
+        // check if +z, -z or no z will be used
+        useZ = rand() % 30;
+        std::cout << "Z use is " << useZ << std::endl;
+
         isMoving = true;
     }
     if (key == GLFW_KEY_E && action == GLFW_PRESS)
@@ -421,27 +426,66 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 
 void applyForce(glm::vec3& position, int dir)
 {
-    // Move Up
+
+    float testSpeed = 0.2f;
+
+    // Cardinal Direction
+    // Move North
     if (dir == 0) {
-        position.y += 0.2f;
+        position.y += testSpeed;
     }
-    // Move Right
+    // Move East
     else if (dir == 1) {
-        position.x += 0.2f;
+        position.x += testSpeed;
     }
-    // Move Down
+    // Move South
     else if (dir == 2) {
-        position.y -= 0.2f;
+        position.y -= testSpeed;
     }
-    // Move Right
+    // Move West
     else if (dir == 3) {
-        position.x -= 0.2f;
+        position.x -= testSpeed;
     }
+    // Move NorthEast
+    else if (dir == 4) {
+        position.y += testSpeed;
+        position.x += testSpeed;
+    }
+    // Move SouthEast
+    else if (dir == 5) {
+        position.y -= testSpeed;
+        position.x += testSpeed;
+    }
+    // Move SouthWest
+    else if (dir == 6) {
+        position.y -= testSpeed;
+        position.x -= testSpeed;
+    }
+    // Move NorthWest
+    else if (dir == 7) {
+        position.y += testSpeed;
+        position.x -= testSpeed;
+    }
+
+    // Z Axis Use
+    if (useZ >= 0 && useZ <= 9) // positive z
+    {
+        position.z += testSpeed;
+    }
+    else  if (useZ >= 10 && useZ <= 19) // negative z
+    {
+        position.z -= testSpeed;
+    }
+    // if 20 to 30, dont increment/decrement z
+   
+
 }
 
 void applyGravity(glm::vec3& position)
 {
-    position.y -= 0.05f;
+    float gravitySpeed = 0.1f;
+
+    position.y -= gravitySpeed;
 }
 
 
