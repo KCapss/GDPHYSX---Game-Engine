@@ -39,14 +39,12 @@ public:
 	glm::vec3 velocity;
 	glm::vec3 acceleration;
 
-	
-	
 
 private:
 
 	bool isGravityOn;
 	float mass;
 
-	const float GRAVITY = 9.8f;
+	const float GRAVITY = -9.8f;
 };
 
