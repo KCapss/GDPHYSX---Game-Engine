@@ -17,7 +17,7 @@ Particle::Particle()
 Particle::Particle(vec3 Pos, float Mass)
 {
     this->mass = Mass;
-    this->position = vec3(0.0f);
+    this->position = vec3(Pos.x, Pos.y, Pos.z);
     this->velocity = vec3(0.0f);
     this->acceleration = vec3(0.0f);
 
@@ -57,14 +57,14 @@ void Particle::updateVelocity(vec3 velocity, float deltaTime)
 
     //Assuming gravity is on
     if (isGravityOn) {
-        this->velocity = (this->velocity + (GRAVITY * deltaTime)) + (velocity * deltaTime);
+        this->velocity = (this->velocity + (vec3(0.f, GRAVITY, 0.f) * deltaTime)) + (velocity * deltaTime);
     }
     
     else {
         this->velocity = (this->velocity) + (velocity * deltaTime);
     }
     
-    cout << "velocity y:" << this->velocity.y << endl;
+    cout << "velocity x: " << this->velocity.x << "\tvelocity y:" << this->velocity.y << "\tvelocity z: " << this->velocity.z << endl;
     updatePosition(deltaTime);
 }
 
@@ -84,7 +84,5 @@ void Particle::applyForce(vec3 Force)
 
 void Particle::toogleGravity(bool flag)
 {
-
-
     this->isGravityOn = flag;
 }
