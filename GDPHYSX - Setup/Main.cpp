@@ -30,7 +30,7 @@ void applyGravity(glm::vec3& position);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 // Physics variables for input listener
-bool isMoving = false;
+bool isForceApplied = false;
 bool isGravity = false;
 bool didReset = false;
 int dir = 0;
@@ -216,7 +216,7 @@ int main(void)
 
         if (didReset)
         {
-            isMoving = false;
+            isForceApplied = false;
             particle->position = {0, 0, -65.f};
             particle->velocity = vec3{ 0.f };
             didReset = false;
@@ -230,14 +230,20 @@ int main(void)
         }
         else if (!isGravity)
         {
+            
+            if (particle->checkGravityStatus()) {
+                cout << "Halt Velocity" << endl;
+                particle->toogleGravity(false);
+                particle->velocity = vec3{ 0.f }; // when gravity is disabled so is velocity
+            }
             particle->toogleGravity(false);
-            particle->velocity = vec3{ 0.f }; // when gravity is disabled so is velocity
+                
 ;        }
 
         // Apply Force
-        if (isMoving) {
+        if (isForceApplied) {
             applyForce(particle->velocity, dir, deltaTime);
-            //isMoving = false;
+            isForceApplied = false;
         }
 
         glm::mat4 projection = glm::perspective(glm::radians(60.0f),
@@ -306,11 +312,12 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         useZ = rand() % 30;
         std::cout << "Z use is " << useZ << std::endl;
 
-        isMoving = true;
+        isForceApplied = true;
     }
     if (key == GLFW_KEY_E && action == GLFW_PRESS)
     {
         isGravity = !isGravity;
+        
     }
     if (key == GLFW_KEY_Q && action == GLFW_PRESS)
     {

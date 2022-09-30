@@ -64,7 +64,7 @@ void Particle::updateVelocity(vec3 velocity, float deltaTime)
         this->velocity = (this->velocity) + (velocity * deltaTime);
     }
     
-    cout << "velocity x: " << this->velocity.x << "\tvelocity y:" << this->velocity.y << "\tvelocity z: " << this->velocity.z << endl;
+    //cout << "velocity x: " << this->velocity.x << "\tvelocity y:" << this->velocity.y << "\tvelocity z: " << this->velocity.z << endl;
     updatePosition(deltaTime);
 }
 
@@ -85,4 +85,9 @@ void Particle::applyForce(vec3 Force)
 void Particle::toogleGravity(bool flag)
 {
     this->isGravityOn = flag;
+}
+
+bool Particle::checkGravityStatus()
+{
+    return this->isGravityOn;
 }

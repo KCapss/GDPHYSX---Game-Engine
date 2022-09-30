@@ -31,6 +31,7 @@ public:
 
 	//Constant Force
 	void toogleGravity(bool flag);
+	bool checkGravityStatus();
 
 
 
