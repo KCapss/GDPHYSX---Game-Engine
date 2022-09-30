@@ -16,14 +16,6 @@
 
 using namespace std;
 
-
-glm::vec3 bunnyMove(0, 0, 0),
-bunnyScaleAxis(3, 3, 3),
-bunnyRotateAxis(0, 0, 0);
-
-float bunnyRadians(0);
-
-void updateInput(GLFWwindow* window, glm::vec3& position, glm::vec3& scale, glm::vec3& rotation, float* thetaX, float* thetaY, float time, bool* isMoving, int* dir, bool* isGravity, bool* didReset);
 void applyForce(glm::vec3& position, int dir, float deltaTime);
 void applyGravity(glm::vec3& position);
 
