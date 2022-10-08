@@ -1,5 +1,18 @@
 #include "Ballistic.h"
 
+Ballistic::Ballistic() : Particle()
+{
+
+}
+
+Ballistic::Ballistic(vec3 Pos, float mass) : Particle(Pos, mass)
+{
+
+
+}
+
+
+
 void Ballistic::setShotType(shotType currentShotType)
 {
 	switch (currentShotType)

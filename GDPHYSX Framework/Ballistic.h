@@ -4,7 +4,11 @@ class Ballistic :
     public Particle
 {
 public:
-    using Particle::Particle;
+    //using Particle::Particle;
+
+    Ballistic();
+    Ballistic(vec3 Pos, float mass);
+    
 
     // Properties
     enum shotType {
