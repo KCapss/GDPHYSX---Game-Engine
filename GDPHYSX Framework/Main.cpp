@@ -321,7 +321,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 glm::vec3 applyForce( int dir, float deltaTime)
 {
     vec3 position(0);
-    float testSpeed = 10000.f * deltaTime;
+    float testSpeed = 5.0f;
 
     // Cardinal Direction
     // Move North

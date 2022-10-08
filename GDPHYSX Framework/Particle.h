@@ -26,18 +26,20 @@ public:
 	virtual void setVelocity(vec3 velocity);
 	virtual void setAcceleration(vec3 acceleration);
 
-
-
+	
 	void setMass(float mass);
 
 	//Getter
 	virtual	vec3 getPosition();
 	float getMass();
 
-	//Physics
+	//Physics == Debuging
 	void updatePosition(float deltaTime);
 	void updateVelocity(vec3 velocity, float deltaTime);
 	void updateAcceleration(vec3 acceleration);
+
+
+	//Physics Application
 	void applyForce(vec3 Force);
 
 
