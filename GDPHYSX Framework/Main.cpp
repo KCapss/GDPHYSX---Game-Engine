@@ -13,13 +13,18 @@
 #include <cstdlib>
 
 #include "Particle.h"
+#include "Ballistic.h"
 
 using namespace std;
 
 glm::vec3 applyForce(int dir, float deltaTime);
 void applyGravity(glm::vec3& position);
 
+void forceToggled();
+
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 
 // Physics variables for input listener
 bool isForceApplied = false;
@@ -27,6 +32,9 @@ bool isGravity = false;
 bool didReset = false;
 int dir = 0;
 int useZ = 0;
+
+// Test Ballistic 
+Ballistic* ballistic = new Ballistic(vec3{ 0.0f, 0.0f, 0.0f }, 10.f);
 
 int main(void)
 {
@@ -183,6 +191,7 @@ int main(void)
 
     // Key callback
     glfwSetKeyCallback(window, key_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
 
     // Set initial position
     glm::mat4 transform = glm::mat4(1.0f);
@@ -297,15 +306,7 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 {
     if (key == GLFW_KEY_W && action == GLFW_PRESS)
     {
-        // Select random cardinal direction
-        dir = rand() % 7;
-        std::cout << "Direction is " << dir << std::endl;
-
-        // check if +z, -z or no z will be used
-        useZ = rand() % 30;
-        std::cout << "Z use is " << useZ << std::endl;
-
-        isForceApplied = true;
+        forceToggled();
     }
     if (key == GLFW_KEY_E && action == GLFW_PRESS)
     {
@@ -315,6 +316,42 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     if (key == GLFW_KEY_Q && action == GLFW_PRESS)
     {
         didReset = !didReset;
+    }
+
+    // Switching Projectile Type
+    if (key == GLFW_KEY_1 && action == GLFW_PRESS)
+    {
+        cout << "1 Pressed" << endl;
+        ballistic->setShotType(Ballistic::PISTOL);
+    }
+    if (key == GLFW_KEY_2 && action == GLFW_PRESS)
+    {
+        cout << "2 Pressed" << endl;
+        ballistic->setShotType(Ballistic::ARTILLERY);
+    }
+    if (key == GLFW_KEY_3 && action == GLFW_PRESS)
+    {
+        cout << "3 Pressed" << endl;
+        ballistic->setShotType(Ballistic::FIREBALL);
+    }
+    if (key == GLFW_KEY_4 && action == GLFW_PRESS)
+    {
+        cout << "4 Pressed" << endl;
+        ballistic->setShotType(Ballistic::LASER);
+    }
+    if (key == GLFW_KEY_5 && action == GLFW_PRESS)
+    {
+        cout << "5 Pressed" << endl;
+        ballistic->setShotType(Ballistic::FIREWORK);
+    }
+}
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+    // Firing Ballistic
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+    {
+        cout << "Left Mouse Button Pressed" << endl;
     }
 }
 
@@ -382,3 +419,15 @@ void applyGravity(glm::vec3& position)
     position.y -= gravitySpeed;
 }
 
+void forceToggled()
+{
+    // Select random cardinal direction
+    dir = rand() % 7;
+    std::cout << "Direction is " << dir << std::endl;
+
+    // check if +z, -z or no z will be used
+    useZ = rand() % 30;
+    std::cout << "Z use is " << useZ << std::endl;
+
+    isForceApplied = true;
+}
