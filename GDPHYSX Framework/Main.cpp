@@ -16,7 +16,7 @@
 
 using namespace std;
 
-void applyForce(glm::vec3& position, int dir, float deltaTime);
+glm::vec3 applyForce(int dir, float deltaTime);
 void applyGravity(glm::vec3& position);
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
@@ -32,7 +32,7 @@ int main(void)
 {
     GLFWwindow* window;
 
-    std::string path = "3D/ball.obj";
+    std::string path = "3D/OGBall.obj";
     std::vector<tinyobj::shape_t> shapes;
     std::vector<tinyobj::material_t> material;
     std::string warning, error;
@@ -75,11 +75,11 @@ int main(void)
     if (!glfwInit())
         return -1;
 
-    float height = 800;
-    float width = 800;
+    float height = 720;
+    float width = 1280;
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(width, height, "Kevin Capalar", NULL, NULL);
+    window = glfwCreateWindow(width, height, "PHYSICS ENGINE 01", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -199,18 +199,16 @@ int main(void)
         GLfloat currTime = glfwGetTime();
         float deltaTime = currTime - lastTime;
 
-        particle->updateVelocity(vec3{0.f}, deltaTime);
-
         //Apply Linear Transformation
         glm::mat4 identity = glm::mat4(1.0f);
 
-        glm::mat4 transform = glm::translate(identity, vec3(particle->position.x, particle->position.y, particle->position.z));
+        glm::mat4 transform = glm::translate(identity, particle->getPosition());
 
         if (didReset)
         {
             isForceApplied = false;
-            particle->position = {0, 0, -65.f};
-            particle->velocity = vec3{ 0.f };
+            particle->setPosition(vec3(0, 0, -65.f));
+            particle->setVelocity(vec3(0));
             didReset = false;
         }
 
@@ -226,7 +224,7 @@ int main(void)
             if (particle->checkGravityStatus()) {
                 cout << "Halt Velocity" << endl;
                 particle->toogleGravity(false);
-                particle->velocity = vec3{ 0.f }; // when gravity is disabled so is velocity
+                particle->setVelocity(vec3(0)); // when gravity is disabled so is velocity
             }
             particle->toogleGravity(false);
                 
@@ -234,14 +232,17 @@ int main(void)
 
         // Apply Force
         if (isForceApplied) {
-            applyForce(particle->velocity, dir, deltaTime);
+            particle->applyForce(applyForce(dir, deltaTime));
             isForceApplied = false;
         }
 
+        //After All Computation
+        particle->updatePosition(deltaTime);
+
         glm::mat4 projection = glm::perspective(glm::radians(60.0f),
-            height / width,
-            0.0f,
-            100.0f);
+            width / height,
+            0.0f, //Near Clipping
+            100.0f); //Far Clipping
 
 
         //Apply Shader Program
@@ -317,10 +318,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
     }
 }
 
-void applyForce(glm::vec3& position, int dir, float deltaTime)
+glm::vec3 applyForce( int dir, float deltaTime)
 {
-
-    float testSpeed = 1000.f * deltaTime;
+    vec3 position(0);
+    float testSpeed = 10000.f * deltaTime;
 
     // Cardinal Direction
     // Move North
@@ -370,6 +371,8 @@ void applyForce(glm::vec3& position, int dir, float deltaTime)
         position.z -= testSpeed;
     }
     // if 20 to 30, dont increment/decrement z
+
+    return position;
 }
 
 void applyGravity(glm::vec3& position)
@@ -379,110 +382,3 @@ void applyGravity(glm::vec3& position)
     position.y -= gravitySpeed;
 }
 
-/*
-void updateInput(GLFWwindow* window, glm::vec3& position, glm::vec3& scale, glm::vec3& rotation, float* thetaX, float* thetaY, float time, bool* isMoving, int* dir, bool* isGravity, bool* didReset)
-{
-    bool wPressed = false;
-
-    // Randomly select 1 of 4 directions, 0 - up, 1 - right, 2 - down, 3 - left
-    bool wCurrentlyPressed = glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS;
-
-    if(!wPressed && wCurrentlyPressed)
-    {
-        *dir = rand() % 4;
-        std::cout << "Number is " << *dir << std::endl;
-        *isMoving = !*isMoving;
-    }
-    wPressed = wCurrentlyPressed;
-
-    // Apply Gravity
-    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-    {
-        if (*isGravity == false)
-            *isGravity = true;
-        else if (*isGravity == true)
-        {
-            bunnyMove = { 0, 0, 0 };
-            *isGravity = false;
-        }
-    }
-
-    // Reset Position
-    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
-    {
-        *didReset = true;
-    }
-
-
-    //Translation (WASD)
-    /*
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-        //position.x -= 10.0f;
-        *isMoving = true;
-    }
-
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-        position.x += 10.0f * time;
-        *isMoving = !*isMoving;
-
-    }
-
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-        position.y += 10.0f * time;
-        *isMoving = !*isMoving;
-
-    }
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-        position.y -= 10.0f * time;
-        *isMoving = !*isMoving;
-    }
-
-    if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS) {
-        position.z -= 10.0f * time;
-        *isMoving = !*isMoving;
-    }
-    if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS) {
-        position.z += 10.0f * time;
-        *isMoving = !*isMoving;
-    }
-    */
-
-    /*
-    //Scaling(Q/E)
-    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
-        scale.x -= 0.5f * time;
-        scale.y -= 0.5f * time;
-        scale.z -= 0.5f * time;
-
-    }
-
-    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
-        scale.x += 0.5f * time;
-        scale.y += 0.5f * time;
-        scale.z += 0.5f * time;
-
-    }
-
-    //Rotation(Arrow Keys)
-    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
-        *thetaY += 30.0f * time;
-
-    }
-
-    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
-        *thetaY -= 30.0f * time;
-
-    }
-
-    if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
-        *thetaX += 30.0f * time;
-
-    }
-
-    if (glfwGetKey(window, 262) == GLFW_PRESS) {
-        *thetaX -= 30.0f * time;
-
-    }
-
-}
-*/

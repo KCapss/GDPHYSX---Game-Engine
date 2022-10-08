@@ -13,14 +13,25 @@ typedef glm::vec3 vec3;
 class Particle
 {
 public:
-	//Default Constructor
+	//Default Constructor & Destructor
 	Particle();
 	Particle(vec3 Pos, float Mass);
+	~Particle();
+
 	
-	//Method
-	glm::mat4 computeTransform(); 
+	//Setter
+	glm::mat4 computeTransform(); //Place Holder
+
+	virtual void setPosition(vec3 Pos);
+	virtual void setVelocity(vec3 velocity);
+	virtual void setAcceleration(vec3 acceleration);
+
+
 
 	void setMass(float mass);
+
+	//Getter
+	virtual	vec3 getPosition();
 	float getMass();
 
 	//Physics
@@ -29,22 +40,35 @@ public:
 	void updateAcceleration(vec3 acceleration);
 	void applyForce(vec3 Force);
 
+
+	
+
 	//Constant Force
 	void toogleGravity(bool flag);
 	bool checkGravityStatus();
 
 
 
-	//Properties
-	glm::vec3 position;
-	glm::vec3 velocity;
-	glm::vec3 acceleration;
+	
 
 
 private:
 
+	//InClass Method
+	void integrator(float deltaTime);
+	
+
+	//Properties
+	glm::vec3 position;
+	glm::vec3 velocity;
+	glm::vec3 acceleration;
+	
+
 	bool isGravityOn;
 	float mass;
+	float damp;
+
+
 
 	const float GRAVITY = -9.8f;
 };
