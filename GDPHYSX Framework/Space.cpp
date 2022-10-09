@@ -25,7 +25,7 @@ bool Space::initializeWindow()
         return true;
 
     //Init Window
-    this->window = glfwCreateWindow(lengthDim, widthDim, "GDGRAP01- Space Exploration", NULL, NULL);
+    this->window = glfwCreateWindow(lengthDim, widthDim, "GDPHYSX Game Engine", NULL, NULL);
     if (!this->window)
     {
         glfwTerminate();
@@ -50,7 +50,7 @@ void Space::initializeObj()
     //Instantiate all obj
     skybox = new Skybox("skybox");
     player = new Player("ship", this->window);
-    planet = new Model("planet", NoTexture, this->window);
+    planet = new Model("ball", NoTexture, this->window);
     debriInitialize();
 
 
@@ -58,7 +58,7 @@ void Space::initializeObj()
     skybox->retrieveSource(lightSrc, mainCam, alterCam);
     player->retrieveSource(lightSrc, mainCam, alterCam);
     planet->retrieveSource(lightSrc, mainCam, alterCam);
-    debriRetrieveSource();
+    //debriRetrieveSource();
 
 
     //Player Setup
@@ -71,9 +71,9 @@ void Space::initializeObj()
     //planet Setup
     planet->setInitialPos(glm::vec3(0.5f, 0, 15000.f));
     planet->setInitialRotation(glm::vec3(0, 0, 0));
-    planet->setInitialScale(glm::vec3(250.0f));
+    planet->setInitialScale(glm::vec3(1000.0f));
 
-    debriSetup();
+    //debriSetup();
 
 
 }
@@ -151,7 +151,7 @@ void Space::deleteDebri()
 }
 
 //Update all active object
-void Space::update()
+void Space::update(float deltaTime)
 {
     //Skybox
     skybox->update();
@@ -160,7 +160,7 @@ void Space::update()
     player->update();
 
     //Debris
-    planet->update();
+    planet->update(deltaTime);
 
     //special Case = reference object acting as point light
     planet->updateLight();
@@ -182,7 +182,7 @@ void Space::draw()
     //Planet
     planet->draw();
 
-    drawDebri();
+    //drawDebri();
 
     /* Swap front and back buffers */
     glfwSwapBuffers(this->window);
@@ -208,6 +208,6 @@ void Space::deleteBuffer()
 
 
     //All Debris
-    deleteDebri();
+    //deleteDebri();
     glfwTerminate();
 }

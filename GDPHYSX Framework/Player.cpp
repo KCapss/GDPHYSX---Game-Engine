@@ -456,7 +456,7 @@ void Player::playerMovement()
 // Handle Camera State function
 void Player::updateCamera()
 {
-	cameraSwitch();
+	//cameraSwitch(); //Temporary Disable the Switch
 	if (currCam == Perspective) {
         perspCam->RotateCam(this->window, this->shipTransform);
         perspCam->newCamPos(this->shipTransform);
@@ -464,7 +464,7 @@ void Player::updateCamera()
 
     else if (currCam == Orthographic) {
         orthoCam->camPanning(this->window, glm::vec3(this->shipTransform * glm::vec4(0, 0, 0, 1)));
-       // orthoCam->camPanning(this->window, glm::vec3(0, 0, 1));
+       
     }
     
 }
@@ -473,7 +473,7 @@ void Player::updateCamera()
 // Handle Light State function
 void Player::updateLight()
 {
-    lightSwitch();
+    lightSwitch(); //Temporary Disable the Switch
     if (SwitchManager::getInstance()->isShipLightActive()) {
         this->updateLightForward();
     }
@@ -487,6 +487,8 @@ void Player::update()
     if (currCam == Perspective) {
         playerMovement();
     }
+
+
     updateLight();
 	updateCamera();
 

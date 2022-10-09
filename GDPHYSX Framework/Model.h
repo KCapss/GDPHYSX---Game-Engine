@@ -67,7 +67,7 @@ public:
 
 //Process
 	//Switch Function
-	void update();
+	void update(float timeStep);
 	void draw();
 
 	//Removing Buffer after program ends

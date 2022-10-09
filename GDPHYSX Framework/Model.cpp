@@ -289,7 +289,7 @@ void Model::updateLight()
 }
 
 //update function
-void Model::update()
+void Model::update(float timeStep)
 {
     this->perspCam->updateCamera();
     this->orthoCam->updateCamera();

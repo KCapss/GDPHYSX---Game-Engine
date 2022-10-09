@@ -17,6 +17,7 @@ void ObjectTextureManager::loadAll()
 	//with no texture
 	loadObj("planet", "3D/planet.obj");
 	loadObj("ship", "3D/shipPlayer.obj");
+	loadObj("ball", "3D/OGBall.obj");
 
 	//Loading for Obj
 	loadObj("tower", "3D/towerDebri.obj");
