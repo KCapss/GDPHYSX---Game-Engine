@@ -1,5 +1,6 @@
 #include "Model.h"
 
+
 #include "SwitchManager.h"
 #include "ObjectTextureManager.h"
 
@@ -299,7 +300,7 @@ void Model::update(float timeStep)
 void Model::draw()
 {
     glBindVertexArray(0);
-    float time = glfwGetTime();
+    //float time = glfwGetTime();
     //Apply Linear Transformation (Default)
     glm::mat4 identity = glm::mat4(1.0f);
     glm::mat4 transform = glm::translate(identity, this->objPosition);

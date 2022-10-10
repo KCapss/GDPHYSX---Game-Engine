@@ -50,7 +50,7 @@ void Space::initializeObj()
     //Instantiate all obj
     skybox = new Skybox("skybox");
     player = new Player("ship", this->window);
-    planet = new Model("ball", NoTexture, this->window);
+    planet = new ParticleObject("ball", NoTexture, this->window);
     debriInitialize();
 
 
@@ -71,7 +71,7 @@ void Space::initializeObj()
     //planet Setup
     planet->setInitialPos(glm::vec3(0.5f, 0, 15000.f));
     planet->setInitialRotation(glm::vec3(0, 0, 0));
-    planet->setInitialScale(glm::vec3(1000.0f));
+    planet->setInitialScale(glm::vec3(200.0f));
 
     //debriSetup();
 

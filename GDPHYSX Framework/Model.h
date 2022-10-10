@@ -18,6 +18,7 @@
 #include "PerspectiveCamera.h" 
 #include "OrthographicCamera.h"
 
+
 enum ObjectType {
 	NoTexture = 0,
 	WithTexture = 1,
@@ -43,6 +44,8 @@ public:
 	void setInitialRotation(glm::vec3 objRot);
 	void setInitialScale(glm::vec3 objScale);
 
+	//Place Holder
+
 
 
 	//Initialization Process
@@ -67,8 +70,8 @@ public:
 
 //Process
 	//Switch Function
-	void update(float timeStep);
-	void draw();
+	virtual void update(float timeStep);
+	virtual void draw();
 
 	//Removing Buffer after program ends
 	void deAllocate();
@@ -111,8 +114,7 @@ protected:
 
 	//Animation
 	GLuint currTime;
-	float lastTime = 0;
-	float deltaTime = 0;
+	
 
 	
 	

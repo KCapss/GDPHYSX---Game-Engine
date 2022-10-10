@@ -15,8 +15,8 @@ Player::Player(std::string name, GLFWwindow *window): Model(name, ObjectType::Te
     loadTexture();
     loadBuffer();
 
-    currTime = glfwGetTime();
-    lastTime = currTime;
+    //currTime = glfwGetTime();
+    //lastTime = currTime;
     SwitchManager::getInstance()->initialize();
 }
 
@@ -422,8 +422,8 @@ void Player::updateLightForward()
 /*Player Movement Control and update*/
 void Player::playerMovement()
 {
-    currTime = glfwGetTime();
-    deltaTime = currTime - lastTime;
+    //currTime = glfwGetTime();
+    //deltaTime = currTime - lastTime;
     if(glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
     {
         shipTransform = glm::translate(shipTransform, glm::vec3(0, 0, -0.5f));
@@ -449,7 +449,7 @@ void Player::playerMovement()
         shipTransform = glm::rotate(shipTransform, glm::radians(SHIP_ROTATION_SPEED), glm::vec3(-1.0f, 0, 0));
     }
 
-    lastTime = currTime;
+    //lastTime = currTime;
     
 }
 
