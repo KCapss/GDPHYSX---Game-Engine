@@ -56,3 +56,7 @@ void Ballistic::updateBallistic()
 
 
 }
+
+float Ballistic::getAge() {
+	
+}

@@ -21,13 +21,18 @@ public:
 
     // Setter
     void setShotType(shotType chosenShotType);
+    void setAge(float age);
 
     // Getter
     shotType getShotType();
+    float getAge();
 
-    void updateBallistic();
+
+    void updateBallistic(float deltaTime);
 
 private:
     shotType currentShotType = shotType::UNUSED;
+    float age = 0;
+
 };
 

@@ -17,9 +17,6 @@ private:
 	//Methods
 
 
-
-
-
 	//Parameters
 	float age; // Default
 
