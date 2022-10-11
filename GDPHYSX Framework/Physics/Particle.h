@@ -25,6 +25,7 @@ public:
 	virtual void setPosition(vec3 Pos);
 	virtual void setVelocity(vec3 velocity);
 	virtual void setAcceleration(vec3 acceleration);
+	virtual void setDamping(float damp);
 
 	
 	void setMass(float mass);
@@ -42,22 +43,14 @@ public:
 	//Physics Application
 	void applyForce(vec3 Force);
 
-
-	
-
 	//Constant Force
 	void toogleGravity(bool flag);
 	bool checkGravityStatus();
 
-
-
-	
-
+	//InClass Method, Ethan: made public to access in ballistics
+	void integrator(float deltaTime);
 
 private:
-
-	//InClass Method
-	void integrator(float deltaTime);
 	
 
 	//Properties

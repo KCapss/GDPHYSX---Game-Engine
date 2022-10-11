@@ -57,6 +57,11 @@ void Particle::setAcceleration(vec3 acceleration)
     this->acceleration = acceleration;
 }
 
+void Particle::setDamping(float damp)
+{
+    this->damp = damp;
+}
+
 void Particle::setMass(float mass)
 {
     //Initial Proposal
