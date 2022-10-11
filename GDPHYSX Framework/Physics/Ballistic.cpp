@@ -10,7 +10,7 @@ Ballistic::Ballistic(vec3 Pos, float mass) : Particle(Pos, mass)
 
 }
 
-void Ballistic::setShotType(shotType chosenShotType)
+void Ballistic::setShotType(ShotTypes chosenShotType)
 {
 	switch (chosenShotType)
 	{
@@ -46,13 +46,17 @@ void Ballistic::setShotType(shotType chosenShotType)
 	this->currentShotType = chosenShotType; // set shot type
 }
 
-shotType Ballistic::getShotType()
+ShotTypes Ballistic::getShotType()
 {
 	return currentShotType;
 }
 
-void Ballistic::updateBallistic()
+void Ballistic::updateBallistic(float deltaTime)
 {
+	
+	
+}
 
-
+float Ballistic::getAge() {
+	return this->age;
 }

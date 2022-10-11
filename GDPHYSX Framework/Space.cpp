@@ -51,13 +51,18 @@ void Space::initializeObj()
     skybox = new Skybox("skybox");
     player = new Player("ship", this->window);
     planet = new ParticleObject("ball", NoTexture, this->window);
+
     debriInitialize();
+    projectile = new BallisticObject("ball", NoTexture, this->window);
+    projectileContainer = new BallisticContainer();
+
 
 
     //Retrieve their source
     skybox->retrieveSource(lightSrc, mainCam, alterCam);
     player->retrieveSource(lightSrc, mainCam, alterCam);
     planet->retrieveSource(lightSrc, mainCam, alterCam);
+    projectile->retrieveSource(lightSrc, mainCam, alterCam);
     //debriRetrieveSource();
 
 
@@ -76,7 +81,13 @@ void Space::initializeObj()
     //debriSetup();
 
 
+    //Physic Game Object Holder
+    projectile->setInitialScale(glm::vec3(100.0f));
+    projectile->onActivate(ShotTypes::PISTOL); 
+    projectileContainer->loadMagazine(projectile); //load Bullet
+
 }
+
 
 void Space::debriInitialize()
 {
@@ -161,6 +172,9 @@ void Space::update(float deltaTime)
 
     //Debris
     planet->update(deltaTime);
+    
+    //Physics Object
+    projectileContainer->updateMagazine(deltaTime);
 
     //special Case = reference object acting as point light
     planet->updateLight();
@@ -177,18 +191,19 @@ void Space::draw()
     skybox->draw();
 
     //Player
-    player->draw();
+    //player->draw();
 
     //Planet
-    planet->draw();
+    //planet->draw();
 
+    projectileContainer->draw();
     //drawDebri();
 
     /* Swap front and back buffers */
     glfwSwapBuffers(this->window);
 
 
-
+    
 
 
 
@@ -209,5 +224,9 @@ void Space::deleteBuffer()
 
     //All Debris
     //deleteDebri();
+
+    //Physics Object
+    projectileContainer->deleteBuffer();
+
     glfwTerminate();
 }

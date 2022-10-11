@@ -14,6 +14,8 @@
 
 //Physic Base Model
 #include "GameObject/ParticleObject.h"
+#include "GameObject/BallisticContainer.h"
+#include "GameObject/BallisticObject.h"
 
 
 #include "Light.h"
@@ -48,9 +50,14 @@ public:
 private:
 	//Interface:
 	Skybox* skybox;
-	//Model for the player;
-	Model* planet;
 
+	//Model for the physics base model;
+	ParticleObject *planet;
+	BallisticObject* projectile;
+	BallisticContainer* projectileContainer;
+
+
+	//Debri
 	Model* tower;
 	Model* generators;
 	Model* spaceRock;
