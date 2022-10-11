@@ -1,5 +1,5 @@
 #pragma once
-#include "Ballistic.h" 
+#include "BallisticObject.h" 
 #include <vector>
 
 using namespace std;
@@ -7,12 +7,21 @@ using namespace std;
 class BallisticContainer
 {
 public:
-	vector<Ballistic*> getMagazine();
-	void loadMagazine(Ballistic* bullet);
+
+	//Constructor
+
+
+	//
+	vector<BallisticObject*> getMagazine(); // Getter but rarely used
+
+	void loadMagazine(BallisticObject* bullet);
 	void updateMagazine(float deltaTime);
+	void draw();
+	void deleteBuffer();
 
 private:
-	vector<Ballistic*> magazine; // holds all instantiated ballistics
+	vector<BallisticObject*> magazine; // holds all instantiated ballistics
+
 	
 
 };
