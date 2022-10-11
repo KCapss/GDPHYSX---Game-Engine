@@ -44,15 +44,12 @@ public:
 	void setInitialRotation(glm::vec3 objRot);
 	void setInitialScale(glm::vec3 objScale);
 
-	//Place Holder
-
-
 
 	//Initialization Process
 	virtual void loadObj();
 	virtual void loadTexture();
 	virtual void loadBuffer();
-	//void loadShaders();
+	
 
 
 //Getter Function
@@ -61,6 +58,10 @@ public:
 	glm::mat4 retrieveCamMat();
 	glm::mat4 retrieveCamProj();
 
+
+	//Properties
+	bool isSetActive();
+	void setActive(bool flag);
 
 	//EdgeCase Process
 	/*void loadSkyboxtexture();*/
@@ -114,7 +115,10 @@ protected:
 
 	//Animation
 	GLuint currTime;
-	
+
+
+protected:
+	bool isActive = true;
 
 	
 	

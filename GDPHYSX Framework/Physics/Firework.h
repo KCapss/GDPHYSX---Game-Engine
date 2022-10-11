@@ -23,24 +23,6 @@ private:
 	//Parameters
 	float age; // Default
 
-////Rule Type Parameter
-//	unsigned type;
-//	float minAge;
-//	float maxAge;
-//
-//	glm::vec3 minVelocity;
-//	glm::vec3 maxVelocity;
-//	
-//	float damp;
-//
-//// PayLoad Parameter = insigned per each firework	
-//	unsigned paramType;
-//	unsigned paramCount;
-//
-//
-////Next
-//	unsigned payloadCount;
-//	//Payload *payload //Set number of payload per each firework
 
 
 //Template
@@ -64,6 +46,6 @@ private:
 		Payload* payload; //Set number of payload per each firework
 	};
 	
-
+	
 };
 

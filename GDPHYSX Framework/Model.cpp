@@ -279,6 +279,16 @@ glm::mat4 Model::retrieveCamProj()
     }
 }
 
+bool Model::isSetActive()
+{
+    return this->isActive;
+}
+
+void Model::setActive(bool flag)
+{
+    this->isActive = flag;
+}
+
 
 /*This function will reference the one who called as reference of their point light*/
 void Model::updateLight()
@@ -292,52 +302,55 @@ void Model::updateLight()
 //update function
 void Model::update(float timeStep)
 {
-    this->perspCam->updateCamera();
-    this->orthoCam->updateCamera();
+    if (this->isActive) {
+        this->perspCam->updateCamera();
+        this->orthoCam->updateCamera();
+    }
 }
 
 //
 void Model::draw()
 {
-    glBindVertexArray(0);
-    //float time = glfwGetTime();
-    //Apply Linear Transformation (Default)
-    glm::mat4 identity = glm::mat4(1.0f);
-    glm::mat4 transform = glm::translate(identity, this->objPosition);
+    if (this->isActive) {
+        glBindVertexArray(0);
+        //float time = glfwGetTime();
+        //Apply Linear Transformation (Default)
+        glm::mat4 identity = glm::mat4(1.0f);
+        glm::mat4 transform = glm::translate(identity, this->objPosition);
 
-    transform = glm::scale(transform, objScale);
+        transform = glm::scale(transform, objScale);
 
-    transform = glm::rotate(transform, glm::radians(objRotation.x), glm::vec3(0, 1, 0));
-    transform = glm::rotate(transform, glm::radians(objRotation.y), glm::vec3(1, 0, 0));
-    transform = glm::rotate(transform, glm::radians(objRotation.z), glm::vec3(0, 0, 1));
+        transform = glm::rotate(transform, glm::radians(objRotation.x), glm::vec3(0, 1, 0));
+        transform = glm::rotate(transform, glm::radians(objRotation.y), glm::vec3(1, 0, 0));
+        transform = glm::rotate(transform, glm::radians(objRotation.z), glm::vec3(0, 0, 1));
 
-    
-    
 
-    glUseProgram(shader->getShaderProg());
-    glBindVertexArray(VAO); // Render on the active
-    shader->transformUpdate(transform);
 
-    shader->projectionUpdate(retrieveCamProj());
-    shader->viewUpdate(retrieveCamMat());
 
-    if (objType == NoTexture) {
-        //shader->LightUpdate(light);
+        glUseProgram(shader->getShaderProg());
+        glBindVertexArray(VAO); // Render on the active
+        shader->transformUpdate(transform);
+
+        shader->projectionUpdate(retrieveCamProj());
+        shader->viewUpdate(retrieveCamMat());
+
+        if (objType == NoTexture) {
+            //shader->LightUpdate(light);
+        }
+
+        if (objType == WithTexture) {
+            glActiveTexture(GL_TEXTURE0);
+            shader->textureUpdate(texture, "tex0", 0);
+            shader->LightUpdate(light);
+            shader->cameraUpdatePos(perspCam->getCameraPos());
+        }
+
+        glUseProgram(shader->getShaderProg());
+
+        glBindVertexArray(VAO); // Render on the active
+        glDrawArrays(GL_TRIANGLES, 0, fullVertexData.size() / 8);
+
     }
-
-    if (objType == WithTexture) {
-        glActiveTexture(GL_TEXTURE0);
-        shader->textureUpdate(texture, "tex0", 0);
-        shader->LightUpdate(light);
-        shader->cameraUpdatePos(perspCam->getCameraPos());
-    }
-    
-    glUseProgram(shader->getShaderProg());
-
-    glBindVertexArray(VAO); // Render on the active
-    glDrawArrays(GL_TRIANGLES, 0, fullVertexData.size() / 8);
-   
-
     //Retrieve Delta Time Later
 }
 

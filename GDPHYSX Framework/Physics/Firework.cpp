@@ -19,5 +19,6 @@ bool Firework::updateFireworks(float deltaTime)
 void Firework::initFireworkRules()
 {
 	//Fill up the details
-
+	
+	
 }
