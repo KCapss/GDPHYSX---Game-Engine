@@ -43,22 +43,14 @@ public:
 	//Physics Application
 	void applyForce(vec3 Force);
 
-
-	
-
 	//Constant Force
 	void toogleGravity(bool flag);
 	bool checkGravityStatus();
 
-
-
-	
-
+	//InClass Method, Ethan: made public to access in ballistics
+	void integrator(float deltaTime);
 
 private:
-
-	//InClass Method
-	void integrator(float deltaTime);
 	
 
 	//Properties

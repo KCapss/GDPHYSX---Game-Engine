@@ -8,14 +8,11 @@ Ballistic::Ballistic() : Particle()
 Ballistic::Ballistic(vec3 Pos, float mass) : Particle(Pos, mass)
 {
 
-
 }
 
-
-
-void Ballistic::setShotType(shotType currentShotType)
+void Ballistic::setShotType(shotType chosenShotType)
 {
-	switch (currentShotType)
+	switch (chosenShotType)
 	{
 		case PISTOL:
 			this->setMass(2.0f);
@@ -41,6 +38,21 @@ void Ballistic::setShotType(shotType currentShotType)
 			this->setAcceleration(vec3(0.0f, 0.0f, 0.0f));
 			//this->setDamping(0.90f);
 			break;
+		case UNUSED:
+			// Placeholder
+			break;
 	}
+
+	this->currentShotType = chosenShotType; // set shot type
+}
+
+shotType Ballistic::getShotType()
+{
+	return currentShotType;
+}
+
+void Ballistic::updateBallistic()
+{
+
 
 }

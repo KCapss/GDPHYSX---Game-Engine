@@ -1,5 +1,15 @@
 #pragma once
 #include "Particle.h"
+
+enum shotType {
+    PISTOL,
+    ARTILLERY,
+    FIREBALL,
+    LASER,
+    FIREWORK,
+    UNUSED
+};
+
 class Ballistic :
     public Particle
 {
@@ -8,21 +18,16 @@ public:
 
     Ballistic();
     Ballistic(vec3 Pos, float mass);
-    
-
-    // Properties
-    enum shotType {
-        PISTOL,
-        ARTILLERY,
-        FIREBALL,
-        LASER,
-        FIREWORK
-    };
 
     // Setter
-    void setShotType(shotType currentShotType);
+    void setShotType(shotType chosenShotType);
+
+    // Getter
+    shotType getShotType();
+
+    void updateBallistic();
 
 private:
- 
+    shotType currentShotType = shotType::UNUSED;
 };
 
