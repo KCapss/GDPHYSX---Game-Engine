@@ -35,6 +35,9 @@ bool Space::initializeWindow()
     glfwMakeContextCurrent(this->window);
     gladLoadGL();
 
+    // Set key callback
+    glfwSetKeyCallback(window, key_callback);
+    glfwSetMouseButtonCallback(window, mouse_button_callback);
 
     //Initialize ViewPort
     glViewport(0, 0, lengthDim, widthDim);
@@ -161,6 +164,39 @@ void Space::deleteDebri()
     statue2->deAllocate();
 }
 
+void Space::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if (key == GLFW_KEY_1 && action == GLFW_PRESS)
+    {
+
+    }
+    if (key == GLFW_KEY_2 && action == GLFW_PRESS)
+    {
+      
+    }
+    if (key == GLFW_KEY_3 && action == GLFW_PRESS)
+    {
+       
+    }
+    if (key == GLFW_KEY_4 && action == GLFW_PRESS)
+    {
+       
+    }
+    if (key == GLFW_KEY_5 && action == GLFW_PRESS)
+    {
+       
+    }
+}
+
+void Space::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+    {
+
+        //cout << "Left Click Pressed" << endl;
+    }
+}
+
 //Update all active object
 void Space::update(float deltaTime)
 {
@@ -204,9 +240,6 @@ void Space::draw()
 
 
     
-
-
-
     /* Poll for and process events */
     glfwPollEvents();
 }

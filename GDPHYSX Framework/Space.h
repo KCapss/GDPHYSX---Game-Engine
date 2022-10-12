@@ -45,8 +45,11 @@ public:
 	void debriSetup();
 	void drawDebri();
 	void deleteDebri();
-	
 
+	// key callback
+	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+	
 private:
 	//Interface:
 	Skybox* skybox;
