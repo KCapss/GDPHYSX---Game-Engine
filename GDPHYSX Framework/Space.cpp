@@ -160,6 +160,21 @@ void Space::deleteDebri()
     statue2->deAllocate();
 }
 
+
+void Space::projectileInit(int size)
+{
+    for (int i = 0; i < size; i++) {
+        BallisticObject* projectile = new BallisticObject("ball", NoTexture, this->window);
+        projectile->retrieveSource(this->lightSrc, this->mainCam, this->alterCam);
+
+        //Debug = Change sizable
+        projectile->setInitialScale(glm::vec3(100.0f));
+        //Onactive () - Optional::
+        projectileContainer->loadMagazine(projectile);
+
+    }
+}
+
 void Space::input()
 {
     if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
