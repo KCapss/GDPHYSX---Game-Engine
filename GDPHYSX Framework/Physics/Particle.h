@@ -32,6 +32,8 @@ public:
 
 	//Getter
 	virtual	vec3 getPosition();
+	vec3 getVelocity();
+	vec3 getAcceleraation();
 	float getMass();
 
 	//Physics == Debuging
