@@ -75,6 +75,16 @@ vec3 Particle::getPosition()
     return this->position;
 }
 
+vec3 Particle::getVelocity()
+{
+    return this->velocity;
+}
+
+vec3 Particle::getAcceleraation()
+{
+    return this->acceleration;
+}
+
 float Particle::getMass()
 {
     return this->mass;

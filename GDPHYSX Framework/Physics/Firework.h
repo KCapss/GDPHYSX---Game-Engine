@@ -6,43 +6,14 @@ public:
 	Firework();
 	~Firework();
 
-	enum fireworkTypes;
-
+	unsigned type; //Fireworks types
+	
 	//Methods
 	bool updateFireworks(float deltaTime);
-	void initFireworkRules();
+	int age; // Default
 
+protected:
 
 private:
-	//Methods
 
-
-	//Parameters
-	float age; // Default
-
-
-
-//Template
-	struct FireWorkRule {
-		unsigned type;
-		float minAge;
-		float maxAge;
-
-		glm::vec3 minVelocity;
-		glm::vec3 maxVelocity;
-
-		float damp;
-
-		struct Payload {
-			unsigned paramType;
-			unsigned paramCount;
-		};
-		
-		//Next
-		unsigned payloadCount;
-		Payload* payload; //Set number of payload per each firework
-	};
-	
-	
 };
-
