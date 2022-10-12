@@ -35,10 +35,6 @@ bool Space::initializeWindow()
     glfwMakeContextCurrent(this->window);
     gladLoadGL();
 
-    // Set key callback
-    glfwSetKeyCallback(window, key_callback);
-    glfwSetMouseButtonCallback(window, mouse_button_callback);
-
     //Initialize ViewPort
     glViewport(0, 0, lengthDim, widthDim);
 
@@ -164,6 +160,7 @@ void Space::deleteDebri()
     statue2->deAllocate();
 }
 
+
 void Space::projectileInit(int size)
 {
     for (int i = 0; i < size; i++) {
@@ -178,36 +175,38 @@ void Space::projectileInit(int size)
     }
 }
 
-void Space::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void Space::input()
 {
-    if (key == GLFW_KEY_1 && action == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
     {
+        //cout << "1 Pressed!" << endl;
+        shotType = ShotTypes::PISTOL;
+    }
+    if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
+    {
+       // cout << "2 Pressed!" << endl;
+        shotType = ShotTypes::ARTILLERY;
+    }
+    if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
+    {
+        //cout << "3 Pressed!" << endl;
+        shotType = ShotTypes::FIREBALL;
+    }
+    if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
+    {
+       // cout << "4 Pressed!" << endl;
+        shotType = ShotTypes::LASER;
+    }
+    if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
+    {
+        //cout << "5 Pressed!" << endl;
+        shotType = ShotTypes::FIREWORK;
+    }
 
-    }
-    if (key == GLFW_KEY_2 && action == GLFW_PRESS)
+    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
     {
-      
-    }
-    if (key == GLFW_KEY_3 && action == GLFW_PRESS)
-    {
-       
-    }
-    if (key == GLFW_KEY_4 && action == GLFW_PRESS)
-    {
-       
-    }
-    if (key == GLFW_KEY_5 && action == GLFW_PRESS)
-    {
-       
-    }
-}
-
-void Space::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
-{
-    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-    {
-
-        //cout << "Left Click Pressed" << endl;
+        //cout << "Left Button Pressed!" << endl;
+        // ballisticContainer->fireMagazine(shotType);
     }
 }
 
@@ -228,6 +227,9 @@ void Space::update(float deltaTime)
 
     //special Case = reference object acting as point light
     planet->updateLight();
+
+    // Keyboard press and Mouse button press
+    input();
 
 }
 
@@ -252,8 +254,6 @@ void Space::draw()
     /* Swap front and back buffers */
     glfwSwapBuffers(this->window);
 
-
-    
     /* Poll for and process events */
     glfwPollEvents();
 }
