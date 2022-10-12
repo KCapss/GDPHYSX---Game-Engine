@@ -46,6 +46,10 @@ public:
 	void drawDebri();
 	void deleteDebri();
 
+	//projectile Handler
+	void projectileInit(int size); //including the source
+	
+
 	// key callback
 	static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
