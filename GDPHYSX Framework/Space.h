@@ -77,5 +77,8 @@ private:
 
 	int lengthDim = 0, widthDim = 0; //set default
 
+	// Stores shot type
+	ShotTypes shotType;
+
 };
 

@@ -164,28 +164,34 @@ void Space::input()
 {
     if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
     {
-        cout << "1 Pressed!" << endl;
+        //cout << "1 Pressed!" << endl;
+        shotType = ShotTypes::PISTOL;
     }
     if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
     {
-        cout << "2 Pressed!" << endl;
+       // cout << "2 Pressed!" << endl;
+        shotType = ShotTypes::ARTILLERY;
     }
     if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS)
     {
-        cout << "3 Pressed!" << endl;
+        //cout << "3 Pressed!" << endl;
+        shotType = ShotTypes::FIREBALL;
     }
     if (glfwGetKey(window, GLFW_KEY_4) == GLFW_PRESS)
     {
-        cout << "4 Pressed!" << endl;
+       // cout << "4 Pressed!" << endl;
+        shotType = ShotTypes::LASER;
     }
     if (glfwGetKey(window, GLFW_KEY_5) == GLFW_PRESS)
     {
-        cout << "5 Pressed!" << endl;
+        //cout << "5 Pressed!" << endl;
+        shotType = ShotTypes::FIREWORK;
     }
 
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
     {
-        cout << "Left Button Pressed!" << endl;
+        //cout << "Left Button Pressed!" << endl;
+        // ballisticContainer->fireMagazine(shotType);
     }
 }
 
@@ -207,6 +213,9 @@ void Space::update(float deltaTime)
     //special Case = reference object acting as point light
     planet->updateLight();
 
+    // Keyboard press and Mouse button press
+    input();
+
 }
 
 
@@ -226,9 +235,6 @@ void Space::draw()
 
     projectileContainer->draw();
     //drawDebri();
-
-    // Keyboard press and Mouse button press
-    input();
 
     /* Swap front and back buffers */
     glfwSwapBuffers(this->window);
