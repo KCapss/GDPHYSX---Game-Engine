@@ -23,8 +23,8 @@ void BallisticContainer::updateMagazine(float deltaTime)
 
 		/*	 Check if particle is invalid,
 			 still need to add a way to measure duration of life*/
-			if (magazine[i]->getPosition().y < -2000.0f ||
-				magazine[i]->getPosition().z < 200000.0f)
+			if (magazine[i]->getPosition().y < -200.0f ||
+				magazine[i]->getPosition().z > 2000.0f)
 			{
 				// Set to unused if invalid
 				//magazine[i]->setShotType(ShotTypes::UNUSED);
@@ -33,6 +33,8 @@ void BallisticContainer::updateMagazine(float deltaTime)
 			}
 		}
 	}
+
+	this->ticks += deltaTime;
 }
 
 void BallisticContainer::fireMagazine(ShotTypes shotypes)
@@ -41,7 +43,9 @@ void BallisticContainer::fireMagazine(ShotTypes shotypes)
 
 
 	//Problem: There is no fixed interval
-	if (limitSize <= this->activeSize) {
+	if ((limitSize >= this->activeSize) && ( ticks >= COOLDOWN ) ){
+
+		cout << "Shot Fired" << endl;
 
 		if (shotypes != ShotTypes::FIREWORK) {
 			for (int i = 0; i < magazine.size(); i++) {
@@ -56,6 +60,7 @@ void BallisticContainer::fireMagazine(ShotTypes shotypes)
 			//PlaceHolder for accessing fireworks
 		}
 
+		ticks = 0;
 	}
 
 
