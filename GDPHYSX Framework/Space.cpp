@@ -54,6 +54,7 @@ void Space::initializeObj()
     debriInitialize();
     //projectile = new BallisticObject("ball", NoTexture, this->window);
     projectileContainer = new BallisticContainer();
+
     projectileContainer->setLimit(10);
     projectileInit(10);
 
@@ -172,7 +173,7 @@ void Space::projectileInit(int size)
         projectile->retrieveSource(this->lightSrc, this->mainCam, this->alterCam);
 
         //Debug = Change sizable
-        projectile->setInitialScale(glm::vec3(100.0f));
+        projectile->setInitialScale(glm::vec3(10.0f));
         //Onactive () - Optional::
         projectileContainer->loadMagazine(projectile);
 
@@ -209,7 +210,7 @@ void Space::input()
 
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
     {
-        cout << "Left Button Pressed!" << endl;
+        //cout << "Left Button Pressed!" << endl;
         projectileContainer->fireMagazine(shotType);
     }
 }

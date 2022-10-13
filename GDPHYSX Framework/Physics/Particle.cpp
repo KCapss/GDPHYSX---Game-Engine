@@ -62,6 +62,11 @@ void Particle::setDamping(float damp)
     this->damp = damp;
 }
 
+void Particle::addVelocity(vec3 addVeloctiy)
+{
+    this->velocity += addVelocity;
+}
+
 void Particle::setMass(float mass)
 {
     //Initial Proposal

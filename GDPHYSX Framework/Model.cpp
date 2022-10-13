@@ -289,6 +289,11 @@ void Model::setActive(bool flag)
     this->isActive = flag;
 }
 
+string Model::getName()
+{
+    return this->name;
+}
+
 
 /*This function will reference the one who called as reference of their point light*/
 void Model::updateLight()

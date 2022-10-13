@@ -51,7 +51,6 @@ public:
 	
 
 	// key callback
-
 	void input();
 
 

@@ -27,7 +27,8 @@ public:
 	virtual void setAcceleration(vec3 acceleration);
 	virtual void setDamping(float damp);
 
-	
+	void addVelocity(vec3 addVeloctiy);
+
 	void setMass(float mass);
 
 	//Getter

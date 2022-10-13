@@ -62,6 +62,7 @@ public:
 	//Properties
 	bool isSetActive();
 	void setActive(bool flag);
+	string getName();
 
 	//EdgeCase Process
 	/*void loadSkyboxtexture();*/
@@ -80,7 +81,7 @@ public:
 
 protected:
 	//Obj information = Default
-	std::string name{};
+	std::string name;
 	GLFWwindow* window;
 
 

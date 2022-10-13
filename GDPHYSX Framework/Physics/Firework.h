@@ -6,14 +6,22 @@ public:
 	Firework();
 	~Firework();
 
-	unsigned type; //Fireworks types
+//Methods
+	void updateFireworks(float deltaTime);
 	
-	//Methods
-	bool updateFireworks(float deltaTime);
-	int age; // Default
+	//Getters
+	unsigned int getType();
+	int getAge();
 
-protected:
+	//Setters
+	void setType(unsigned int type);
+	void setAge(int age);
+
 
 private:
+	unsigned int type; //Fireworks types
+	int age; // Default
+
+
 
 };
