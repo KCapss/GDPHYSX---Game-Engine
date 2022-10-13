@@ -50,7 +50,7 @@ private:
 		//Set number of payload per each firework
 
 //Methods
-		
+		glm::vec3 randomVector(glm::vec3 minVector, glm::vec3 maxVector);
 
 
 

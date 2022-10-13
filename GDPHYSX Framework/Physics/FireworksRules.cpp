@@ -76,3 +76,30 @@ void FireworkRules::applyRules(FireworkObject* firework)
 	firework->setMass(1.0f);
 	firework->setDamping(this->damp);
 }
+
+glm::vec3 FireworkRules::randomVector(glm::vec3 minVector, glm::vec3 maxVector)
+{
+	glm::vec3 randVector;
+	float minX = 0, minY = 0, minZ = 0;
+	float maxX = 0, maxY = 0, maxZ = 0;
+
+	// Set minimum float 
+	minVector.x = minX;
+	minVector.y = minY;
+	minVector.z = minZ;
+
+	// Set maximum float 
+	maxVector.x = maxX;
+	maxVector.y = maxY;
+	maxVector.z = maxZ;
+
+	// Assign random floats to randVector
+	randVector.x = minX + static_cast<float> (rand() / static_cast <float> (RAND_MAX / (maxX - minX)));
+	randVector.y = minY + static_cast<float> (rand() / static_cast <float> (RAND_MAX / (maxY - minY)));
+	randVector.z = minZ + static_cast<float> (rand() / static_cast <float> (RAND_MAX / (maxZ - minZ)));
+
+	return randVector;
+
+	// Source for getting randomized floats:
+	// https://stackoverflow.com/questions/686353/random-float-number-generation
+}

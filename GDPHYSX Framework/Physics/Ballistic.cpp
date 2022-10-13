@@ -53,8 +53,9 @@ ShotTypes Ballistic::getShotType()
 
 void Ballistic::updateBallistic(float deltaTime)
 {
-	
-	
+	// Check how long object has been active by 
+	// counting down age
+	age -= deltaTime;
 }
 
 float Ballistic::getAge() {
