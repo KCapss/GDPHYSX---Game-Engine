@@ -53,7 +53,9 @@ void Space::initializeObj()
 
     debriInitialize();
     //projectile = new BallisticObject("ball", NoTexture, this->window);
+    fireworksObject = new FireworkObject("ball", NoTexture, this->window);
     projectileContainer = new BallisticContainer();
+    
 
     projectileContainer->setLimit(10);
     projectileInit(10);
@@ -65,6 +67,7 @@ void Space::initializeObj()
     player->retrieveSource(lightSrc, mainCam, alterCam);
     planet->retrieveSource(lightSrc, mainCam, alterCam);
     //projectile->retrieveSource(lightSrc, mainCam, alterCam);
+    fireworksObject->retrieveSource(lightSrc, mainCam, alterCam);
     //debriRetrieveSource();
 
 
@@ -88,7 +91,10 @@ void Space::initializeObj()
     projectile->onActivate(ShotTypes::PISTOL); 
     projectileContainer->loadMagazine(projectile)*/; //load Bullet
 
-
+    fireworksObject->setInitialScale(glm::vec3(10.0f));
+    fireworksObject->create(1, NULL);
+    projectileContainer->loadFireworks(fireworksObject);
+    //projectileContainer->loadMagazine(projectile);
 
 }
 
@@ -211,7 +217,8 @@ void Space::input()
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
     {
         //cout << "Left Button Pressed!" << endl;
-        projectileContainer->fireMagazine(shotType);
+        //projectileContainer->fireMagazine(shotType);
+        projectileContainer->fireMagazine(ShotTypes::FIREWORK);
     }
 }
 
@@ -228,7 +235,7 @@ void Space::update(float deltaTime)
     planet->update(deltaTime);
     
     //Physics Object
-    projectileContainer->updateMagazine(deltaTime);
+    projectileContainer->updateBallisticContainer(deltaTime);
 
     //special Case = reference object acting as point light
     planet->updateLight();

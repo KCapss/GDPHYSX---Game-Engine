@@ -5,6 +5,8 @@
 
 #include <vector>
 
+
+
 class FireworkObject: public Firework, public FireworkRules, public Model
 {
 public:
@@ -16,13 +18,13 @@ public:
 //Property
 
     /* Store all payload */
-    vector<FireworkObject*> fireworkPayload;
+    std::vector<FireworkObject*> fireworkPayload;
 
     /** And the number of rules. */
     const static unsigned ruleCount = 1;
 
     /** Holds the set of rules. */
-    vector<FireworkRules> rulesList; 
+    std::vector<FireworkRules*> rulesList; 
     
     //Add static for global checking of the firework Object
     
@@ -32,8 +34,8 @@ public:
     
     /** Dispatches a firework from the origin. */
     void create(unsigned type,  Firework* parent);
-    void activate();
-
+    void activate(FireworkObject* parent);
+    void applyRules(FireworkObject* firework);
     ///** Dispatches the given number of fireworks from the given parent. */
     //void create(unsigned type, unsigned number,  Firework* parent);
 

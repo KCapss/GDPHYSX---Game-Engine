@@ -19,8 +19,8 @@ public:
 
 
 private:
-	unsigned int type; //Fireworks types
-	int age; // Default
+	unsigned int type = 0; //Fireworks types
+	int age = 0; // Default
 
 
 

@@ -12,7 +12,14 @@ void BallisticContainer::loadMagazine(BallisticObject* bullet)
 	maxSize++;
 }
 
-void BallisticContainer::updateMagazine(float deltaTime)
+void BallisticContainer::loadFireworks(FireworkObject* fireworks)
+{
+	divisoria.push_back(fireworks);
+	cout << "Exolision loaded" << endl;
+	maxSize++;
+}
+
+void BallisticContainer::updateBallisticContainer(float deltaTime)
 {
 	for (int i = 0; i < magazine.size(); i++)
 	{
@@ -26,13 +33,19 @@ void BallisticContainer::updateMagazine(float deltaTime)
 	/*	 Now checks if out of bounds or is past its age*/
 	if (magazine[i]->getPosition().y < -2000.0f ||
 				magazine[i]->getAge() <= 0 ||
-				magazine[i]->getPosition().z < 200000.0f)
+				magazine[i]->getPosition().z > 2000.0f)
 			{
 				// Set to unused if invalid
 				//magazine[i]->setShotType(ShotTypes::UNUSED);
 				cout << "Shot Disabled" << endl;
 				magazine[i]->onReset();
 			}
+		}
+	}
+
+	for (int i = 0; i < divisoria.size(); i++) {
+		if (divisoria[i]->getType() != 0) {
+			divisoria[i]->updateFireworkObject(deltaTime);
 		}
 	}
 
@@ -59,7 +72,13 @@ void BallisticContainer::fireMagazine(ShotTypes shotypes)
 		}
 
 		else if (shotypes == ShotTypes::FIREWORK) {
-			//PlaceHolder for accessing fireworks
+			for (int i = 0; i < divisoria.size(); i++) {
+				if (divisoria[i]->getType() != 0) {
+					cout << "Boom" << endl;
+					divisoria[i]->activate(NULL);
+					break;
+				}
+			}
 		}
 
 		ticks = 0;
@@ -82,6 +101,12 @@ void BallisticContainer::draw()
 			magazine[i]->draw();
 		}
 	}
+
+	for (int i = 0; i < divisoria.size(); i++) {
+		if (divisoria[i]->getType() != 0) {
+			divisoria[i]->draw();
+		}
+	}
 }
 
 void BallisticContainer::deleteBuffer()
@@ -90,5 +115,9 @@ void BallisticContainer::deleteBuffer()
 	for (int i = 0; i < magazine.size(); i++)
 	{
 			magazine[i]->deAllocate();
+	}
+
+	for (int i = 0; i < divisoria.size(); i++) {
+			divisoria[i]->deAllocate();
 	}
 }

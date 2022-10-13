@@ -1,7 +1,10 @@
 #pragma once
 #include "Particle.h"
 #include "Firework.h"
-#include "../GameObject/FireworkObject.h"
+
+#include <vector>
+
+using namespace std;
 
 class FireworkRules{
 public:
@@ -14,7 +17,7 @@ public:
 
 	void init(unsigned payloadCount);
 	void create(Firework* firework, Firework* parent = NULL) const; // avoid nalang these
-	void applyRules(FireworkObject* firework);
+	
 
 
 	// It accept FireworkObject
@@ -34,7 +37,7 @@ public:
 
 	
 
-private:
+
 		unsigned type;
 		int minAge;
 		int maxAge;
