@@ -8,7 +8,7 @@ FireworkRules::FireworkRules()
 
 FireworkRules::~FireworkRules()
 {
-	if (payloads != NULL) payloads;
+	//if (payloads != NULL) payloads;
 }
 
 
@@ -27,7 +27,11 @@ void FireworkRules::init(unsigned payloadCount)
 {
 	FireworkRules::payloadCount = payloadCount;
 	
-	payloads = new Payload();
+	for (int i = 0; i < payloadCount; i++) {
+		Payload* load = new Payload();
+		payloads.push_back(load);
+	}
+	
 }
 
 void FireworkRules::create(Firework* firework, Firework* parent) const
@@ -63,19 +67,7 @@ void FireworkRules::create(Firework* firework, Firework* parent) const
 		//firework->setAcceleration(vec3(0,9.8f,0));
 }
 
-void FireworkRules::applyRules(FireworkObject* firework)
-{
-	//firework->setType(this->type);
-	//rand for setAge
-	firework->setAge((rand() % (this->maxAge - this->minAge)) + this->minAge);
-	//randf for velocity
-	// 
-	// use: firework->addVeloctiy(Output ng RANDF)
-	// 
-	//--- insert here
-	firework->setMass(1.0f);
-	firework->setDamping(this->damp);
-}
+
 
 glm::vec3 FireworkRules::randomVector(glm::vec3 minVector, glm::vec3 maxVector)
 {
@@ -84,14 +76,14 @@ glm::vec3 FireworkRules::randomVector(glm::vec3 minVector, glm::vec3 maxVector)
 	float maxX = 0, maxY = 0, maxZ = 0;
 
 	// Set minimum float 
-	minVector.x = minX;
-	minVector.y = minY;
-	minVector.z = minZ;
+	minX = minVector.x;
+	minY = minVector.y;
+	minZ = minVector.z;
 
 	// Set maximum float 
-	maxVector.x = maxX;
-	maxVector.y = maxY;
-	maxVector.z = maxZ;
+	maxX = maxVector.x;
+	maxY = maxVector.y;
+	maxZ = maxVector.z;
 
 	// Assign random floats to randVector
 	randVector.x = minX + static_cast<float> (rand() / static_cast <float> (RAND_MAX / (maxX - minX)));

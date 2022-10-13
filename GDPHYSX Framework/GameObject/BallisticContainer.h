@@ -1,5 +1,6 @@
 #pragma once
 #include "BallisticObject.h" 
+#include "FireworkObject.h"
 #include <vector>
 
 using namespace std;
@@ -12,10 +13,11 @@ public:
 	vector<BallisticObject*> getMagazine(); // Getter but rarely used
 
 	void loadMagazine(BallisticObject* bullet);
+	void loadFireworks(FireworkObject* fireworks);
 	//void load Fireworks
 
 //Loading the Ammo
-	void updateMagazine(float deltaTime);
+	void updateBallisticContainer(float deltaTime);
 
 
 //Action
@@ -28,6 +30,7 @@ public:
 
 private:
 	vector<BallisticObject*> magazine; // holds all instantiated ballistics
+	vector<FireworkObject*> divisoria; // holds all illegal fireworks
 	int maxSize = 0;
 	int activeSize = 0;
 	unsigned limitSize = 0;

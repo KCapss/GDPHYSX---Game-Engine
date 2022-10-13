@@ -16,19 +16,30 @@ FireworkObject::~FireworkObject()
 void FireworkObject::initFireworkRules()
 {
 	//Create a FireWork Rules Class
-	FireworkRules* rule = new FireworkRules();
-    rule->init(0);
-    rule->setParameters(
+	FireworkRules* rule1 = new FireworkRules();
+    rule1->init(1);
+    rule1->setParameters(
         1, // type
-        1, 3, // age range
-        glm::vec3(-5, 25, -5), // min velocity
-        glm::vec3(5, 28, 5), // max velocity
-        0.1 // damping
+        200, 300, // age range
+        glm::vec3(-5, 35, -5), // min velocity
+        glm::vec3(5, 50, 5), // max velocity
+        0.9f // damping
+    );
+    rule1->payloads[0]->set(2, 50);
+
+    rulesList.push_back(rule1);
+
+    FireworkRules* rule2 = new FireworkRules();
+    rule2->init(0);
+    rule2->setParameters(
+        1, // type
+        200, 300, // age range
+        glm::vec3(-5, 35, -5), // min velocity
+        glm::vec3(5, 50, 5), // max velocity
+        0.9f // damping
     );
 
-   /* rule->payloads[0].set(1, 5);
-    rule->payloads[1].set(1, 5);*/
-
+    rulesList.push_back(rule2);
 
     //TODO List: Create a succedding rule for child instantiation "calling rule->init()"
 
@@ -44,15 +55,15 @@ void FireworkObject::create(unsigned type, Firework* parent)
        
     }
 
-    for (int i = 0; i < rulesList[type - 1].payloads.size(); i++) {
+    for (int i = 0; i < rulesList[type - 1]->payloads.size(); i++) {
 
-        for (int j = 0; j < rulesList[type - 1].payloads[i]->paramCount; j++) {
+        for (int j = 0; j < rulesList[type - 1]->payloads[i]->paramCount; j++) {
 
             FireworkObject* newFireworks = new FireworkObject(name, objType, window);
             newFireworks->retrieveSource(light, perspCam, orthoCam);
 
-            newFireworks->setType(rulesList[type - 1].payloads[i]->paramType);
-            newFireworks->create(rulesList[type - 1].payloads[i]->paramType, this);
+            newFireworks->setType(rulesList[type - 1]->payloads[i]->paramType);
+            newFireworks->create(rulesList[type - 1]->payloads[i]->paramType, this);
 
             this->fireworkPayload.push_back(newFireworks);
         }
@@ -72,9 +83,36 @@ void FireworkObject::activate(FireworkObject* parent)
 
     }
 
-    this->rulesList[this->getType() - 1].applyRules(this);
+    else {
+        this->setPosition(vec3(0));
+        this->setVelocity(vec3(0));
+        this->setAcceleration(vec3(0));
+    }
+    this->applyRules(this);
     this->toogleGravity(true);
     this->setActive(true);
+}
+
+void FireworkObject::applyRules(FireworkObject* firework)
+{
+    int maxAge = rulesList[this->getType() - 1]->maxAge;
+    int minAge = rulesList[this->getType() - 1]->minAge;
+    glm::vec3 minVel = rulesList[this->getType() - 1]->minVelocity;
+    glm::vec3 maxVel = rulesList[this->getType() - 1]->maxVelocity;
+    float damping = rulesList[this->getType() - 1]->damp;
+
+    glm::vec3 final = rulesList[this->getType() - 1]->randomVector(minVel, maxVel);
+    
+    firework->setAge((rand() % (maxAge - minAge)) + minAge);
+    firework->addVelocity(final);
+    //randf for velocity
+    // 
+    // use: firework->addVeloctiy(Output ng RANDF)
+    // 
+    //--- insert here
+    firework->setMass(1.0f);
+    firework->setDamping(damping);
+
 }
 
 void FireworkObject::updateFireworkObject(float deltaTime)
@@ -84,7 +122,8 @@ void FireworkObject::updateFireworkObject(float deltaTime)
     }
 
     if (this->isSetActive()) {
-
+        
+        
         this->updateFireworks(deltaTime);
         this->tick += deltaTime;
         //Activate its child
@@ -99,6 +138,7 @@ void FireworkObject::updateFireworkObject(float deltaTime)
             this->tick = 0;
         }
 
+      
     }
 
 
@@ -107,6 +147,10 @@ void FireworkObject::updateFireworkObject(float deltaTime)
 
 void FireworkObject::draw()
 {
+
+    for (int i = 0; i < fireworkPayload.size(); i++) {
+        fireworkPayload[i]->draw();
+    }
 
     if (this->isSetActive()) {
         glBindVertexArray(0);

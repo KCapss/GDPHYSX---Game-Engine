@@ -16,6 +16,7 @@
 #include "GameObject/ParticleObject.h"
 #include "GameObject/BallisticContainer.h"
 #include "GameObject/BallisticObject.h"
+#include "GameObject/FireworkObject.h"
 
 
 #include "Light.h"
@@ -61,7 +62,9 @@ private:
 	//Model for the physics base model;
 	ParticleObject *planet;
 	BallisticObject* projectile;
+	FireworkObject* fireworksObject;
 	BallisticContainer* projectileContainer;
+	
 
 
 	//Debri
