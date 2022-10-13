@@ -20,10 +20,11 @@ void BallisticContainer::updateMagazine(float deltaTime)
 		{
 			// Run physics
 			magazine[i]->integrator(deltaTime);
+			magazine[i]->updateBallistic(deltaTime);
 
-		/*	 Check if particle is invalid,
-			 still need to add a way to measure duration of life*/
+		/*	 Now checks if out of bounds or is past its age*/
 			if (magazine[i]->getPosition().y < -2000.0f ||
+				magazine[i]->getAge() <= 0 ||
 				magazine[i]->getPosition().z < 200000.0f)
 			{
 				// Set to unused if invalid
