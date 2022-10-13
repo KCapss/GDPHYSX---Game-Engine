@@ -33,6 +33,9 @@ private:
 	unsigned limitSize = 0;
 
 	//vector<FireworkObject*> firesticks;
+
+	float ticks = 0;
+	const float COOLDOWN = 0.2f;
 	
 
 };

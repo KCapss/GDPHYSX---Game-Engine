@@ -11,6 +11,7 @@ BallisticObject::BallisticObject(std::string name, ObjectType objType, GLFWwindo
 
 void BallisticObject::update(float timeStep)
 {
+
 	if (this->isSetActive()) {
 		this->updatePosition(timeStep);
 	}
@@ -19,7 +20,7 @@ void BallisticObject::update(float timeStep)
 void BallisticObject::draw()
 {
 
-    cout << "Shot Draw" << endl;
+    
     if (this->isSetActive()) {
         glBindVertexArray(0);
         //float time = glfwGetTime();

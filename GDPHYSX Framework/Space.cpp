@@ -52,8 +52,11 @@ void Space::initializeObj()
     planet = new ParticleObject("ball", NoTexture, this->window);
 
     debriInitialize();
-    projectile = new BallisticObject("ball", NoTexture, this->window);
+    //projectile = new BallisticObject("ball", NoTexture, this->window);
     projectileContainer = new BallisticContainer();
+
+    projectileContainer->setLimit(10);
+    projectileInit(10);
 
 
 
@@ -61,7 +64,7 @@ void Space::initializeObj()
     skybox->retrieveSource(lightSrc, mainCam, alterCam);
     player->retrieveSource(lightSrc, mainCam, alterCam);
     planet->retrieveSource(lightSrc, mainCam, alterCam);
-    projectile->retrieveSource(lightSrc, mainCam, alterCam);
+    //projectile->retrieveSource(lightSrc, mainCam, alterCam);
     //debriRetrieveSource();
 
 
@@ -81,9 +84,11 @@ void Space::initializeObj()
 
 
     //Physic Game Object Holder
-    projectile->setInitialScale(glm::vec3(100.0f));
+   /* projectile->setInitialScale(glm::vec3(100.0f));
     projectile->onActivate(ShotTypes::PISTOL); 
-    projectileContainer->loadMagazine(projectile); //load Bullet
+    projectileContainer->loadMagazine(projectile)*/; //load Bullet
+
+
 
 }
 
@@ -168,7 +173,7 @@ void Space::projectileInit(int size)
         projectile->retrieveSource(this->lightSrc, this->mainCam, this->alterCam);
 
         //Debug = Change sizable
-        projectile->setInitialScale(glm::vec3(100.0f));
+        projectile->setInitialScale(glm::vec3(10.0f));
         //Onactive () - Optional::
         projectileContainer->loadMagazine(projectile);
 
@@ -179,7 +184,7 @@ void Space::input()
 {
     if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS)
     {
-        //cout << "1 Pressed!" << endl;
+        cout << "1 Pressed!" << endl;
         shotType = ShotTypes::PISTOL;
     }
     if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS)
@@ -206,7 +211,7 @@ void Space::input()
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
     {
         //cout << "Left Button Pressed!" << endl;
-        // ballisticContainer->fireMagazine(shotType);
+        projectileContainer->fireMagazine(shotType);
     }
 }
 

@@ -14,21 +14,36 @@ public:
     ~FireworkObject();
 
 //Property
+
+    /* Store all payload */
+    vector<FireworkObject*> fireworkPayload;
+
     /** And the number of rules. */
     const static unsigned ruleCount = 1;
 
     /** Holds the set of rules. */
-    vector<FireworkRules> rules;
+    vector<FireworkRules> rulesList; 
+    
+    //Add static for global checking of the firework Object
     
 //Methods
     void initFireworkRules();
 
+    
     /** Dispatches a firework from the origin. */
-    void create(unsigned type, const Firework* parent = NULL);
+    void create(unsigned type,  Firework* parent);
+    void activate();
 
-    /** Dispatches the given number of fireworks from the given parent. */
-    void create(unsigned type, unsigned number, const Firework* parent);
+    ///** Dispatches the given number of fireworks from the given parent. */
+    //void create(unsigned type, unsigned number,  Firework* parent);
 
-    virtual void update();
+    //Activate
+
+    void updateFireworkObject(float deltaTime);
+    void draw();
+
+private:
+    float tick = 0;
+
 };
 

@@ -22,8 +22,9 @@ void BallisticContainer::updateMagazine(float deltaTime)
 			magazine[i]->integrator(deltaTime);
 			magazine[i]->updateBallistic(deltaTime);
 
-		/*	 Now checks if out of bounds or is past its age*/
-			if (magazine[i]->getPosition().y < -2000.0f ||
+
+	/*	 Now checks if out of bounds or is past its age*/
+	if (magazine[i]->getPosition().y < -2000.0f ||
 				magazine[i]->getAge() <= 0 ||
 				magazine[i]->getPosition().z < 200000.0f)
 			{
@@ -34,6 +35,8 @@ void BallisticContainer::updateMagazine(float deltaTime)
 			}
 		}
 	}
+
+	this->ticks += deltaTime;
 }
 
 void BallisticContainer::fireMagazine(ShotTypes shotypes)
@@ -42,7 +45,9 @@ void BallisticContainer::fireMagazine(ShotTypes shotypes)
 
 
 	//Problem: There is no fixed interval
-	if (limitSize <= this->activeSize) {
+	if ((limitSize >= this->activeSize) && ( ticks >= COOLDOWN ) ){
+
+		cout << "Shot Fired" << endl;
 
 		if (shotypes != ShotTypes::FIREWORK) {
 			for (int i = 0; i < magazine.size(); i++) {
@@ -57,6 +62,7 @@ void BallisticContainer::fireMagazine(ShotTypes shotypes)
 			//PlaceHolder for accessing fireworks
 		}
 
+		ticks = 0;
 	}
 
 

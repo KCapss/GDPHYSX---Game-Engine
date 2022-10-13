@@ -151,13 +151,49 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="GameObject\BallisticContainer.cpp" />
+    <ClCompile Include="GameObject\BallisticObject.cpp" />
+    <ClCompile Include="GameObject\FireworkObject.cpp" />
+    <ClCompile Include="GameObject\ParticleObject.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ObjectTextureManager.cpp" />
+    <ClCompile Include="OrthographicCamera.cpp" />
+    <ClCompile Include="PerspectiveCamera.cpp" />
+    <ClCompile Include="Physics\Ballistic.cpp" />
+    <ClCompile Include="Physics\Firework.cpp" />
+    <ClCompile Include="Physics\FireworksRules.cpp" />
+    <ClCompile Include="Physics\Particle.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Skybox.cpp" />
+    <ClCompile Include="Space.cpp" />
+    <ClCompile Include="SwitchManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Particle.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="GameObject\BallisticContainer.h" />
+    <ClInclude Include="GameObject\BallisticObject.h" />
+    <ClInclude Include="GameObject\FireworkObject.h" />
+    <ClInclude Include="GameObject\ParticleObject.h" />
+    <ClInclude Include="Light.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="ObjectTextureManager.h" />
+    <ClInclude Include="OrthographicCamera.h" />
+    <ClInclude Include="PerspectiveCamera.h" />
+    <ClInclude Include="Physics\Ballistic.h" />
+    <ClInclude Include="Physics\Firework.h" />
+    <ClInclude Include="Physics\FireworksRules.h" />
+    <ClInclude Include="Physics\Particle.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="Skybox.h" />
+    <ClInclude Include="Space.h" />
     <ClInclude Include="stb_image.h" />
+    <ClInclude Include="SwitchManager.h" />
     <ClInclude Include="tiny_obj_loader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
