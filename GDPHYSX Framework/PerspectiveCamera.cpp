@@ -27,8 +27,8 @@ glm::mat4 PerspectiveCamera::getProjection()
 
 void PerspectiveCamera::RotateCam(GLFWwindow* window, glm::mat4 shipPosTransformMat)
 {
-
-    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS) {
+    // Changed mouse pannning to right click
+    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS) {
 
         //CurrentCam Pos
         double xPos, yPos;
