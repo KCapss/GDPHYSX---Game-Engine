@@ -53,12 +53,12 @@ void Space::initializeObj()
 
     debriInitialize();
     //projectile = new BallisticObject("ball", NoTexture, this->window);
-    fireworksObject = new FireworkObject("ball", NoTexture, this->window);
+    //fireworksObject = new FireworkObject("ball", NoTexture, this->window);
     projectileContainer = new BallisticContainer();
     
 
-    projectileContainer->setLimit(10);
-    projectileInit(10);
+    projectileContainer->setLimit(5);
+    projectileInit(5);
 
 
 
@@ -67,7 +67,7 @@ void Space::initializeObj()
     player->retrieveSource(lightSrc, mainCam, alterCam);
     planet->retrieveSource(lightSrc, mainCam, alterCam);
     //projectile->retrieveSource(lightSrc, mainCam, alterCam);
-    fireworksObject->retrieveSource(lightSrc, mainCam, alterCam);
+    //fireworksObject->retrieveSource(lightSrc, mainCam, alterCam);
     //debriRetrieveSource();
 
 
@@ -91,9 +91,9 @@ void Space::initializeObj()
     projectile->onActivate(ShotTypes::PISTOL); 
     projectileContainer->loadMagazine(projectile)*/; //load Bullet
 
-    fireworksObject->setInitialScale(glm::vec3(5.0f));
+    /*fireworksObject->setInitialScale(glm::vec3(5.0f));
     fireworksObject->create(1, NULL);
-    projectileContainer->loadFireworks(fireworksObject);
+    projectileContainer->loadFireworks(fireworksObject);*/
     //projectileContainer->loadMagazine(projectile);
 
 }
@@ -184,6 +184,17 @@ void Space::projectileInit(int size)
         projectileContainer->loadMagazine(projectile);
 
     }
+
+    for (int i = 0; i < size; i++) {
+
+        FireworkObject* fireworks = new FireworkObject("ball", NoTexture, this->window);
+        fireworks->retrieveSource(this->lightSrc, this->mainCam, this->alterCam);
+
+        fireworks->setInitialScale(glm::vec3(5.0f));
+        fireworks->create(1, NULL);
+        projectileContainer->loadFireworks(fireworks);
+
+    }
 }
 
 void Space::input()
@@ -217,8 +228,8 @@ void Space::input()
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
     {
         //cout << "Left Button Pressed!" << endl;
-        //projectileContainer->fireMagazine(shotType);
-        projectileContainer->fireMagazine(ShotTypes::FIREWORK);
+        projectileContainer->fireMagazine(shotType);
+        //projectileContainer->fireMagazine(ShotTypes::FIREWORK);
     }
 }
 

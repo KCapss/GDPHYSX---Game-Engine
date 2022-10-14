@@ -44,8 +44,16 @@ void BallisticContainer::updateBallisticContainer(float deltaTime)
 	}
 
 	for (int i = 0; i < divisoria.size(); i++) {
-		if (divisoria[i]->getType() != 0) {
+		if (divisoria[i]->IsReady()) {
+			//Update:
 			divisoria[i]->updateFireworkObject(deltaTime);
+
+			//Checker
+			if (!divisoria[i]->isPayloadActive()) {
+				cout << "fireworks gone" << endl;
+				divisoria[i]->setReady(false);
+			}
+			
 		}
 	}
 
@@ -73,8 +81,10 @@ void BallisticContainer::fireMagazine(ShotTypes shotypes)
 
 		else if (shotypes == ShotTypes::FIREWORK) {
 			for (int i = 0; i < divisoria.size(); i++) {
-				if (divisoria[i]->getType() != 0) {
+				if (!divisoria[i]->IsReady()) {
 					cout << "Boom" << endl;
+
+					divisoria[i]->setReady(true);
 					divisoria[i]->activate(NULL);
 					break;
 				}

@@ -135,6 +135,7 @@ void FireworkObject::create(unsigned type, FireworkObject* parent)
         //Base Parent
         this->parent = NULL;
 
+        //Designed for instantiate diff type with same container
         if (getType() != type && getType() != 0) {
             //Create a new set of fireworks
             this->deletePayload(NULL); // remove preloaded container
@@ -206,6 +207,78 @@ void FireworkObject::deletePayload(FireworkObject* parent)
     
 }
 
+bool FireworkObject::isPayloadActive()
+{
+
+    bool check = false;
+    int nonActiveCount = 0;
+
+    if (!this->isSetActive()) {
+        //Only Applies to Parent Object
+        for (int i = 0; i < fireworkPayload.size(); i++) {
+
+            //Determine the size the payload of its children
+            if (fireworkPayload[i]->isSetActive()) {
+                return true;
+            }
+            
+            else {
+                check = fireworkPayload[i]->isPayloadActive();
+                nonActiveCount++;
+            }
+
+            if (check)
+                return true;
+
+        }
+        
+        if (nonActiveCount == fireworkPayload.size() && !check) {
+            return false;
+        }
+        nonActiveCount = 0;
+    }
+
+
+
+   //Double Redundant for loop idk why
+    if (!this->IsReady()) {
+
+        for (int i = 0; i < fireworkPayload.size(); i++) {
+            //Determine the size the payload of its children
+            if (fireworkPayload[i]->isSetActive()) {
+                check = fireworkPayload[i]->isPayloadActive();
+            }
+
+        }
+
+        
+    }
+
+
+    else if (this->IsReady()) {
+        for (int i = 0; i < fireworkPayload.size(); i++) {
+            //Determine the size the payload of its children
+            if (!fireworkPayload[i]->isSetActive() && !this->isSetActive()) {
+                nonActiveCount++;
+                check = fireworkPayload[i]->isPayloadActive();
+            }
+
+   
+        }
+
+        if (nonActiveCount == fireworkPayload.size() && check) {
+            return false;
+        }
+
+        else {
+            return true;
+        }
+    }
+
+    return true;
+    
+}
+
 void FireworkObject::activate(FireworkObject* parent)
 {
     if(parent != NULL){
@@ -224,8 +297,11 @@ void FireworkObject::activate(FireworkObject* parent)
     }
     this->applyRules(this);
     this->toogleGravity(true);
+    this->setAcceleration(this->getAcceleraation() + vec3(0, -10.0f, 0));
     this->setActive(true);
 }
+
+
 
 void FireworkObject::applyRules(FireworkObject* firework)
 {
@@ -247,6 +323,16 @@ void FireworkObject::applyRules(FireworkObject* firework)
     firework->setMass(1.0f);
     firework->setDamping(damping);
 
+}
+void FireworkObject::setReady(bool flag)
+{
+    
+    this->isReady = flag;
+}
+
+bool FireworkObject::IsReady()
+{
+    return isReady;
 }
 
 void FireworkObject::updateFireworkObject(float deltaTime)

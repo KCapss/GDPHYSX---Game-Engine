@@ -16,27 +16,27 @@ void Ballistic::setShotType(ShotTypes chosenShotType)
 	{
 		case PISTOL:
 			this->setMass(2.0f);
-			this->setVelocity(vec3(0.0f, 0.0f, 35.0f));
+			this->setVelocity(vec3(0.0f, 0.0f, 100.0f));
 			this->setAcceleration(vec3(0.0f, -1.0f, 0.0f));
-			//this->setDamping(0.99f);
+			this->setDamping(0.99f);
 			break;
 		case ARTILLERY:
 			this->setMass(200.0f);
-			this->setVelocity(vec3(0.0f, 30.0f, 40.0f));
-			this->setAcceleration(vec3(0.0f, -20.0f, 0.0f));
-			//this->setDamping(0.99f);
+			this->setVelocity(vec3(0.0f, 100.0f, 40.0f));
+			this->setAcceleration(vec3(0.0f, -40.0f, 0.0f));
+			this->setDamping(0.99f);
 			break;
 		case FIREBALL:
 			this->setMass(1.0f);
-			this->setVelocity(vec3(0.0f, 0.0f, 10.0f));
-			this->setAcceleration(vec3(0.0f, 0.6f, 0.0f));
-			//this->setDamping(0.9f);
+			this->setVelocity(vec3(0.0f, 0.0f, 30.0f));
+			this->setAcceleration(vec3(0.0f, 5.6f, 0.0f));
+			this->setDamping(0.9f);
 			break;
 		case LASER:
 			this->setMass(0.1f);
-			this->setVelocity(vec3(0.0f, 0.0f, 100.0f));
+			this->setVelocity(vec3(0.0f, 0.0f, 300.0f));
 			this->setAcceleration(vec3(0.0f, 0.0f, 0.0f));
-			//this->setDamping(0.90f);
+			this->setDamping(0.90f);
 			break;
 		case UNUSED:
 			// Placeholder
