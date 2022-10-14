@@ -144,4 +144,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="Shaders\ball.frag" />
+    <CopyFileToFolders Include="Shaders\ball.vert" />
+    <CopyFileToFolders Include="Shaders\generator.frag" />
+    <CopyFileToFolders Include="Shaders\generator.vert" />
+    <CopyFileToFolders Include="Shaders\Planet.frag" />
+    <CopyFileToFolders Include="Shaders\Planet.vert" />
+    <CopyFileToFolders Include="Shaders\ship.frag" />
+    <CopyFileToFolders Include="Shaders\ship.vert" />
+    <CopyFileToFolders Include="Shaders\skybox.frag" />
+    <CopyFileToFolders Include="Shaders\skybox.vert" />
+    <CopyFileToFolders Include="Shaders\spaceRock.frag" />
+    <CopyFileToFolders Include="Shaders\spaceRock.vert" />
+    <CopyFileToFolders Include="Shaders\statue.frag" />
+    <CopyFileToFolders Include="Shaders\statue.vert" />
+    <CopyFileToFolders Include="Shaders\statue2.frag" />
+    <CopyFileToFolders Include="Shaders\statue2.vert" />
+    <CopyFileToFolders Include="Shaders\tower.frag" />
+    <CopyFileToFolders Include="Shaders\tower.vert" />
+  </ItemGroup>
 </Project>

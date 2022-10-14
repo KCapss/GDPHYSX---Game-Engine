@@ -10,4 +10,22 @@ progress in one place.
 
 Active List:
 1) Particle Motion HomeWork - Done
-2) Physics Engine Phase 1 - Ongoing
+2) Physics Engine Phase 1 - Done
+
+3) Physics Engine Phase 2 - Upcoming
+
+
+Particle Homework .exe controls
+Q - reset 
+W - Add Force
+E - Enable Gravity
+
+Physics Engine Phase 1.exe controls
+1-5 Numbers (Ballistic Setting) [5 - Firework]
+Left Click - Fire Particle
+
+WS - Forward/Backward
+AD - Rotate Object (Invisble As of now)
+Right Click - Pan Camera (around the invisible object)
+
+
