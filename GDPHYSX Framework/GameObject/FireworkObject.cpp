@@ -11,6 +11,8 @@ FireworkObject::FireworkObject(std::string name, ObjectType objType, GLFWwindow*
 
 FireworkObject::~FireworkObject()
 {
+    this->deAllocate(); //handling de allocating child
+    /*Note: this can be source of error*/
 }
 
 void FireworkObject::initFireworkRules()
@@ -121,20 +123,38 @@ void FireworkObject::initFireworkRules()
     rulesList.push_back(rule9);
 }
 
+
+
+
 //This called space.cpp
-void FireworkObject::create(unsigned type, Firework* parent)
+void FireworkObject::create(unsigned type, FireworkObject* parent)
 {
     //Create a firework based on the assigned type at declaration
     if (parent == NULL) {
         
+        //Base Parent
+        this->parent = NULL;
+
+        if (getType() != type && getType() != 0) {
+            //Create a new set of fireworks
+            this->deletePayload(NULL); // remove preloaded container
+            this->create(type, NULL); // create a batch
+
+        }
         this->setType(type);
-       
+    }
+
+    else {
+        //Child List
+        this->parent = parent;
     }
 
     for (int i = 0; i < rulesList[type - 1]->payloads.size(); i++) {
 
         for (int j = 0; j < rulesList[type - 1]->payloads[i]->paramCount; j++) {
 
+
+            
             FireworkObject* newFireworks = new FireworkObject(name, objType, window);
             newFireworks->retrieveSource(light, perspCam, orthoCam);
 
@@ -150,6 +170,42 @@ void FireworkObject::create(unsigned type, Firework* parent)
 
 }
 
+
+void FireworkObject::deletePayload(FireworkObject* parent)
+{
+//Recursive
+    //Applies Payload Child
+    if (parent != NULL) {
+        for (int i = 0; i < fireworkPayload.size(); i++) {
+            //Determine the size the payload of its children
+            if (fireworkPayload[i]->fireworkPayload.size() > 0) {
+                fireworkPayload[i]->deletePayload(fireworkPayload[i]);
+                delete fireworkPayload[i]; //Possible Error Not yet Proven
+            }
+
+        }
+
+        fireworkPayload.clear();
+    }
+
+
+    //Only Applies to Parent Object
+    else {
+        for (int i = 0; i < fireworkPayload.size(); i++) {
+            //Determine the size the payload of its children
+            if (fireworkPayload[i]->fireworkPayload.size() > 0) {
+                fireworkPayload[i]->deletePayload(fireworkPayload[i]);
+                delete fireworkPayload[i]; //Possible Error Not yet Proven
+            }
+
+        }
+
+        fireworkPayload.clear();
+    }
+
+    
+}
+
 void FireworkObject::activate(FireworkObject* parent)
 {
     if(parent != NULL){
@@ -157,6 +213,8 @@ void FireworkObject::activate(FireworkObject* parent)
         this->setVelocity(parent->getVelocity());
         this->setAcceleration(parent->getAcceleraation());
 
+        //Inheriting Physical Size;
+        this->setInitialScale(parent->objScale);
     }
 
     else {
@@ -212,6 +270,8 @@ void FireworkObject::updateFireworkObject(float deltaTime)
             this->setActive(false);
             this->toogleGravity(false);
             this->tick = 0;
+
+            //Decrease total active particle
         }
 
       
