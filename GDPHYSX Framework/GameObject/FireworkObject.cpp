@@ -23,9 +23,9 @@ void FireworkObject::initFireworkRules()
     rule1->setParameters(
         1, // type
         150, 450, // age range
-        glm::vec3(-5, 200, -5), // min velocity
-        glm::vec3(5, 240, 5), // max velocity
-        0.1f // damping
+        glm::vec3(-50, 100, -50), // min velocity
+        glm::vec3(50, 300, 50), // max velocity
+        0.5f // damping
     );
     rule1->payloads[0]->set(3, 5);
     rule1->payloads[1]->set(5, 5);
@@ -48,8 +48,8 @@ void FireworkObject::initFireworkRules()
     rule3->setParameters(
         3, // type
         150, 450, // age range
-        glm::vec3(-50, -50, -50), // min velocity
-        glm::vec3(50, 50, 50), // max velocity
+        glm::vec3(-150, -50, -150), // min velocity
+        glm::vec3(150, 50, 150), // max velocity
         0.1f // damping
     );
     rulesList.push_back(rule3);
@@ -70,8 +70,8 @@ void FireworkObject::initFireworkRules()
     rule5->setParameters(
         5, // type
         150, 300, // age range
-        glm::vec3(-200, 20, -50), // min velocity
-        glm::vec3(200, 180, 50), // max velocity
+        glm::vec3(-400, 20, -100), // min velocity
+        glm::vec3(400, 180, 100), // max velocity
         0.01f // damping
     );
     rule5->payloads[0]->set(3, 5);
