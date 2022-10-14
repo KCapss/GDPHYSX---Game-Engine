@@ -191,6 +191,7 @@ void FireworkObject::deletePayload(FireworkObject* parent)
 
 
     //Only Applies to Parent Object
+
     else {
         for (int i = 0; i < fireworkPayload.size(); i++) {
             //Determine the size the payload of its children
@@ -254,7 +255,7 @@ bool FireworkObject::isPayloadActive()
         
     }
 
-
+    //Applies to the root parent;
     else if (this->IsReady()) {
         for (int i = 0; i < fireworkPayload.size(); i++) {
             //Determine the size the payload of its children
