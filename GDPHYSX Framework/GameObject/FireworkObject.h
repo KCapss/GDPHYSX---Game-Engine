@@ -20,31 +20,25 @@ public:
     /* Store all payload */
     std::vector<FireworkObject*> fireworkPayload;
 
-    /** And the number of rules. */
-    const static unsigned ruleCount = 1;
-
     /** Holds the set of rules. */
     std::vector<FireworkRules*> rulesList; 
     
-    //Add static for global checking of the firework Object
     
 //Methods
     void initFireworkRules();
+    void create(unsigned type, FireworkObject* parent);
 
-    
-    /** Dispatches a firework from the origin. */
-    void create(unsigned type,  Firework* parent);
     void activate(FireworkObject* parent);
     void applyRules(FireworkObject* firework);
-    ///** Dispatches the given number of fireworks from the given parent. */
-    //void create(unsigned type, unsigned number,  Firework* parent);
 
-    //Activate
+    void deletePayload(FireworkObject* parent);
+    
 
     void updateFireworkObject(float deltaTime);
     void draw();
 
 private:
+    FireworkObject* parent;
     float tick = 0;
 
 };

@@ -91,7 +91,7 @@ void Space::initializeObj()
     projectile->onActivate(ShotTypes::PISTOL); 
     projectileContainer->loadMagazine(projectile)*/; //load Bullet
 
-    fireworksObject->setInitialScale(glm::vec3(10.0f));
+    fireworksObject->setInitialScale(glm::vec3(1.0f));
     fireworksObject->create(1, NULL);
     projectileContainer->loadFireworks(fireworksObject);
     //projectileContainer->loadMagazine(projectile);
