@@ -32,6 +32,10 @@ public:
     void applyRules(FireworkObject* firework);
 
     void deletePayload(FireworkObject* parent);
+    bool isPayloadActive();
+
+    void setReady(bool flag);
+    bool IsReady();
     
 
     void updateFireworkObject(float deltaTime);
@@ -39,6 +43,7 @@ public:
 
 private:
     FireworkObject* parent;
+    bool isReady = false;
     float tick = 0;
 
 };

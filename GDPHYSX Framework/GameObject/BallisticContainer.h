@@ -30,7 +30,7 @@ public:
 
 private:
 	vector<BallisticObject*> magazine; // holds all instantiated ballistics
-	vector<FireworkObject*> divisoria; // holds all illegal fireworks
+	vector<FireworkObject*> fireworkBox; // holds all illegal fireworks
 	int maxSize = 0;
 	int activeSize = 0;
 	unsigned limitSize = 0;

@@ -23,9 +23,9 @@ void FireworkObject::initFireworkRules()
     rule1->setParameters(
         1, // type
         150, 450, // age range
-        glm::vec3(-5, 200, -5), // min velocity
-        glm::vec3(5, 240, 5), // max velocity
-        0.1f // damping
+        glm::vec3(-50, 100, -50), // min velocity
+        glm::vec3(50, 300, 50), // max velocity
+        0.5f // damping
     );
     rule1->payloads[0]->set(3, 5);
     rule1->payloads[1]->set(5, 5);
@@ -48,8 +48,8 @@ void FireworkObject::initFireworkRules()
     rule3->setParameters(
         3, // type
         150, 450, // age range
-        glm::vec3(-50, -50, -50), // min velocity
-        glm::vec3(50, 50, 50), // max velocity
+        glm::vec3(-150, -50, -150), // min velocity
+        glm::vec3(150, 50, 150), // max velocity
         0.1f // damping
     );
     rulesList.push_back(rule3);
@@ -70,8 +70,8 @@ void FireworkObject::initFireworkRules()
     rule5->setParameters(
         5, // type
         150, 300, // age range
-        glm::vec3(-200, 20, -50), // min velocity
-        glm::vec3(200, 180, 50), // max velocity
+        glm::vec3(-400, 20, -100), // min velocity
+        glm::vec3(400, 180, 100), // max velocity
         0.01f // damping
     );
     rule5->payloads[0]->set(3, 5);
@@ -135,6 +135,7 @@ void FireworkObject::create(unsigned type, FireworkObject* parent)
         //Base Parent
         this->parent = NULL;
 
+        //Designed for instantiate diff type with same container
         if (getType() != type && getType() != 0) {
             //Create a new set of fireworks
             this->deletePayload(NULL); // remove preloaded container
@@ -190,6 +191,7 @@ void FireworkObject::deletePayload(FireworkObject* parent)
 
 
     //Only Applies to Parent Object
+
     else {
         for (int i = 0; i < fireworkPayload.size(); i++) {
             //Determine the size the payload of its children
@@ -203,6 +205,78 @@ void FireworkObject::deletePayload(FireworkObject* parent)
         fireworkPayload.clear();
     }
 
+    
+}
+
+bool FireworkObject::isPayloadActive()
+{
+
+    bool check = false;
+    int nonActiveCount = 0;
+
+    if (!this->isSetActive()) {
+        //Only Applies to Parent Object
+        for (int i = 0; i < fireworkPayload.size(); i++) {
+
+            //Determine the size the payload of its children
+            if (fireworkPayload[i]->isSetActive()) {
+                return true;
+            }
+            
+            else {
+                check = fireworkPayload[i]->isPayloadActive();
+                nonActiveCount++;
+            }
+
+            if (check)
+                return true;
+
+        }
+        
+        if (nonActiveCount == fireworkPayload.size() && !check) {
+            return false;
+        }
+        nonActiveCount = 0;
+    }
+
+
+
+   //Double Redundant for loop idk why
+    if (!this->IsReady()) {
+
+        for (int i = 0; i < fireworkPayload.size(); i++) {
+            //Determine the size the payload of its children
+            if (fireworkPayload[i]->isSetActive()) {
+                check = fireworkPayload[i]->isPayloadActive();
+            }
+
+        }
+
+        
+    }
+
+    //Applies to the root parent;
+    else if (this->IsReady()) {
+        for (int i = 0; i < fireworkPayload.size(); i++) {
+            //Determine the size the payload of its children
+            if (!fireworkPayload[i]->isSetActive() && !this->isSetActive()) {
+                nonActiveCount++;
+                check = fireworkPayload[i]->isPayloadActive();
+            }
+
+   
+        }
+
+        if (nonActiveCount == fireworkPayload.size() && check) {
+            return false;
+        }
+
+        else {
+            return true;
+        }
+    }
+
+    return true;
     
 }
 
@@ -224,8 +298,11 @@ void FireworkObject::activate(FireworkObject* parent)
     }
     this->applyRules(this);
     this->toogleGravity(true);
+    this->setAcceleration(this->getAcceleraation() + vec3(0, -10.0f, 0));
     this->setActive(true);
 }
+
+
 
 void FireworkObject::applyRules(FireworkObject* firework)
 {
@@ -247,6 +324,16 @@ void FireworkObject::applyRules(FireworkObject* firework)
     firework->setMass(1.0f);
     firework->setDamping(damping);
 
+}
+void FireworkObject::setReady(bool flag)
+{
+    
+    this->isReady = flag;
+}
+
+bool FireworkObject::IsReady()
+{
+    return isReady;
 }
 
 void FireworkObject::updateFireworkObject(float deltaTime)

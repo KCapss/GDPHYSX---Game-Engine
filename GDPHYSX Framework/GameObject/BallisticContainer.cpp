@@ -8,14 +8,14 @@ vector<BallisticObject*> BallisticContainer::getMagazine()
 void BallisticContainer::loadMagazine(BallisticObject* bullet)
 {
 	magazine.push_back(bullet);
-	cout << "Bullet loaded" << endl;
+	
 	maxSize++;
 }
 
 void BallisticContainer::loadFireworks(FireworkObject* fireworks)
 {
-	divisoria.push_back(fireworks);
-	cout << "Exolision loaded" << endl;
+	fireworkBox.push_back(fireworks);
+	
 	maxSize++;
 }
 
@@ -36,16 +36,22 @@ void BallisticContainer::updateBallisticContainer(float deltaTime)
 				magazine[i]->getPosition().z > 2000.0f)
 			{
 				// Set to unused if invalid
-				//magazine[i]->setShotType(ShotTypes::UNUSED);
-				cout << "Shot Disabled" << endl;
 				magazine[i]->onReset();
 			}
 		}
 	}
 
-	for (int i = 0; i < divisoria.size(); i++) {
-		if (divisoria[i]->getType() != 0) {
-			divisoria[i]->updateFireworkObject(deltaTime);
+	for (int i = 0; i < fireworkBox.size(); i++) {
+		if (fireworkBox[i]->IsReady()) {
+			//Update:
+			fireworkBox[i]->updateFireworkObject(deltaTime);
+
+			//Checker
+			if (!fireworkBox[i]->isPayloadActive()) {
+				
+				fireworkBox[i]->setReady(false);
+			}
+			
 		}
 	}
 
@@ -55,12 +61,9 @@ void BallisticContainer::updateBallisticContainer(float deltaTime)
 void BallisticContainer::fireMagazine(ShotTypes shotypes)
 {
 	//Check what kind of bullets
-
-
-	//Problem: There is no fixed interval
 	if ((limitSize >= this->activeSize) && ( ticks >= COOLDOWN ) ){
 
-		cout << "Shot Fired" << endl;
+		
 
 		if (shotypes != ShotTypes::FIREWORK) {
 			for (int i = 0; i < magazine.size(); i++) {
@@ -72,10 +75,12 @@ void BallisticContainer::fireMagazine(ShotTypes shotypes)
 		}
 
 		else if (shotypes == ShotTypes::FIREWORK) {
-			for (int i = 0; i < divisoria.size(); i++) {
-				if (divisoria[i]->getType() != 0) {
-					cout << "Boom" << endl;
-					divisoria[i]->activate(NULL);
+			for (int i = 0; i < fireworkBox.size(); i++) {
+				if (!fireworkBox[i]->IsReady()) {
+					
+
+					fireworkBox[i]->setReady(true);
+					fireworkBox[i]->activate(NULL);
 					break;
 				}
 			}
@@ -102,9 +107,9 @@ void BallisticContainer::draw()
 		}
 	}
 
-	for (int i = 0; i < divisoria.size(); i++) {
-		if (divisoria[i]->getType() != 0) {
-			divisoria[i]->draw();
+	for (int i = 0; i < fireworkBox.size(); i++) {
+		if (fireworkBox[i]->getType() != 0) {
+			fireworkBox[i]->draw();
 		}
 	}
 }
@@ -117,7 +122,7 @@ void BallisticContainer::deleteBuffer()
 			magazine[i]->deAllocate();
 	}
 
-	for (int i = 0; i < divisoria.size(); i++) {
-			divisoria[i]->deAllocate();
+	for (int i = 0; i < fireworkBox.size(); i++) {
+			fireworkBox[i]->deAllocate();
 	}
 }
