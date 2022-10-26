@@ -88,13 +88,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Kevin\source\repos\GDPHYSX_SETUP\GDPHYSX - Setup\Dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\admin\Documents\Important Programming Tools\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Kevin\source\repos\GDPHYSX_SETUP\GDPHYSX - Setup\Dependencies\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\admin\Documents\Important Programming Tools\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -105,7 +105,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\Kevin\source\repos\GDPHYSX_SETUP\GDPHYSX - Setup\Dependencies\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\admin\Documents\Important Programming Tools\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -113,7 +113,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\Kevin\source\repos\GDPHYSX_SETUP\GDPHYSX - Setup\Dependencies\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\admin\Documents\Important Programming Tools\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -162,6 +162,9 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ObjectTextureManager.cpp" />
     <ClCompile Include="OrthographicCamera.cpp" />
+    <ClCompile Include="ForceGenerators\ParticleSpring.cpp" />
+    <ClCompile Include="ForceGenerators\ParticleAnchoredSpring.cpp" />
+    <ClCompile Include="ForceGenerators\ParticleBungee.cpp" />
     <ClCompile Include="PerspectiveCamera.cpp" />
     <ClCompile Include="Physics\Ballistic.cpp" />
     <ClCompile Include="Physics\Firework.cpp" />
@@ -183,6 +186,9 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="ObjectTextureManager.h" />
     <ClInclude Include="OrthographicCamera.h" />
+    <ClInclude Include="ForceGenerators\ParticleSpring.h" />
+    <ClInclude Include="ForceGenerators\ParticleAnchoredSpring.h" />
+    <ClInclude Include="ForceGenerators\ParticleBungee.h" />
     <ClInclude Include="PerspectiveCamera.h" />
     <ClInclude Include="Physics\Ballistic.h" />
     <ClInclude Include="Physics\Firework.h" />
