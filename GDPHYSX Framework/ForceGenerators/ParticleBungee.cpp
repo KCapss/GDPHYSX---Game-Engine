@@ -23,5 +23,5 @@ void ParticleBungee::updateForce(Particle* particle, float deltaTime)
 	// Calculate final force and apply it
 	force = glm::normalize(force);
 	force *= -1.0 * magnitude;
-	particle->applyForce(force);
+	particle->addForce(force);
 }

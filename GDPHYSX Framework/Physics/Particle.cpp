@@ -124,8 +124,9 @@ void Particle::updateAcceleration(vec3 acceleration)
 
 
 //Still testing for error if it applied on multiple iteration
-void Particle::applyForce(vec3 Force)
+void Particle::addForce(vec3 Force)
 {
+    /*
     //Initial Proposal
     //this->velocity +=  (Force / this->mass); // there can be an error if mass is 0
 
@@ -142,6 +143,9 @@ void Particle::applyForce(vec3 Force)
 
     //New Method
     this->velocity += inverseMass * Force;
+    */
+
+    forceAccum += Force;
 }
 
 void Particle::toogleGravity(bool flag)
@@ -165,15 +169,30 @@ void Particle::integrator(float deltaTime)
     //Updating Position:
     this->position = this->position + ((this->velocity * deltaTime));
 
-    
-  
+    glm::vec3 resultingAcc = this->acceleration;
+    float inverseMass = 0;
+    //Using Inverse Mass
+    if (this->mass != 0) {
+        inverseMass = 1 / this->mass;
+    }
+    else {
+        inverseMass = 0;
+    }
+    resultingAcc += inverseMass * forceAccum;
+
     //Updating Velocity
 
     if(this->isGravityOn)
-        this->velocity = (this->velocity * powf(this->damp, deltaTime)) + (vec3(0.0f, GRAVITY, 0.0f) + this->acceleration) * deltaTime;
+        this->velocity = (this->velocity * powf(this->damp, deltaTime)) + (vec3(0.0f, GRAVITY, 0.0f) + resultingAcc) * deltaTime;
     else
-        this->velocity = (this->velocity * powf(this->damp, deltaTime)) + (this->acceleration) * deltaTime;
+        this->velocity = (this->velocity * powf(this->damp, deltaTime)) + resultingAcc * deltaTime;
      //powf(deltaTime) will be edit later
     
-     
+     // Clear force accumulated
+    clearAccumulator();
+}
+
+void Particle::clearAccumulator()
+{
+    forceAccum = glm::vec3(0);
 }

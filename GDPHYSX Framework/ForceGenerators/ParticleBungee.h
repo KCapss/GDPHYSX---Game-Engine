@@ -1,7 +1,7 @@
 #pragma once
-#include "../Physics/Particle.h"
+#include "ParticleForceGenerator.h"
 
-class ParticleBungee
+class ParticleBungee : public ParticleForceGenerator
 {
 private:
 	// Particle at the other end of the spring (particle at initial point)
