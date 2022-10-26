@@ -54,6 +54,9 @@ public:
 	void integrator(float deltaTime);
 	void clearAccumulator();
 
+	// Boolean methods
+	bool hasFiniteMass();
+
 
 private:
 	

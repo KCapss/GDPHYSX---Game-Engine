@@ -196,3 +196,18 @@ void Particle::clearAccumulator()
 {
     forceAccum = glm::vec3(0);
 }
+
+bool Particle::hasFiniteMass()
+{
+    float inverseMass = 0;
+    //Using Inverse Mass
+    if (this->mass != 0) {
+        inverseMass = 1 / this->mass;
+        return true;
+    }
+
+    else {
+        inverseMass = 0;
+        return false;
+    }
+}
