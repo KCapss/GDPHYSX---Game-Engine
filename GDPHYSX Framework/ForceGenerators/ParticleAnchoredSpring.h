@@ -1,7 +1,7 @@
 #pragma once
-#include "../Physics/Particle.h"
+#include "ParticleForceGenerator.h"
 
-class ParticleAnchoredSpring
+class ParticleAnchoredSpring : public ParticleForceGenerator
 {
 private:
 	// location of anchored end of spring
