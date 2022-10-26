@@ -44,7 +44,7 @@ public:
 
 
 	//Physics Application
-	void applyForce(vec3 Force);
+	void addForce(vec3 Force);
 
 	//Constant Force
 	void toogleGravity(bool flag);
@@ -52,6 +52,8 @@ public:
 
 	//InClass Method, Ethan: made public to access in ballistics
 	void integrator(float deltaTime);
+	void clearAccumulator();
+
 
 private:
 	
@@ -60,7 +62,7 @@ private:
 	glm::vec3 position;
 	glm::vec3 velocity;
 	glm::vec3 acceleration;
-	
+	glm::vec3 forceAccum;
 
 	bool isGravityOn;
 	float mass;
