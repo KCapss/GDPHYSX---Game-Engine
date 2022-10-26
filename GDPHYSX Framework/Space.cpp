@@ -103,9 +103,9 @@ void Space::initializeObj()
     //projectileContainer->loadMagazine(projectile);
 
     ASpringObject->retrieveSource(lightSrc, mainCam, alterCam);
-    ASpringObject->setInitialPos(glm::vec3(0.5f, 0, 150.f));
+    ASpringObject->setStartPos(glm::vec3(0.5f, 0, 2.0f));
     ASpringObject->setInitialRotation(glm::vec3(0, 0, 0));
-    ASpringObject->setInitialScale(glm::vec3(20.0f));
+    ASpringObject->setInitialScale(glm::vec3(30.0f));
 
 }
 

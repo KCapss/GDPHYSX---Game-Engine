@@ -8,6 +8,8 @@ public:
     AnchorSpringObject(std::string name, ObjectType objType, GLFWwindow* currWindow);
     //~AnchorSpringObject();
 
+    void setStartPos(glm::vec3 Pos);
+
     void update(float timeStep);
     void draw();
     
