@@ -11,9 +11,11 @@ Space::Space(int length, int width)
     mainCam = new PerspectiveCamera(length, width);
     alterCam = new OrthographicCamera();
 
-
     this->lengthDim = length;
     this->widthDim = width;
+
+
+
 
 }
 
@@ -55,6 +57,10 @@ void Space::initializeObj()
     //projectile = new BallisticObject("ball", NoTexture, this->window);
     //fireworksObject = new FireworkObject("ball", NoTexture, this->window);
     projectileContainer = new BallisticContainer();
+
+
+    //Remove when not needed
+    ASpringObject = new AnchorSpringObject("ball", NoTexture, this->window);
     
 
     projectileContainer->setLimit(5);
@@ -95,6 +101,11 @@ void Space::initializeObj()
     fireworksObject->create(1, NULL);
     projectileContainer->loadFireworks(fireworksObject);*/
     //projectileContainer->loadMagazine(projectile);
+
+    ASpringObject->retrieveSource(lightSrc, mainCam, alterCam);
+    ASpringObject->setInitialPos(glm::vec3(0.5f, 0, 150.f));
+    ASpringObject->setInitialRotation(glm::vec3(0, 0, 0));
+    ASpringObject->setInitialScale(glm::vec3(20.0f));
 
 }
 
@@ -247,6 +258,7 @@ void Space::update(float deltaTime)
     
     //Physics Object
     projectileContainer->updateBallisticContainer(deltaTime);
+    ASpringObject->update(deltaTime);
 
     //special Case = reference object acting as point light
     planet->updateLight();
@@ -272,6 +284,7 @@ void Space::draw()
     //planet->draw();
 
     projectileContainer->draw();
+    ASpringObject->draw();
     //drawDebri();
 
     /* Swap front and back buffers */

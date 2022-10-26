@@ -17,6 +17,7 @@
 #include "GameObject/BallisticContainer.h"
 #include "GameObject/BallisticObject.h"
 #include "GameObject/FireworkObject.h"
+#include "GameObject/AnchorSpringObject.h"
 
 
 #include "Light.h"
@@ -64,6 +65,9 @@ private:
 	BallisticObject* projectile;
 	FireworkObject* fireworksObject;
 	BallisticContainer* projectileContainer;
+
+	//ForceGenerator
+	AnchorSpringObject* ASpringObject;
 	
 
 
