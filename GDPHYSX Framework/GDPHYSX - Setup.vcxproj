@@ -151,6 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ForceGenerators\ParticleForceGenerator.cpp" />
+    <ClCompile Include="ForceGenerators\ParticleGravity.cpp" />
     <ClCompile Include="GameObject\AnchorSpringObject.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GameObject\BallisticContainer.cpp" />
@@ -178,6 +180,8 @@
     <ClCompile Include="SwitchManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ForceGenerators\ParticleForceGenerator.h" />
+    <ClInclude Include="ForceGenerators\ParticleGravity.h" />
     <ClInclude Include="GameObject\AnchorSpringObject.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="GameObject\BallisticContainer.h" />

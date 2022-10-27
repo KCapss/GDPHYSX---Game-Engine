@@ -85,9 +85,9 @@ void Space::initializeObj()
     player->recomputeTransform();
 
     //planet Setup
-    planet->setInitialPos(glm::vec3(0.5f, 0, 15000.f));
+    //planet->setInitialPos(glm::vec3(0.5f, 0, 15000.f));
     planet->setInitialRotation(glm::vec3(0, 0, 0));
-    planet->setInitialScale(glm::vec3(200.0f));
+    planet->setInitialScale(glm::vec3(20.0f));
 
     //debriSetup();
 
@@ -105,7 +105,7 @@ void Space::initializeObj()
     ASpringObject->retrieveSource(lightSrc, mainCam, alterCam);
     ASpringObject->setStartPos(glm::vec3(0.5f, 0, 2.0f));
     ASpringObject->setInitialRotation(glm::vec3(0, 0, 0));
-    ASpringObject->setInitialScale(glm::vec3(30.0f));
+    ASpringObject->setInitialScale(glm::vec3(2.0f));
 
 }
 
