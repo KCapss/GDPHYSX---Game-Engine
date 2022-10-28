@@ -25,9 +25,9 @@ void ParticleAnchoredSpring::updateForce(Particle* particle, float deltaTime)
 	// Calculate final force and apply it
 	force = glm::normalize(force);
 	force *= -1.0 * magnitude;
-	std::cout << "Force x: " << force.x <<
+	/*std::cout << "Force x: " << force.x <<
 		"y: " << force.y <<
-		"z: " << force.z << std::endl;
+		"z: " << force.z << std::endl;*/
 
 	particle->addForce(force);
 

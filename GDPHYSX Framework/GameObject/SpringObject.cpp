@@ -2,6 +2,8 @@
 
 SpringObject::SpringObject(std::string name, ObjectType objType, GLFWwindow* currWindow)
 {
+    this->particle = new Particle();
+
     //Debug Only Remove when not needed
     particle->setVelocity(vec3(0, 0, 1.0f));
     particle->setDamping(0.95f);

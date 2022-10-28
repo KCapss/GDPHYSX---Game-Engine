@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GameObject\BungeeObject.cpp" />
     <ClCompile Include="ForceGenerators\ParticleForceGenerator.cpp" />
     <ClCompile Include="ForceGenerators\ParticleGravity.cpp" />
     <ClCompile Include="GameObject\AnchorSpringObject.cpp" />
@@ -177,9 +178,11 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="Space.cpp" />
+    <ClCompile Include="GameObject\SpringObject.cpp" />
     <ClCompile Include="SwitchManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GameObject\BungeeObject.h" />
     <ClInclude Include="ForceGenerators\ParticleForceGenerator.h" />
     <ClInclude Include="ForceGenerators\ParticleGravity.h" />
     <ClInclude Include="GameObject\AnchorSpringObject.h" />
@@ -204,6 +207,7 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="Space.h" />
+    <ClInclude Include="GameObject\SpringObject.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="SwitchManager.h" />
     <ClInclude Include="tiny_obj_loader.h" />

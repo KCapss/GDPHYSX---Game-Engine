@@ -17,8 +17,11 @@
 #include "GameObject/BallisticContainer.h"
 #include "GameObject/BallisticObject.h"
 #include "GameObject/FireworkObject.h"
-#include "GameObject/AnchorSpringObject.h"
 
+//Force Generator
+#include "GameObject/AnchorSpringObject.h"
+#include "GameObject/SpringObject.h"
+#include "GameObject/BungeeObject.h"
 
 #include "Light.h"
 #include "PerspectiveCamera.h"
@@ -67,7 +70,12 @@ private:
 	BallisticContainer* projectileContainer;
 
 	//ForceGenerator
+	ParticleObject* refParticle;
 	AnchorSpringObject* ASpringObject;
+	SpringObject* springObject;
+	BungeeObject* bungeeObject;
+
+	//
 	
 
 
