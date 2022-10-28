@@ -22,6 +22,10 @@
 #include "GameObject/AnchorSpringObject.h"
 #include "GameObject/SpringObject.h"
 #include "GameObject/BungeeObject.h"
+#include "GameObject/SpringParticleContainer.h"
+
+//Manager
+#include "ForceGenerators/ParticleForceRegistry.h"
 
 #include "Light.h"
 #include "PerspectiveCamera.h"
@@ -36,23 +40,19 @@ public:
 	//Constructor
 	GLFWwindow* window;
 	Space(int length, int width);
-	bool initializeWindow();
 
+	bool initializeWindow();
 	void initializeObj();
 
 	void update(float deltaTime);
 	void draw();
 	void deleteBuffer();
 
-	//Debri Handler
-	void debriInitialize();
-	void debriRetrieveSource();
-	void debriSetup();
-	void drawDebri();
-	void deleteDebri();
-
 	//projectile Handler
 	void projectileInit(int size); //including the source
+
+	//SpringHandler
+	void springInit(int size); //including the source
 	
 
 	// key callback
@@ -69,22 +69,23 @@ private:
 	FireworkObject* fireworksObject;
 	BallisticContainer* projectileContainer;
 
+	//Manager
+	ParticleForceRegistry* pfGenManager;
+
 	//ForceGenerator
 	ParticleObject* refParticle;
+
 	AnchorSpringObject* ASpringObject;
 	SpringObject* springObject;
 	BungeeObject* bungeeObject;
+	SpringParticleContainer* springContainer;
 
 	//
 	
 
 
 	//Debri
-	Model* tower;
-	Model* generators;
-	Model* spaceRock;
-	Model* statue;
-	Model* statue2;
+	
 	Player* player;
 
 	//External Src
@@ -96,7 +97,7 @@ private:
 
 	// Stores shot type
 	ShotTypes shotType;
-	
+	int springTypes = 0;
 
 };
 

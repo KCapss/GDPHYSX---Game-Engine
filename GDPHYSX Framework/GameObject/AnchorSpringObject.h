@@ -14,16 +14,18 @@ public:
 
     void update(float timeStep);
     void draw();
+
+    void reset();
     
+    Particle* particle;
+    ParticleAnchoredSpring* aSpringPhysics;
 
 protected:
 
-    ParticleAnchoredSpring* aSpring;
-    Particle* particle;
-
-
     Model* refPoint;
     glm::vec3 anchorPos = glm::vec3(0);
+    float tick = 0;
+    float maxTime = 1000.0f;
 
 private:
 };

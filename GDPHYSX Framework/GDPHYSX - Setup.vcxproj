@@ -180,6 +180,7 @@
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="Space.cpp" />
     <ClCompile Include="GameObject\SpringObject.cpp" />
+    <ClCompile Include="GameObject\SpringParticleContainer.cpp" />
     <ClCompile Include="SwitchManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +211,7 @@
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="Space.h" />
     <ClInclude Include="GameObject\SpringObject.h" />
+    <ClInclude Include="GameObject\SpringParticleContainer.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="SwitchManager.h" />
     <ClInclude Include="tiny_obj_loader.h" />

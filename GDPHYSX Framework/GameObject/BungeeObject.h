@@ -21,13 +21,16 @@ public:
     void update(float timeStep);
     void draw();
 
+    void reset();
 
+    Particle* particle;
+    ParticleBungee* bungeePhysics;
 protected:
 
     //Own particle
-    Particle* particle; 
-    ParticleBungee* bungeePhysics;
 
+    float tick = 0;
+    float maxTime = 1000.0f;
     glm::vec3 anchorPos = glm::vec3(0);
 };
 

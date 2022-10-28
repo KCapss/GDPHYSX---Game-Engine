@@ -17,6 +17,7 @@ void ParticleForceRegistry::remove(Particle* particle, ParticleForceGenerator* f
 			Registry::iterator it;
 			it = registrations.begin() + i;
 			registrations.erase(it);
+			registrations.shrink_to_fit();// readjust the  code if error here remove it
 			return; // go back if found
 		}
 	}

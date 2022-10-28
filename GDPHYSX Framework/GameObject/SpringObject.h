@@ -17,13 +17,16 @@ public:
 
     void update(float timeStep);
     void draw();
+    void reset();
 
+    Particle* particle;
+    ParticleSpring* springPhysics;
 
 protected:
 
     //Own particle
-    Particle* particle;
-    ParticleSpring* springPhysics;
+    float tick = 0;
+    float maxTime = 1000.0f;
 
    
 };
