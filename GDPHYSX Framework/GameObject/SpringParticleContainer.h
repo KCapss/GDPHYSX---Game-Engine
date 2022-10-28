@@ -35,7 +35,8 @@ protected:
 
 private:
 
-
+	float buffer = 0.5f;
+	float tick = 0.0f;
 
 };
 

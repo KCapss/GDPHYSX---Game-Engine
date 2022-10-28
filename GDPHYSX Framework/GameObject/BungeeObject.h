@@ -30,7 +30,7 @@ protected:
     //Own particle
 
     float tick = 0;
-    float maxTime = 1000.0f;
+    float maxTime = 15.0f;
     glm::vec3 anchorPos = glm::vec3(0);
 };
 

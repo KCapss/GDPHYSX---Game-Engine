@@ -30,42 +30,45 @@ void SpringParticleContainer::loadBungee(BungeeObject* Bungee)
 
 void SpringParticleContainer::fire(int i)
 {
-	switch (i) {
+	if (tick > buffer) {
+		switch (i) {
 
-	//Normal Spring
-	case 6:
-		for (int i = 0; i < SpringList.size(); i++) {
-			if (!SpringList[i]->isSetActive()) {
+			//Normal Spring
+		case 6:
+			for (int i = 0; i < SpringList.size(); i++) {
+				if (!SpringList[i]->isSetActive()) {
 
-				SpringList[i]->reset();
-				break;
+					SpringList[i]->reset();
+					break;
+				}
 			}
-		}
-		break;
-	//Anchored
-	case 7:
-		for (int i = 0; i < ASpringList.size(); i++) {
-			if (!ASpringList[i]->isSetActive()) {
+			break;
+			//Anchored
+		case 7:
+			for (int i = 0; i < ASpringList.size(); i++) {
+				if (!ASpringList[i]->isSetActive()) {
 
-				ASpringList[i]->reset();
-				break;
+					ASpringList[i]->reset();
+					break;
+				}
 			}
-		}
-		break;
+			break;
 
-	//Bungee
-	case 8:
-		for (int i = 0; i < BungeeList.size(); i++) {
-			if (!BungeeList[i]->isSetActive()) {
+			//Bungee
+		case 8:
+			for (int i = 0; i < BungeeList.size(); i++) {
+				if (!BungeeList[i]->isSetActive()) {
 
-				BungeeList[i]->reset();
-				break;
+					BungeeList[i]->reset();
+					break;
+				}
 			}
+
+			break;
 		}
 
-		break;
+		tick = 0.0f;
 	}
-
 }
 
 void SpringParticleContainer::updateSpringContainer(float timeStep)
@@ -91,7 +94,7 @@ void SpringParticleContainer::updateSpringContainer(float timeStep)
 		}
 	}
 
-
+	tick += timeStep;
 }
 
 void SpringParticleContainer::draw()
@@ -113,7 +116,7 @@ void SpringParticleContainer::draw()
 	for (int i = 0; i < BungeeList.size(); i++) {
 		if (BungeeList[i]->isSetActive()) {
 			
-			SpringList[i]->draw();
+			BungeeList[i]->draw();
 		}
 	}
 }

@@ -176,7 +176,7 @@ void Space::springInit(int size)
         copySpring->retrieveSource(lightSrc, mainCam, alterCam);
         copySpring->init((Particle*)refParticle, 1.0f, 10.0f);
         copySpring->setStartPos(vec3(0, 0, 5.0f));
-        copySpring->setInitialScale(vec3(50.0f));
+        copySpring->setInitialScale(vec3(10.0f));
        
 
         springContainer->loadSpring(copySpring);
@@ -188,7 +188,7 @@ void Space::springInit(int size)
         copyASpring->retrieveSource(lightSrc, mainCam, alterCam);
         copyASpring->setStartPos(glm::vec3(0.00f, 0.01f, 0.0f));
         copyASpring->setStartPos(vec3(0, 0, 5.0f));
-        copyASpring->setInitialScale(vec3(50.0f));
+        copyASpring->setInitialScale(vec3(10.0f));
        
 
         springContainer->loadAnchor(copyASpring);
@@ -199,7 +199,7 @@ void Space::springInit(int size)
         copyBungee->retrieveSource(lightSrc, mainCam, alterCam);
         copyBungee->init((Particle*)refParticle, 1.0f, 10.0f);
         copyBungee->setStartPos(vec3(0, 0, 5.0f));
-        copyBungee->setInitialScale(vec3(50.0f));
+        copyBungee->setInitialScale(vec3(10.0f));
        
 
         springContainer->loadBungee(copyBungee);
@@ -308,7 +308,7 @@ void Space::draw()
     //planet->draw();
 
     projectileContainer->draw();
-    projectileContainer->draw();
+    springContainer->draw();
     
     refParticle->draw();
     /*springObject->draw();
