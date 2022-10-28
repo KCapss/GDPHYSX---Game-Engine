@@ -11,9 +11,11 @@ Space::Space(int length, int width)
     mainCam = new PerspectiveCamera(length, width);
     alterCam = new OrthographicCamera();
 
-
     this->lengthDim = length;
     this->widthDim = width;
+
+
+
 
 }
 
@@ -55,6 +57,14 @@ void Space::initializeObj()
     //projectile = new BallisticObject("ball", NoTexture, this->window);
     //fireworksObject = new FireworkObject("ball", NoTexture, this->window);
     projectileContainer = new BallisticContainer();
+
+
+    //Remove when not needed
+    refParticle = new ParticleObject("ball", NoTexture, this->window);
+    ASpringObject = new AnchorSpringObject("ball", NoTexture, this->window);
+    springObject = new SpringObject("ball", NoTexture, this->window);
+    bungeeObject = new BungeeObject("ball", NoTexture, this->window);
+
     
 
     projectileContainer->setLimit(5);
@@ -79,9 +89,9 @@ void Space::initializeObj()
     player->recomputeTransform();
 
     //planet Setup
-    planet->setInitialPos(glm::vec3(0.5f, 0, 15000.f));
+    //planet->setInitialPos(glm::vec3(0.5f, 0, 15000.f));
     planet->setInitialRotation(glm::vec3(0, 0, 0));
-    planet->setInitialScale(glm::vec3(200.0f));
+    planet->setInitialScale(glm::vec3(20.0f));
 
     //debriSetup();
 
@@ -95,6 +105,29 @@ void Space::initializeObj()
     fireworksObject->create(1, NULL);
     projectileContainer->loadFireworks(fireworksObject);*/
     //projectileContainer->loadMagazine(projectile);
+
+    //Reference Particle
+    refParticle->retrieveSource(lightSrc, mainCam, alterCam);
+    refParticle->setPosition(vec3(0));
+    refParticle->setInitialScale(vec3(3.0f));
+
+    //Spring Force
+    springObject->retrieveSource(lightSrc, mainCam, alterCam);
+    springObject->init((Particle*)refParticle, 1.0f, 100.0f);
+    springObject->setStartPos(vec3(0));
+    springObject->setInitialScale(vec3(20.0f));
+
+    bungeeObject->retrieveSource(lightSrc, mainCam, alterCam);
+    bungeeObject->init((Particle*)refParticle, 1.2f, 10.0f);
+    bungeeObject->setStartPos(vec3(0, 1000.0f, 0));
+    bungeeObject->setInitialScale(vec3(20.0f));
+
+
+
+    ASpringObject->retrieveSource(lightSrc, mainCam, alterCam);
+    ASpringObject->setStartPos(glm::vec3(0.01f, 0.01f, 0.01f));
+    ASpringObject->setInitialRotation(glm::vec3(0, 0, 0));
+    ASpringObject->setInitialScale(glm::vec3(2.0f));
 
 }
 
@@ -248,6 +281,11 @@ void Space::update(float deltaTime)
     //Physics Object
     projectileContainer->updateBallisticContainer(deltaTime);
 
+    refParticle->update(deltaTime);
+    //ASpringObject->update(deltaTime);
+    //springObject->update(deltaTime);
+    bungeeObject->update(deltaTime);
+
     //special Case = reference object acting as point light
     planet->updateLight();
 
@@ -272,6 +310,12 @@ void Space::draw()
     //planet->draw();
 
     projectileContainer->draw();
+    
+    refParticle->draw();
+    //springObject->draw();
+    //ASpringObject->draw();
+    bungeeObject->draw();
+
     //drawDebri();
 
     /* Swap front and back buffers */

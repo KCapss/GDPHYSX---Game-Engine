@@ -11,7 +11,7 @@ PerspectiveCamera::PerspectiveCamera(float width, float height)
     this->projection = glm::perspective(glm::radians(60.0f),
         width / height,
         0.01f,
-        1000000.0f);
+        100000000.0f);
 
     this->distance = 10.0f;
     this->cameraPos = glm::vec3(0, 0, -distance);

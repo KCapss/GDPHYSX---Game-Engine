@@ -15,6 +15,7 @@ Particle::Particle()
 
     //Gravity
     this->isGravityOn = false;
+    this->forceAccum = vec3(0.0f);
 }
 
 Particle::Particle(vec3 Pos, float Mass)
@@ -23,6 +24,7 @@ Particle::Particle(vec3 Pos, float Mass)
     this->position = vec3(Pos.x, Pos.y, Pos.z);
     this->velocity = vec3(0.0f);
     this->acceleration = vec3(0.0f);
+    this->forceAccum = vec3(0.0f);
 
     this->damp = 1.0f;
 
@@ -126,7 +128,7 @@ void Particle::updateAcceleration(vec3 acceleration)
 //Still testing for error if it applied on multiple iteration
 void Particle::addForce(vec3 Force)
 {
-    /*
+    
     //Initial Proposal
     //this->velocity +=  (Force / this->mass); // there can be an error if mass is 0
 
@@ -142,10 +144,10 @@ void Particle::addForce(vec3 Force)
     
 
     //New Method
-    this->velocity += inverseMass * Force;
-    */
+    this->forceAccum += inverseMass * Force;
+    
 
-    forceAccum += Force;
+    //forceAccum += Force;
 }
 
 void Particle::toogleGravity(bool flag)

@@ -12,7 +12,10 @@ void ParticleAnchoredSpring::updateForce(Particle* particle, float deltaTime)
 {
 	// Calculate vector of spring
 	glm::vec3 force = particle->getPosition();
-	force -= *anchor;
+
+	
+	force -= * anchor;
+
 
 	// Calculate magnitude of the force 
 	float magnitude = glm::length(force);
@@ -22,5 +25,12 @@ void ParticleAnchoredSpring::updateForce(Particle* particle, float deltaTime)
 	// Calculate final force and apply it
 	force = glm::normalize(force);
 	force *= -1.0 * magnitude;
+	/*std::cout << "Force x: " << force.x <<
+		"y: " << force.y <<
+		"z: " << force.z << std::endl;*/
+
 	particle->addForce(force);
+
+	
+	
 }

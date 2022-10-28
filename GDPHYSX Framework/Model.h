@@ -39,7 +39,7 @@ public:
 	Model(std::string name, ObjectType objType, GLFWwindow *currWindow); //Universal Constructor of the Class
 
 	//Setup Function
-	void retrieveSource(Light* light, PerspectiveCamera* perspCam, OrthographicCamera* orthoCam); // All model have same sources
+	virtual void retrieveSource(Light* light, PerspectiveCamera* perspCam, OrthographicCamera* orthoCam); // All model have same sources
 	void setInitialPos(glm::vec3 pos); //Debri Pre defined starting Pos
 	void setInitialRotation(glm::vec3 objRot);
 	void setInitialScale(glm::vec3 objScale);
