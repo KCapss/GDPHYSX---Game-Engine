@@ -78,6 +78,36 @@
     <ClCompile Include="Physics\Particle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ForceGenerators\ParticleSpring.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ForceGenerators\ParticleAnchoredSpring.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ForceGenerators\ParticleBungee.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\AnchorSpringObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ForceGenerators\ParticleForceGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ForceGenerators\ParticleGravity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\BungeeObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\SpringObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ForceGenerators\ParticleForceRegistry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject\SpringParticleContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">
@@ -141,6 +171,36 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Physics\Particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceGenerators\ParticleSpring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceGenerators\ParticleAnchoredSpring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceGenerators\ParticleBungee.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\AnchorSpringObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceGenerators\ParticleForceGenerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceGenerators\ParticleGravity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\BungeeObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\SpringObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ForceGenerators\ParticleForceRegistry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject\SpringParticleContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
