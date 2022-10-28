@@ -1,11 +1,11 @@
 #include "SpringObject.h"
 
-SpringObject::SpringObject(std::string name, ObjectType objType, GLFWwindow* currWindow)
+SpringObject::SpringObject(std::string name, ObjectType objType, GLFWwindow* currWindow) : Model(name, objType, currWindow)
 {
     this->particle = new Particle();
 
     //Debug Only Remove when not needed
-    particle->setVelocity(vec3(0, 0, 1.0f));
+    particle->setVelocity(vec3(0, 0, 0.1f));
     particle->setDamping(0.95f);
     particle->toogleGravity(true);
     ///

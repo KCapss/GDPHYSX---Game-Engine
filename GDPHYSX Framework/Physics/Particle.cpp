@@ -172,15 +172,7 @@ void Particle::integrator(float deltaTime)
     this->position = this->position + ((this->velocity * deltaTime));
 
     glm::vec3 resultingAcc = this->acceleration;
-    float inverseMass = 0;
-    //Using Inverse Mass
-    if (this->mass != 0) {
-        inverseMass = 1 / this->mass;
-    }
-    else {
-        inverseMass = 0;
-    }
-    resultingAcc += inverseMass * forceAccum;
+    resultingAcc += forceAccum;
 
     //Updating Velocity
 

@@ -25,6 +25,6 @@ protected:
     Particle* particle;
     ParticleSpring* springPhysics;
 
-    glm::vec3 anchorPos = glm::vec3(0);
+   
 };
 

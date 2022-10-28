@@ -113,21 +113,21 @@ void Space::initializeObj()
 
     //Spring Force
     springObject->retrieveSource(lightSrc, mainCam, alterCam);
-    springObject->init((Particle*)refParticle, 1.0f, 100.0f);
-    springObject->setStartPos(vec3(0));
-    springObject->setInitialScale(vec3(20.0f));
+    springObject->init((Particle*)refParticle, 1.0f, 10.0f);
+    springObject->setStartPos(vec3(0, 0, 5.0f));
+    springObject->setInitialScale(vec3(5.0f));
 
     bungeeObject->retrieveSource(lightSrc, mainCam, alterCam);
     bungeeObject->init((Particle*)refParticle, 1.2f, 10.0f);
-    bungeeObject->setStartPos(vec3(0, 1000.0f, 0));
+    bungeeObject->setStartPos(vec3(0, 10.0f, 0));
     bungeeObject->setInitialScale(vec3(20.0f));
 
 
 
     ASpringObject->retrieveSource(lightSrc, mainCam, alterCam);
-    ASpringObject->setStartPos(glm::vec3(0.01f, 0.01f, 0.01f));
+    ASpringObject->setStartPos(glm::vec3(0.00f, 0.01f, 0.0f));
     ASpringObject->setInitialRotation(glm::vec3(0, 0, 0));
-    ASpringObject->setInitialScale(glm::vec3(2.0f));
+    ASpringObject->setInitialScale(glm::vec3(10.0f));
 
 }
 
@@ -283,8 +283,8 @@ void Space::update(float deltaTime)
 
     refParticle->update(deltaTime);
     //ASpringObject->update(deltaTime);
-    //springObject->update(deltaTime);
-    bungeeObject->update(deltaTime);
+    springObject->update(deltaTime);
+    //bungeeObject->update(deltaTime);
 
     //special Case = reference object acting as point light
     planet->updateLight();
@@ -312,8 +312,8 @@ void Space::draw()
     projectileContainer->draw();
     
     refParticle->draw();
-    //springObject->draw();
-    //ASpringObject->draw();
+    springObject->draw();
+    ASpringObject->draw();
     bungeeObject->draw();
 
     //drawDebri();

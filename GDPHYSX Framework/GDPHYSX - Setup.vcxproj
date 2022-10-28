@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ForceGenerators\ParticleForceRegistry.cpp" />
     <ClCompile Include="GameObject\BungeeObject.cpp" />
     <ClCompile Include="ForceGenerators\ParticleForceGenerator.cpp" />
     <ClCompile Include="ForceGenerators\ParticleGravity.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="SwitchManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ForceGenerators\ParticleForceRegistry.h" />
     <ClInclude Include="GameObject\BungeeObject.h" />
     <ClInclude Include="ForceGenerators\ParticleForceGenerator.h" />
     <ClInclude Include="ForceGenerators\ParticleGravity.h" />

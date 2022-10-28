@@ -11,6 +11,11 @@ void ParticleSpring::updateForce(Particle* particle, float deltaTime)
 {
 	// Calculate vector of spring
 	glm::vec3 force = particle->getPosition();
+
+	std::cout << "Position x: " << force.x <<
+		"y: " << force.y <<
+		"z: " << force.z << std::endl;
+
 	force -= other->getPosition();
 
 	// Calculate magnitude of the force 

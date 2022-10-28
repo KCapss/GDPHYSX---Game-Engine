@@ -14,23 +14,19 @@ void ParticleBungee::updateForce(Particle* particle, float deltaTime)
 
 	force -= other->getPosition();
 
-	std::cout << "Initial Force x: " << force.x <<
+	/*std::cout << "Initial Force x: " << force.x <<
 		"y: " << force.y <<
-		"z: " << force.z << std::endl;
+		"z: " << force.z << std::endl;*/
 
 	// Check if the bungee is compressed
 	float magnitude = glm::length(force);
 	if (magnitude <= restLength) return;
 
 	// Calculate the magnitude of the force
-	magnitude = springConstant * (restLength - magnitude);
+	magnitude = springConstant * abs(restLength - magnitude);
 
 	// Calculate final force and apply it
 	force = glm::normalize(force);
-	force *= magnitude;
+	force *= -magnitude;
 	particle->addForce(force);
-
-	std::cout << "Force x: " << force.x <<
-		"y: " << force.y <<
-		"z: " << force.z << std::endl;
 }

@@ -4,14 +4,14 @@ AnchorSpringObject::AnchorSpringObject(std::string name, ObjectType objType, GLF
 	Model(name, objType, currWindow)
 {
     //Create an active spring
-    this->aSpring = new ParticleAnchoredSpring(&anchorPos, 3.0f, 5000.0f);
+    this->aSpring = new ParticleAnchoredSpring(&anchorPos, 0.8f, 100.0f);
     this->particle = new Particle();
 
 
 	//Debug Only Remove when not needed
     particle->setVelocity(vec3(0,0,0));
     particle->setDamping(0.95f);
-    //particle->toogleGravity(true);
+    particle->toogleGravity(true);
 	///
 
     particle->setMass(10.0f);
