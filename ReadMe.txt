@@ -41,5 +41,5 @@ Left Click - Fire:
 
 Note: All projectile for spring will the other/anchor will be
 attached at the spawn origin.
-
+	
 
