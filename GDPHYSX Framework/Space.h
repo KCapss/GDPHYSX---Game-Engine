@@ -17,6 +17,7 @@
 #include "GameObject/BallisticContainer.h"
 #include "GameObject/BallisticObject.h"
 #include "GameObject/FireworkObject.h"
+#include "GameObject/ObjectContainer.h"
 
 //Force Generator
 #include "GameObject/AnchorSpringObject.h"
@@ -68,6 +69,7 @@ private:
 	BallisticObject* projectile;
 	FireworkObject* fireworksObject;
 	BallisticContainer* projectileContainer;
+	ObjectContainer* objectContainer;
 
 	//Manager
 	ParticleForceRegistry* pfGenManager;
@@ -84,8 +86,9 @@ private:
 	
 
 
-	//Debri
-	
+	//Debris
+	ParticleObject* testParticle;
+
 	Player* player;
 
 	//External Src

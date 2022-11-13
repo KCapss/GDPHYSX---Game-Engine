@@ -60,12 +60,14 @@ void Space::initializeObj()
     //projectile = new BallisticObject("ball", NoTexture, this->window);
     //fireworksObject = new FireworkObject("ball", NoTexture, this->window);
     projectileContainer = new BallisticContainer();
+    objectContainer = new ObjectContainer();
     springContainer = new SpringParticleContainer(pfGenManager);
     
 
 
     //Remove when not needed
     refParticle = new ParticleObject("ball", NoTexture, this->window);
+    testParticle = new ParticleObject("ball", NoTexture, this->window);
     /*ASpringObject = new AnchorSpringObject("ball", NoTexture, this->window);
     springObject = new SpringObject("ball", NoTexture, this->window);
     bungeeObject = new BungeeObject("ball", NoTexture, this->window);*/
@@ -75,12 +77,15 @@ void Space::initializeObj()
     refParticle->setPosition(vec3(0));
     refParticle->setInitialScale(vec3(3.0f));
 
-    
-
+    // Test particle for collision
+    testParticle->retrieveSource(lightSrc, mainCam, alterCam);
+    testParticle->setPosition(vec3(0, 0, 300.f));
+    testParticle->setInitialScale(vec3(10.0f));
+    objectContainer->addParticle((Particle*)testParticle);
+ 
     projectileContainer->setLimit(5);
-    projectileInit(5);
+    projectileInit(1);
     springInit(3);
-
 
     //Retrieve their source
     skybox->retrieveSource(lightSrc, mainCam, alterCam);
@@ -153,7 +158,7 @@ void Space::projectileInit(int size)
         projectile->setInitialScale(glm::vec3(10.0f));
         //Onactive () - Optional::
         projectileContainer->loadMagazine(projectile);
-
+        objectContainer->addParticle(projectile); // for testing collision
     }
 
     for (int i = 0; i < size; i++) {
@@ -164,7 +169,6 @@ void Space::projectileInit(int size)
         fireworks->setInitialScale(glm::vec3(5.0f));
         fireworks->create(1, NULL);
         projectileContainer->loadFireworks(fireworks);
-
     }
 }
 
@@ -254,8 +258,8 @@ void Space::input()
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
     {
         //cout << "Left Button Pressed!" << endl;
-        //projectileContainer->fireMagazine(shotType);  // == disable for this assignment
-        springContainer->fire(springTypes);
+        projectileContainer->fireMagazine(shotType);  // == disable for this assignment
+        //springContainer->fire(springTypes);
        
     }
 }
@@ -276,10 +280,12 @@ void Space::update(float deltaTime)
     pfGenManager->updateForces(deltaTime);
     
     //Physics Object
+    objectContainer->updateParticleContainer();
     projectileContainer->updateBallisticContainer(deltaTime);
     springContainer->updateSpringContainer(deltaTime);
 
     refParticle->update(deltaTime);
+    testParticle->update(deltaTime);
     //ASpringObject->update(deltaTime);
     //springObject->update(deltaTime);
     //bungeeObject->update(deltaTime);
@@ -311,6 +317,7 @@ void Space::draw()
     springContainer->draw();
     
     refParticle->draw();
+    testParticle->draw();
     /*springObject->draw();
     ASpringObject->draw();
     bungeeObject->draw();*/
