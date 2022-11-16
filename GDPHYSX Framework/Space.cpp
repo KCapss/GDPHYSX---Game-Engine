@@ -79,7 +79,7 @@ void Space::initializeObj()
 
     // Test particle for collision
     testParticle->retrieveSource(lightSrc, mainCam, alterCam);
-    testParticle->setPosition(vec3(0, 0, 300.f));
+    testParticle->setPosition(vec3(0, -100.0f, 0.f));
     testParticle->setInitialScale(vec3(10.0f));
     testParticle->setMass(0.0f);
     objectContainer->addParticle((Particle*)testParticle);

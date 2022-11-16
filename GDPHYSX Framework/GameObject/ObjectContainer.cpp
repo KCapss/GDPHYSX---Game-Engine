@@ -31,7 +31,7 @@ void ObjectContainer::updateParticleContainer(float deltaTime)
 					//Lenght
 					float distance = glm::distance(particle1Pos, particle2Pos);
 					cout << "Distance: " << distance << " \n";
-					if (abs(distance) <= 20.0f && particleVelDif != glm::vec3(0, 0, 0))
+					if (abs(distance) <= 5.0f && particleVelDif != glm::vec3(0, 0, 0))
 					{
 						cout << "Collided\n";
 						particleContact = new ParticleContact(particleContainer[i], particleContainer[j]);

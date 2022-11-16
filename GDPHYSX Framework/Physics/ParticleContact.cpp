@@ -7,7 +7,7 @@ ParticleContact::ParticleContact(Particle* particle1, Particle* particle2)
 	particle[1] = particle2;
 
 	contactNormal = -1.0f * glm::normalize(particle[0]->getVelocity());
-	restitution = 1.0f; // temporarily all objects same material
+	restitution = 0.75f; // temporarily all objects same material
 }
 
 void ParticleContact::resolve(float deltaTime)
