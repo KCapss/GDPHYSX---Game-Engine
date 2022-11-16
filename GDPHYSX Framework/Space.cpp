@@ -81,7 +81,7 @@ void Space::initializeObj()
     testParticle->retrieveSource(lightSrc, mainCam, alterCam);
     testParticle->setPosition(vec3(0, 0, 300.f));
     testParticle->setInitialScale(vec3(10.0f));
-    testParticle->setMass(0.01f);
+    testParticle->setMass(0.0f);
     objectContainer->addParticle((Particle*)testParticle);
  
     projectileContainer->setLimit(5);

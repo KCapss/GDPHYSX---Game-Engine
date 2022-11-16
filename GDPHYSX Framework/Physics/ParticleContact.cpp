@@ -1,11 +1,12 @@
 #include "ParticleContact.h"
 
+
 ParticleContact::ParticleContact(Particle* particle1, Particle* particle2)
 {
 	particle[0] = particle1;
 	particle[1] = particle2;
 
-	contactNormal = glm::normalize(particle[0]->getVelocity());
+	contactNormal = -1.0f * glm::normalize(particle[0]->getVelocity());
 	restitution = 1.0f; // temporarily all objects same material
 }
 
@@ -24,7 +25,7 @@ float ParticleContact::calculateSeparatingVelocity() const
 void ParticleContact::resolveVelocity(float duration)
 {
 	float separatingVelocity = calculateSeparatingVelocity();
-	if (separatingVelocity > 0)
+	if (separatingVelocity > 0 )
 	{
 		// contact is separating / stationary, no impulse required
 		return;
