@@ -22,6 +22,14 @@ void ObjectContainer::updateParticleContainer()
 				//float distanceBetween = glm::distance(particle1Pos, particle2Pos);
 				float seperateVel = glm::dot((particleVel1 - particleVel2), glm::normalize(particle1Pos - particle2Pos));
 				cout << "Distance: " << seperateVel << " \n";
+
+				if (seperateVel <= 20.0f && seperateVel >= -20.0f)
+				{
+					cout << "Collided\n";
+					particleContact = new ParticleContact(particleContainer[i], particleContainer[j]);
+					delete particleContact;
+				}
+
 				/*if (distanceBetween <= 10.0)
 				{
 					printf("Collide!");

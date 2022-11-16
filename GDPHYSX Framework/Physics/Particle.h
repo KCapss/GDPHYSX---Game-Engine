@@ -36,6 +36,7 @@ public:
 	vec3 getVelocity();
 	vec3 getAcceleraation();
 	float getMass();
+	float getInverseMass();
 
 	//Physics == Debuging
 	void updatePosition(float deltaTime);

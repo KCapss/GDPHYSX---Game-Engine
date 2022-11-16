@@ -97,6 +97,21 @@ float Particle::getMass()
     return this->mass;
 }
 
+float Particle::getInverseMass()
+{
+    float inverseMass = 0;
+    //Using Inverse Mass
+    if (this->mass != 0) {
+        inverseMass = 1 / this->mass;
+    }
+
+    else {
+        inverseMass = 0;
+    }
+
+    return inverseMass;
+}
+
 void Particle::updatePosition(float deltaTime)
 {
     this->integrator(deltaTime);
