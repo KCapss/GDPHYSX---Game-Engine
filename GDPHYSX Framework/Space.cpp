@@ -81,6 +81,7 @@ void Space::initializeObj()
     testParticle->retrieveSource(lightSrc, mainCam, alterCam);
     testParticle->setPosition(vec3(0, 0, 300.f));
     testParticle->setInitialScale(vec3(10.0f));
+    testParticle->setMass(0.01f);
     objectContainer->addParticle((Particle*)testParticle);
  
     projectileContainer->setLimit(5);
@@ -280,7 +281,7 @@ void Space::update(float deltaTime)
     pfGenManager->updateForces(deltaTime);
     
     //Physics Object
-    objectContainer->updateParticleContainer();
+    objectContainer->updateParticleContainer(deltaTime);
     projectileContainer->updateBallisticContainer(deltaTime);
     springContainer->updateSpringContainer(deltaTime);
 

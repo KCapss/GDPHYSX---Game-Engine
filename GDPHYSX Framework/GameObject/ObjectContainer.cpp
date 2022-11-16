@@ -5,7 +5,7 @@ void ObjectContainer::addParticle(Particle* particle)
 	particleContainer.push_back(particle);
 }
 
-void ObjectContainer::updateParticleContainer()
+void ObjectContainer::updateParticleContainer(float deltaTime)
 {
 	for (int i = 0; i < particleContainer.size(); i++)
 	{
@@ -23,10 +23,11 @@ void ObjectContainer::updateParticleContainer()
 				float seperateVel = glm::dot((particleVel1 - particleVel2), glm::normalize(particle1Pos - particle2Pos));
 				cout << "Distance: " << seperateVel << " \n";
 
-				if (seperateVel <= 20.0f && seperateVel >= -20.0f)
+				if (seperateVel <= 5.0f && seperateVel >= -5.0f)
 				{
 					cout << "Collided\n";
 					particleContact = new ParticleContact(particleContainer[i], particleContainer[j]);
+					particleContact->resolve(deltaTime);
 					delete particleContact;
 				}
 

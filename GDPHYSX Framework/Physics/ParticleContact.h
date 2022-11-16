@@ -14,10 +14,10 @@ public:
 	// holds direction of contact in world coordinates
 	glm::vec3 contactNormal;
 
-protected:
 	// Resolves contact for both velocity and interpenetration
 	void resolve(float deltaTime);
 
+protected:
 	// Calculates seperating velocity at contact
 	float calculateSeparatingVelocity() const;
 

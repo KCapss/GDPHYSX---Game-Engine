@@ -9,7 +9,7 @@ class ObjectContainer
 {
 public:
 	void addParticle(Particle* particle);
-	void updateParticleContainer();
+	void updateParticleContainer(float deltaTime);
 
 private:
 	vector<Particle*> particleContainer;
