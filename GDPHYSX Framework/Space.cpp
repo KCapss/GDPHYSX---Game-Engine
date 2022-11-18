@@ -76,11 +76,15 @@ void Space::initializeObj()
     refParticle->retrieveSource(lightSrc, mainCam, alterCam);
     refParticle->setPosition(vec3(0));
     refParticle->setInitialScale(vec3(3.0f));
+//    refParticle->setInitialScale(vec3(1.0f));
 
     // Test particle for collision
     testParticle->retrieveSource(lightSrc, mainCam, alterCam);
-    testParticle->setPosition(vec3(0, 0, 300.f));
+    testParticle->setPosition(vec3(0, -100.0f, 0.f));
     testParticle->setInitialScale(vec3(10.0f));
+//    testParticle->setInitialScale(vec3(1.0f));
+
+    testParticle->setMass(0.0f);
     objectContainer->addParticle((Particle*)testParticle);
  
     projectileContainer->setLimit(5);
@@ -156,6 +160,8 @@ void Space::projectileInit(int size)
 
         //Debug = Change sizable
         projectile->setInitialScale(glm::vec3(10.0f));
+//         projectile->setInitialScale(glm::vec3(1.0f));
+
         //Onactive () - Optional::
         projectileContainer->loadMagazine(projectile);
         objectContainer->addParticle(projectile); // for testing collision
@@ -280,7 +286,7 @@ void Space::update(float deltaTime)
     pfGenManager->updateForces(deltaTime);
     
     //Physics Object
-    objectContainer->updateParticleContainer();
+    objectContainer->updateParticleContainer(deltaTime);
     projectileContainer->updateBallisticContainer(deltaTime);
     springContainer->updateSpringContainer(deltaTime);
 

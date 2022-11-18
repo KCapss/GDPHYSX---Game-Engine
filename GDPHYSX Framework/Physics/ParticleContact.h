@@ -3,6 +3,7 @@
 class ParticleContact
 {
 public:
+
 	ParticleContact();
 	ParticleContact(Particle* particle1, Particle* particle2);
 
@@ -18,19 +19,20 @@ public:
 	// Resolves contact for both velocity and interpenetration
 	void resolve(float deltaTime);
 
-	//Calculate for interpenetration
+
+	// Holds depth of penetration of contact
+
 	float penetration;
 
 protected:
 	// Calculates seperating velocity at contact
 	float calculateSeparatingVelocity() const;
-	
-
 
 private:
 	// Handles impulse calculations for this collision
-	void resolveVelocity(float duration);
+	void resolveVelocity(float deltaTime);
 
-
+	// Handles interpentration resultion for this contacrt
+	void resolveInterpenetration(float deltaTime);
 };
 
