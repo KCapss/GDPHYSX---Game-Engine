@@ -11,6 +11,9 @@ public:
 	//Function
 	virtual unsigned addContact(ParticleContact* contact,
 		unsigned limit) const = 0;
+
+
+
 protected:
 	//Defaul Function
 	float currentLength() const;

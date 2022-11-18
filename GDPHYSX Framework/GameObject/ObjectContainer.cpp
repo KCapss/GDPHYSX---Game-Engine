@@ -33,11 +33,27 @@ void ObjectContainer::updateParticleContainer(float deltaTime)
 					//cout << "Distance: " << distance << " \n";
 					if (abs(distance) <= 20.0f && particleVelDif != glm::vec3(0, 0, 0))
 					{
+
 						cout << "Collided\n";
 						particleContact = new ParticleContact(particleContainer[i], particleContainer[j]);
 						particleContact->resolve(deltaTime);
 						delete particleContact;
 					}
+
+					//Particle is beneath or touching the floor
+					else if (particleContainer[i]->getPosition().y <= floorDepth) {
+						cout << "Floor Collided\n";
+
+						glm::vec3 refPos = particleContainer[i]->getPosition();
+
+						Particle* floorParticle = new Particle(glm::vec3(refPos.x, floorDepth - 1.0f, refPos.z), 0);
+						particleContact = new ParticleContact(particleContainer[i], floorParticle);
+						particleContact->resolve(deltaTime);
+						delete particleContact;
+
+					}
+
+
 				}
 				/*if (distanceBetween <= 10.0)
 				{

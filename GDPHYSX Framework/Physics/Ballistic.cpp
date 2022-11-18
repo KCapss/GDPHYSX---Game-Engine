@@ -22,7 +22,7 @@ void Ballistic::setShotType(ShotTypes chosenShotType)
 			break;
 		case ARTILLERY:
 			this->setMass(200.0f);
-			this->setVelocity(vec3(0.0f, 10.0f, 0.0f));
+			this->setVelocity(vec3(30.0f, 10.0f, 0.0f));
 			this->setAcceleration(vec3(0.0f, -30.0f, 0.0f));
 			/*this->setVelocity(vec3(0.0f, 100.0f, 40.0f));
 			this->setAcceleration(vec3(0.0f, -40.0f, 0.0f));*/

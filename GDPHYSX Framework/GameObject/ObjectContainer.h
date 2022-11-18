@@ -11,6 +11,9 @@ public:
 	void addParticle(Particle* particle);
 	void updateParticleContainer(float deltaTime);
 
+	//Debugging
+	float floorDepth = -10.0f;
+
 private:
 	vector<Particle*> particleContainer;
 	ParticleContact* particleContact;
