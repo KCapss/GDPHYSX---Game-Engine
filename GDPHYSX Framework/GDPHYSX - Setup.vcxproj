@@ -176,6 +176,7 @@
     <ClCompile Include="Physics\Firework.cpp" />
     <ClCompile Include="Physics\FireworksRules.cpp" />
     <ClCompile Include="Physics\Particle.cpp" />
+    <ClCompile Include="Physics\ParticleContact.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Skybox.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="Physics\Firework.h" />
     <ClInclude Include="Physics\FireworksRules.h" />
     <ClInclude Include="Physics\Particle.h" />
+    <ClInclude Include="Physics\ParticleContact.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Skybox.h" />
