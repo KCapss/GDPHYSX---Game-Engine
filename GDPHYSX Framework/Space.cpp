@@ -152,7 +152,7 @@ void Space::initializeObj()
 
     //Mass Aggregate setup
     cube->retrieveSource(lightSrc, mainCam, alterCam);
-    cube->init(10.0f, 10.0f, 100.0f, 1.0f);
+    cube->init(10.0f, 10.0f, 10.0f, vec3(0, 0, 150.0f), 1.0f);
     cube->addListContact(objectContainer);
 
 }
@@ -274,8 +274,8 @@ void Space::input()
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
     {
         //cout << "Left Button Pressed!" << endl;
-        //projectileContainer->fireMagazine(shotType);  // == disable for this assignment
-        springContainer->fire(springTypes);
+        projectileContainer->fireMagazine(shotType);  // == disable for this assignment
+        //springContainer->fire(springTypes);
        
     }
 }

@@ -9,13 +9,13 @@
 #include <vector>
 
 
-class CubeObject : public Model, public ParticleRod
+class CubeObject : public Model
 {
 public:
 	CubeObject(std::string name, ObjectType objType, GLFWwindow* currWindow);
 	//RetrieveSource
 	//SetScale
-	void init(float l, float w, float h, float scaleMag);
+	void init(float l, float w, float h, vec3 Pos, float scaleMag);
 	void addListContact(ObjectContainer *refContainer);
 
 
@@ -28,12 +28,13 @@ public:
 protected:
 	std::vector <ParticleObject*> EdgeList;
 	std::vector <ParticleContact*> ContactList;
+	std::vector <ParticleRod*> RodList;
 	int const EDGE_SIZE = 8;
 
 private:
 
 	glm::vec3 setupEdge(int index);
-
+	glm::vec3 Pos;
 	float length;
 	float width;
 	float height;

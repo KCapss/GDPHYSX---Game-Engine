@@ -1,5 +1,11 @@
 #include "ParticleRod.h"
 
+ParticleRod::ParticleRod(Particle* p1, Particle* p2): ParticleLink()
+{
+    particle[0] = p1;
+    particle[1] = p2;
+}
+
 unsigned ParticleRod::addContact(ParticleContact* contact, unsigned limit) const
 {
     // Find the length of the rod

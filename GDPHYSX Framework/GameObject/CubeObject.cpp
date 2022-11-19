@@ -1,16 +1,17 @@
 #include "CubeObject.h"
 
 CubeObject::CubeObject(std::string name, ObjectType objType, GLFWwindow* currWindow) :
-	Model(name, objType, currWindow), ParticleRod()
+	Model(name, objType, currWindow)
 {
 	//Purpose Generate Edges
 }
 
-void CubeObject::init(float l, float w, float h, float scaleMag)
+void CubeObject::init(float l, float w, float h, vec3 Pos, float scaleMag)
 {
 	this->length = l;
 	this->width = w;
 	this->height = h;
+	this->Pos = Pos;
 
 	for (int i = 0; i < EDGE_SIZE; i++) {
 		ParticleObject* edgeParticle = new ParticleObject(this->name, this->objType, this->window);
@@ -45,10 +46,18 @@ void CubeObject::addListContact(ObjectContainer *refContainer)
 	for (int i = 0; i < EDGE_SIZE; i++) {
 		for (int j = 0; j < EDGE_SIZE - i; j++) {
 			
-			if (i != j) {
+			if (i != i+j) {
 				//Particle
+				//cout << "Left: " << i << "Right: " << i + j << endl;
+
+				//Create Contact
 				ParticleContact* pairContact = new ParticleContact(EdgeList[i], EdgeList[i + j]);
 				ContactList.push_back(pairContact);
+
+				//Create Rod
+				ParticleRod* rodCopy = new ParticleRod(EdgeList[i], EdgeList[i + j]);
+				RodList.push_back(rodCopy);
+				
 					//refContainer->addPairContact
 
 			}
@@ -68,7 +77,7 @@ void CubeObject::update(float timeStep)
 
 	for (int i = 0; i < ContactList.size(); i++) {
 	
-		//unsigned int copy = addContact(ContactList[i], 1);
+		unsigned int copy = RodList[i]->addContact(ContactList[i], 1);
 	}
 
 }
@@ -86,28 +95,28 @@ glm::vec3 CubeObject::setupEdge(int index)
 
 	switch (index) {
 	case 0:
-		finalPos = glm::vec3(-this->length, this->height, this->width);
+		finalPos = glm::vec3(-this->length, this->height, this->width) + Pos;
 		break;
 	case 1:
-		finalPos = glm::vec3(this->length, this->height, this->width);
+		finalPos = glm::vec3(this->length, this->height, this->width) + Pos;
 		break;
 	case 2:
-		finalPos = glm::vec3(-this->length, -this->height, this->width);
+		finalPos = glm::vec3(-this->length, -this->height, this->width) + Pos;
 		break;
 	case 3:
-		finalPos = glm::vec3(this->length, -this->height, this->width);
+		finalPos = glm::vec3(this->length, -this->height, this->width) + Pos;
 		break;
 	case 4:
-		finalPos = glm::vec3(-this->length, this->height, -this->width);
+		finalPos = glm::vec3(-this->length, this->height, -this->width) + Pos;
 		break;
 	case 5:
-		finalPos = glm::vec3(this->length, this->height, -this->width);
+		finalPos = glm::vec3(this->length, this->height, -this->width) + Pos;
 		break;
 	case 6:
-		finalPos = glm::vec3(-this->length, -this->height, -this->width);
+		finalPos = glm::vec3(-this->length, -this->height, -this->width) + Pos;
 		break;
 	case 7:
-		finalPos = glm::vec3(this->length, -this->height, -this->width);
+		finalPos = glm::vec3(this->length, -this->height, -this->width) + Pos;
 		break;
 
 	default:

@@ -12,7 +12,7 @@ public:
 	void updateParticleContainer(float deltaTime);
 
 	//Debugging
-	float floorDepth = -10.0f;
+	float floorDepth = -1000.0f;
 
 private:
 	vector<Particle*> particleContainer;
