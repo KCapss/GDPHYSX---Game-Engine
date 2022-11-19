@@ -25,6 +25,11 @@
 #include "GameObject/BungeeObject.h"
 #include "GameObject/SpringParticleContainer.h"
 
+//Mass Aggregate
+#include "GameObject/CubeObject.h"
+
+
+
 //Manager
 #include "ForceGenerators/ParticleForceRegistry.h"
 
@@ -82,7 +87,8 @@ private:
 	BungeeObject* bungeeObject;
 	SpringParticleContainer* springContainer;
 
-	//
+	//Mass Aggregate
+	CubeObject* cube;
 	
 
 

@@ -4,7 +4,8 @@ class ParticleRod :
     public ParticleLink
 {
 public:
-    float length;
+    //ParticleRod(Particle p1, Particle p2);
+    float length = 10.0f;
 
 protected:
     virtual unsigned addContact (ParticleContact* contact,

@@ -72,6 +72,10 @@ void Space::initializeObj()
     springObject = new SpringObject("ball", NoTexture, this->window);
     bungeeObject = new BungeeObject("ball", NoTexture, this->window);*/
 
+    //Mass Agreggate
+    cube = new CubeObject("ball", NoTexture, this->window);
+
+
     //Reference Particle
     refParticle->retrieveSource(lightSrc, mainCam, alterCam);
     refParticle->setPosition(vec3(0));
@@ -144,6 +148,12 @@ void Space::initializeObj()
     //ASpringObject->setStartPos(glm::vec3(0.00f, 0.01f, 0.0f));
     //ASpringObject->setInitialRotation(glm::vec3(0, 0, 0));
     //ASpringObject->setInitialScale(glm::vec3(10.0f));
+
+
+    //Mass Aggregate setup
+    cube->retrieveSource(lightSrc, mainCam, alterCam);
+    cube->init(10.0f, 10.0f, 100.0f, 1.0f);
+    cube->addListContact(objectContainer);
 
 }
 
@@ -286,9 +296,12 @@ void Space::update(float deltaTime)
     pfGenManager->updateForces(deltaTime);
     
     //Physics Object
-    objectContainer->updateParticleContainer(deltaTime);
     projectileContainer->updateBallisticContainer(deltaTime);
     springContainer->updateSpringContainer(deltaTime);
+
+    objectContainer->updateParticleContainer(deltaTime);
+    cube->update(deltaTime);
+    
 
     refParticle->update(deltaTime);
     testParticle->update(deltaTime);
@@ -320,6 +333,7 @@ void Space::draw()
     //planet->draw();
 
     projectileContainer->draw();
+    cube->draw();
     springContainer->draw();
     
     refParticle->draw();

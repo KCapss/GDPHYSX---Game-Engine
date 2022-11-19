@@ -15,8 +15,8 @@ public:
 	CubeObject(std::string name, ObjectType objType, GLFWwindow* currWindow);
 	//RetrieveSource
 	//SetScale
-	void init(int l, int w, int h, float scaleMag);
-	void addListContact(ObjectContainer refContainer);
+	void init(float l, float w, float h, float scaleMag);
+	void addListContact(ObjectContainer *refContainer);
 
 
 
@@ -32,7 +32,7 @@ protected:
 
 private:
 
-
+	glm::vec3 setupEdge(int index);
 
 	float length;
 	float width;
