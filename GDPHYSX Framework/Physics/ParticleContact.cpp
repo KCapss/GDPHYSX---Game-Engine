@@ -1,6 +1,10 @@
 #include "ParticleContact.h"
 
 
+ParticleContact::ParticleContact()
+{
+}
+
 ParticleContact::ParticleContact(Particle* particle1, Particle* particle2)
 {
 	particle[0] = particle1;

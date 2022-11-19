@@ -264,8 +264,8 @@ void Space::input()
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
     {
         //cout << "Left Button Pressed!" << endl;
-        projectileContainer->fireMagazine(shotType);  // == disable for this assignment
-        //springContainer->fire(springTypes);
+        //projectileContainer->fireMagazine(shotType);  // == disable for this assignment
+        springContainer->fire(springTypes);
        
     }
 }

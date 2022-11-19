@@ -5,6 +5,7 @@
 class ParticleLink: public ParticleContact
 {
 public:
+	ParticleLink();
 	//Members
 	Particle* particle[2];
 
