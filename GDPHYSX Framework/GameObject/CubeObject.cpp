@@ -43,8 +43,8 @@ void CubeObject::addListContact(ObjectContainer *refContainer)
 
 
 	//Connect the Rods in pairs location
-	for (int i = 0; i < EDGE_SIZE; i++) {
-		for (int j = 0; j < EDGE_SIZE - i; j++) {
+	for (int i = 0; i < EdgeList.size(); i++) {
+		for (int j = 0; j < EdgeList.size() - i; j++) {
 			
 			if (i != i+j) {
 				//Particle
