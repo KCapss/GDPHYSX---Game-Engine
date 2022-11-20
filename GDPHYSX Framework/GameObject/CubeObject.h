@@ -2,7 +2,7 @@
 //Object Primitives
 #include "ParticleObject.h"
 #include "../Physics/ParticleRod.h"
-
+#include "../Physics/ParticleContactResolver.h"
 //Object Contact
 #include "ObjectContainer.h"
 
@@ -29,6 +29,9 @@ protected:
 	std::vector <ParticleObject*> EdgeList;
 	std::vector <ParticleContact*> ContactList;
 	std::vector <ParticleRod*> RodList;
+
+	//Resolver
+	ParticleContactResolver* resolver;
 	int const EDGE_SIZE = 8;
 
 private:

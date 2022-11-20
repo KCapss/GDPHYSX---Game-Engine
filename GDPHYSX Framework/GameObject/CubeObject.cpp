@@ -4,6 +4,9 @@ CubeObject::CubeObject(std::string name, ObjectType objType, GLFWwindow* currWin
 	Model(name, objType, currWindow)
 {
 	//Purpose Generate Edges
+	this->resolver = new ParticleContactResolver(2);
+
+
 }
 
 void CubeObject::init(float l, float w, float h, vec3 Pos, float scaleMag)
@@ -79,6 +82,15 @@ void CubeObject::update(float timeStep)
 	
 		unsigned int copy = RodList[i]->addContact(ContactList[i], 1);
 	}
+
+
+	//Enable Them to see how contact resolver works
+	/*for (int iteration = 0; iteration < 3; iteration++) {
+		for (int i = 0; i < ContactList.size(); i++) {
+			resolver->resolveContacts(ContactList[i], 1, timeStep);
+		}
+	}
+	*/
 
 }
 

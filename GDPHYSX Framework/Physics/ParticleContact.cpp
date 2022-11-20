@@ -48,7 +48,7 @@ void ParticleContact::resolveVelocity(float deltaTime)
 
 	// calculate applied impulse
 	float impulse = deltaVelocity / totalInverseMass;
-	std::cout << "Impulse" << impulse << std::endl;
+	//std::cout << "Impulse" << impulse << std::endl;
 
 	// find amount of impulse per unit of inverse mass
 	glm::vec3 impulsePerIMass = contactNormal * impulse;

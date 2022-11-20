@@ -19,11 +19,12 @@ void ParticleContactResolver::resolveContacts(ParticleContact* contactArray, uns
     while (iterationsUsed < iterations)
     {
         // Find the contact with the largest closing velocity;
-        real max = REAL_MAX;
+        float max = 28.0f;//REAL_MAX;
         unsigned maxIndex = numContacts;
         for (i = 0; i < numContacts; i++)
         {
-            real sepVel = contactArray[i].calculateSeparatingVelocity();
+            float sepVel = contactArray[i].calculateSeparatingVelocity();
+
             if (sepVel < max &&
                 (sepVel < 0 || contactArray[i].penetration > 0))
             {
@@ -39,29 +40,30 @@ void ParticleContactResolver::resolveContacts(ParticleContact* contactArray, uns
         contactArray[maxIndex].resolve(timeStep);
 
         // Update the interpenetrations for all particles
-        Vector3* move = contactArray[maxIndex].particleMovement;
+        vec3* move = contactArray[maxIndex].particleMovement;
         for (i = 0; i < numContacts; i++)
         {
             if (contactArray[i].particle[0] == contactArray[maxIndex].particle[0])
             {
-                contactArray[i].penetration -= move[0] * contactArray[i].contactNormal;
+                contactArray[i].penetration -= glm::dot(move[0], contactArray[i].contactNormal);
             }
             else if (contactArray[i].particle[0] == contactArray[maxIndex].particle[1])
             {
-                contactArray[i].penetration -= move[1] * contactArray[i].contactNormal;
+                contactArray[i].penetration -= glm::dot(move[1], contactArray[i].contactNormal);
             }
             if (contactArray[i].particle[1])
             {
                 if (contactArray[i].particle[1] == contactArray[maxIndex].particle[0])
                 {
-                    contactArray[i].penetration += move[0] * contactArray[i].contactNormal;
+                    contactArray[i].penetration += glm::dot(move[0], contactArray[i].contactNormal);
                 }
                 else if (contactArray[i].particle[1] == contactArray[maxIndex].particle[1])
                 {
-                    contactArray[i].penetration += move[1] * contactArray[i].contactNormal;
+                    contactArray[i].penetration += glm::dot(move[1], contactArray[i].contactNormal);
                 }
             }
         }
 
         iterationsUsed++;
+    }
 }

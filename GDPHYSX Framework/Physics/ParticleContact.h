@@ -21,10 +21,12 @@ public:
 
 
 	// Holds depth of penetration of contact
-
 	float penetration;
 
-protected:
+	//Holds the amount each particle is moved by during interpenetration resolution.
+	glm::vec3 particleMovement[2];
+
+//protected:
 	// Calculates seperating velocity at contact
 	float calculateSeparatingVelocity() const;
 

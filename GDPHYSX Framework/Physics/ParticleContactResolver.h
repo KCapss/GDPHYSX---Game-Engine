@@ -5,8 +5,8 @@ class ParticleContactResolver
 {
 protected:
 
-    unsigned iterations;
-    unsigned iterationsUsed;
+    unsigned int iterations;
+    unsigned int iterationsUsed;
 
 public:
 
