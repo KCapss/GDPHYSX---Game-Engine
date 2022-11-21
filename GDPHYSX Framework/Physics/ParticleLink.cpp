@@ -14,5 +14,5 @@ float ParticleLink::currentLength() const
 	glm::vec3 particleDiff = particle[0]->getPosition() - particle[1]->getPosition();
 
 	//cout << "Lenght: " << particleDiff.length() << endl;
-	return particleDiff.length();
+	return glm::length(particleDiff);
 }

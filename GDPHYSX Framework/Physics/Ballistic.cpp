@@ -36,7 +36,7 @@ void Ballistic::setShotType(ShotTypes chosenShotType)
 			break;
 		case LASER:
 			this->setMass(0.1f);
-			this->setVelocity(vec3(0.0f, 0.0f, 300.0f));
+			this->setVelocity(vec3(0.0f, 0.0f, 600.0f));
 			this->setAcceleration(vec3(0.0f, 0.0f, 0.0f));
 			this->setDamping(0.90f);
 			break;
