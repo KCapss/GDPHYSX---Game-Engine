@@ -159,10 +159,12 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GameObject\BallisticContainer.cpp" />
     <ClCompile Include="GameObject\BallisticObject.cpp" />
+    <ClCompile Include="GameObject\CubeObject.cpp" />
     <ClCompile Include="GameObject\FireworkObject.cpp" />
     <ClCompile Include="GameObject\ParticleObject.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="Render\LineRenderer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="GameObject\ObjectContainer.cpp" />
@@ -171,6 +173,7 @@
     <ClCompile Include="ForceGenerators\ParticleSpring.cpp" />
     <ClCompile Include="ForceGenerators\ParticleAnchoredSpring.cpp" />
     <ClCompile Include="ForceGenerators\ParticleBungee.cpp" />
+    <ClCompile Include="Physics\ParticleContactResolver.cpp" />
     <ClCompile Include="PerspectiveCamera.cpp" />
     <ClCompile Include="Physics\Ballistic.cpp" />
     <ClCompile Include="Physics\Firework.cpp" />
@@ -197,9 +200,11 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="GameObject\BallisticContainer.h" />
     <ClInclude Include="GameObject\BallisticObject.h" />
+    <ClInclude Include="GameObject\CubeObject.h" />
     <ClInclude Include="GameObject\FireworkObject.h" />
     <ClInclude Include="GameObject\ParticleObject.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Render\LineRenderer.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="GameObject\ObjectContainer.h" />
     <ClInclude Include="ObjectTextureManager.h" />
@@ -207,6 +212,7 @@
     <ClInclude Include="ForceGenerators\ParticleSpring.h" />
     <ClInclude Include="ForceGenerators\ParticleAnchoredSpring.h" />
     <ClInclude Include="ForceGenerators\ParticleBungee.h" />
+    <ClInclude Include="Physics\ParticleContactResolver.h" />
     <ClInclude Include="PerspectiveCamera.h" />
     <ClInclude Include="Physics\Ballistic.h" />
     <ClInclude Include="Physics\Firework.h" />

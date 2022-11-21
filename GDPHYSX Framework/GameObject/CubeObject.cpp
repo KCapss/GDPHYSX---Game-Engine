@@ -61,7 +61,12 @@ void CubeObject::addListContact(ObjectContainer *refContainer)
 				ParticleRod* rodCopy = new ParticleRod(EdgeList[i], EdgeList[i + j]);
 				RodList.push_back(rodCopy);
 				
+				
 					//refContainer->addPairContact
+
+				//Create the renderer part;
+				LineRenderer* lineCopy = new LineRenderer(EdgeList[i]->getPosition(), EdgeList[i + j]->getPosition());
+				LineRendererList.push_back(lineCopy);
 
 			}
 		}
@@ -85,12 +90,18 @@ void CubeObject::update(float timeStep)
 
 
 	//Enable Them to see how contact resolver works
-	/*for (int iteration = 0; iteration < 3; iteration++) {
+	for (int iteration = 0; iteration < 3; iteration++) {
 		for (int i = 0; i < ContactList.size(); i++) {
 			resolver->resolveContacts(ContactList[i], 1, timeStep);
 		}
 	}
-	*/
+	
+
+	for (int i = 0; i < ContactList.size(); i++) {
+
+		LineRendererList[i]->updatePos(ContactList[i]->particle[0]->getPosition(),
+			ContactList[i]->particle[1]->getPosition());
+	}
 
 }
 
@@ -98,6 +109,11 @@ void CubeObject::draw()
 {
 	for (int i = 0; i < EdgeList.size(); i++) {
 		EdgeList[i]->draw();
+	}
+
+	for (int i = 0; i < LineRendererList.size(); i++) {
+
+		LineRendererList[i]->draw();
 	}
 }
 

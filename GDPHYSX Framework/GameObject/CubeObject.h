@@ -3,6 +3,9 @@
 #include "ParticleObject.h"
 #include "../Physics/ParticleRod.h"
 #include "../Physics/ParticleContactResolver.h"
+
+#include "../Render/LineRenderer.h"
+
 //Object Contact
 #include "ObjectContainer.h"
 
@@ -26,9 +29,13 @@ public:
 
 
 protected:
+	//List
 	std::vector <ParticleObject*> EdgeList;
 	std::vector <ParticleContact*> ContactList;
 	std::vector <ParticleRod*> RodList;
+
+	//Renderer
+	std::vector<LineRenderer*> LineRendererList;
 
 	//Resolver
 	ParticleContactResolver* resolver;
