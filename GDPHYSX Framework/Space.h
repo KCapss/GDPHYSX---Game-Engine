@@ -17,12 +17,18 @@
 #include "GameObject/BallisticContainer.h"
 #include "GameObject/BallisticObject.h"
 #include "GameObject/FireworkObject.h"
+#include "GameObject/ObjectContainer.h"
 
 //Force Generator
 #include "GameObject/AnchorSpringObject.h"
 #include "GameObject/SpringObject.h"
 #include "GameObject/BungeeObject.h"
 #include "GameObject/SpringParticleContainer.h"
+
+//Mass Aggregate
+#include "GameObject/CubeObject.h"
+
+
 
 //Manager
 #include "ForceGenerators/ParticleForceRegistry.h"
@@ -68,6 +74,7 @@ private:
 	BallisticObject* projectile;
 	FireworkObject* fireworksObject;
 	BallisticContainer* projectileContainer;
+	ObjectContainer* objectContainer;
 
 	//Manager
 	ParticleForceRegistry* pfGenManager;
@@ -80,12 +87,14 @@ private:
 	BungeeObject* bungeeObject;
 	SpringParticleContainer* springContainer;
 
-	//
+	//Mass Aggregate
+	CubeObject* cube;
 	
 
 
-	//Debri
-	
+	//Debris
+	ParticleObject* testParticle;
+
 	Player* player;
 
 	//External Src
