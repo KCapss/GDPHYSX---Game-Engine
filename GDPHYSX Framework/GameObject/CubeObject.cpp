@@ -48,10 +48,9 @@ void CubeObject::addListContact(ObjectContainer *refContainer)
 	//Connect the Rods in pairs location
 	for (int i = 0; i < EdgeList.size(); i++) {
 		for (int j = 0; j < EdgeList.size() - i; j++) {
-			
+			//Option 1: Interconnect the edge automatically
 			if (i != i+j) {
-				//Particle
-				//cout << "Left: " << i << "Right: " << i + j << endl;
+				
 
 				//Create Contact
 				ParticleContact* pairContact = new ParticleContact(EdgeList[i], EdgeList[i + j]);
@@ -59,16 +58,23 @@ void CubeObject::addListContact(ObjectContainer *refContainer)
 
 				//Create Rod
 				ParticleRod* rodCopy = new ParticleRod(EdgeList[i], EdgeList[i + j]);
+				rodCopy->length = glm::distance(EdgeList[i]->getPosition(), EdgeList[i + j]->getPosition());
+
+				//Set Length
 				RodList.push_back(rodCopy);
 				
 				
 					//refContainer->addPairContact
 
 				//Create the renderer part;
-				LineRenderer* lineCopy = new LineRenderer(EdgeList[i]->getPosition(), EdgeList[i + j]->getPosition());
+				LineRenderer* lineCopy = new LineRenderer(EdgeList[i]->getPosition(), EdgeList[i + j]->getPosition(), 10.0f);
 				LineRendererList.push_back(lineCopy);
 
 			}
+
+
+
+			//Option 2: Determine the actual edge and actual corner
 		}
 	}
 
@@ -90,7 +96,7 @@ void CubeObject::update(float timeStep)
 
 
 	//Enable Them to see how contact resolver works
-	for (int iteration = 0; iteration < 3; iteration++) {
+	for (int iteration = 0; iteration < 20; iteration++) {
 		for (int i = 0; i < ContactList.size(); i++) {
 			resolver->resolveContacts(ContactList[i], 1, timeStep);
 		}

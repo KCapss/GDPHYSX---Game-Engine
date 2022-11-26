@@ -152,7 +152,7 @@ void Space::initializeObj()
 
     //Mass Aggregate setup
     cube->retrieveSource(lightSrc, mainCam, alterCam);
-    cube->init(10.0f, 10.0f, 10.0f, vec3(0, 0, 150.0f), 1.0f);
+    cube->init(10.0f, 10.0f, 10.0f, vec3(7.5f, 7.5f, 150.0f), 1.0f);
     cube->addListContact(objectContainer);
 
 }

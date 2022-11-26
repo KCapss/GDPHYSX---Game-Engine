@@ -11,6 +11,8 @@ public:
     virtual unsigned addContact (ParticleContact* contact,
         unsigned limit) const;
 
+    
+
 private:
 
 };

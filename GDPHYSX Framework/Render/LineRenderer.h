@@ -16,7 +16,7 @@ class LineRenderer
 
     */
 public:
-    LineRenderer(glm::vec3 P1, glm::vec3 P2);
+    LineRenderer(glm::vec3 P1, glm::vec3 P2, float Length);
 
     void updatePos(glm::vec3 P1, glm::vec3 P2);
     void draw();
@@ -30,5 +30,6 @@ protected:
 private:
     glm::vec3 P1;
     glm::vec3 P2;
+    float length;
 };
 
