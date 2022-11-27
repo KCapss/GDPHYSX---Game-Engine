@@ -41,5 +41,17 @@ Left Click - Fire:
 
 Note: All projectile for spring will the other/anchor will be
 attached at the spawn origin.
+
+======================================================
+
+Physics Engine Phase 2.exe controls
+1-5 Numbers (Ballistic Setting) [5 - Firework]
+6-8 Numbers: Switch Spring Type [Disabled as of the moment]
+
+Left Click - Fire Particle (One Bullet Max)
+
+WS - Forward/Backward
+AD - Rotate Object (Invisble As of now)
+Right Click - Pan Camera (around the invisible object)
 	
 
