@@ -67,7 +67,8 @@ void BallisticObject::onActivate(ShotTypes shotType)
     this->setShotType(shotType);
     this->setActive(true);
     this->setPosition(this->defaultPos);
-
+    this->setAge(10.0f);
+    
     cout << "Shot Activated" << endl;
 }
 
@@ -75,5 +76,6 @@ void BallisticObject::onReset()
 {
     this->setActive(false);
     this->setShotType(ShotTypes::UNUSED);
+   
    
 ;}

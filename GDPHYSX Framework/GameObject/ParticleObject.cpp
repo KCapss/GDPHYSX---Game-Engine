@@ -8,7 +8,7 @@ ParticleObject::ParticleObject(std::string name, ObjectType objType, GLFWwindow*
 	//Automatically Enable During Runtime; == Particle
     this->setMass(1.0f);
     this->setVelocity(vec3(0));
-    //this->toogleGravity(true);
+    this->toogleGravity(true);
     //this->setVelocity(vec3(0, 0, 100.f));
 
     

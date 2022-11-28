@@ -42,7 +42,8 @@ void ObjectContainer::updateParticleContainer(float deltaTime)
 
 					//Particle is beneath or touching the floor
 					else if (particleContainer[i]->getPosition().y <= floorDepth) {
-						cout << "Floor Collided\n";
+
+						//cout << "Floor Collided\n";
 
 						glm::vec3 refPos = particleContainer[i]->getPosition();
 
