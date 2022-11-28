@@ -46,6 +46,12 @@ void Ballistic::setShotType(ShotTypes chosenShotType)
 	}
 
 	this->currentShotType = chosenShotType; // set shot type
+	this->setMass(10.0f);
+}
+
+void Ballistic::setAge(float age)
+{
+	this->age = age;
 }
 
 ShotTypes Ballistic::getShotType()

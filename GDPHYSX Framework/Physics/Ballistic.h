@@ -32,7 +32,7 @@ public:
 
 private:
     ShotTypes currentShotType = ShotTypes::UNUSED;
-    float age = 500.0f; // particle can only last 500 seconds 
+    float age = 10.0f; // particle can only last 500 seconds 
 
 };
 

@@ -92,7 +92,7 @@ void Space::initializeObj()
     objectContainer->addParticle((Particle*)testParticle);
  
     projectileContainer->setLimit(5);
-    projectileInit(1);
+    projectileInit(2);
     springInit(3);
 
     //Retrieve their source
