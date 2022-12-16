@@ -78,6 +78,8 @@ void Space::initializeObj()
 
     //Rigid Body
     rbObj = new RigidBodyObject("cube", NoTexture, this->window);
+    rbObj->setPosition(vec3(0, 0, 100.0f));
+    objectContainer->addRBObject(rbObj);
 
 
     //Reference Particle
@@ -308,7 +310,8 @@ void Space::update(float deltaTime)
     projectileContainer->updateBallisticContainer(deltaTime);
     springContainer->updateSpringContainer(deltaTime);
 
-    objectContainer->updateParticleContainer(deltaTime);
+    //objectContainer->updateParticleContainer(deltaTime);
+    objectContainer->updateRBObjContainer(deltaTime);
     cube->update(deltaTime);
     
 

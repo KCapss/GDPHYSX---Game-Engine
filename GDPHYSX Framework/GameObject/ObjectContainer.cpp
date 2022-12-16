@@ -5,6 +5,11 @@ void ObjectContainer::addParticle(Particle* particle)
 	particleContainer.push_back(particle);
 }
 
+void ObjectContainer::addRBObject(RigidBodyObject* rgObj)
+{
+	rigidBodyObjContainer.push_back(rgObj);
+}
+
 void ObjectContainer::updateParticleContainer(float deltaTime)
 {
 	for (int i = 0; i < particleContainer.size(); i++)
@@ -62,6 +67,25 @@ void ObjectContainer::updateParticleContainer(float deltaTime)
 				}*/
 			}
 		}
+	}
+
+}
+
+void ObjectContainer::updateRBObjContainer(float deltaTime)
+{
+	for (int i = 0; i < rigidBodyObjContainer.size(); i++) {
+		
+		for (int j = 0; j < particleContainer.size(); j++) {
+			if (rigidBodyObjContainer[i]->isParticleInside(particleContainer[j]->getPosition())) {
+				cout << "Found Collision " << endl;
+			}
+
+			else {
+				//cout << "Not Collided" << endl;
+			}
+		}
+		
+		
 	}
 
 }

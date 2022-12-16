@@ -59,3 +59,18 @@ void RigidBodyObject::draw()
     glDrawArrays(GL_TRIANGLES, 0, fullVertexData.size() / 8);
 
 }
+
+bool RigidBodyObject::isParticleInside(vec3 pointPos)
+{
+    float halfL = length / 2.0f;
+
+    return (
+        pointPos.x >= this->getPosition().x - halfL &&
+        pointPos.x <= this->getPosition().x + halfL &&
+        pointPos.y >= this->getPosition().y - halfL &&
+        pointPos.y <= this->getPosition().y + halfL &&
+        pointPos.z >= this->getPosition().z - halfL &&
+        pointPos.z <= this->getPosition().z + halfL
+        );
+        
+}
