@@ -15,6 +15,7 @@ public:
 
     //Check for intersection
     bool isParticleInside(vec3 pointPos);
+    void setLength(float length);
 
 
 protected:

@@ -74,3 +74,9 @@ bool RigidBodyObject::isParticleInside(vec3 pointPos)
         );
         
 }
+
+void RigidBodyObject::setLength(float length)
+{
+    this->length = length;
+    this->setInitialScale(vec3(this->length * (3.0f/4.0f)));
+}

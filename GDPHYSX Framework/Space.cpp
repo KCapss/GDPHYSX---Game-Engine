@@ -163,7 +163,7 @@ void Space::initializeObj()
 
     //Rigid Body Setup
     rbObj->retrieveSource(lightSrc, mainCam, alterCam);
-    rbObj->setInitialScale(vec3(10.0f));
+    rbObj->setLength(50.0f);
     
 
 }
