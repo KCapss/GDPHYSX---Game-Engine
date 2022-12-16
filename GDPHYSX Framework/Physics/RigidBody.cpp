@@ -33,6 +33,16 @@ static inline void _calculateTransformMatrix(glm::mat4& transformMatrix,
     transformMatrix[2][3] = position.z;
 }
 
+RigidBody::RigidBody()
+{
+    this->setPosition(vec3(0));
+    this->setMass(1);
+    this->rotation = vec3(0);
+    
+
+
+}
+
 void RigidBody::calculateDerivedData()
 {
     glm::normalize(orientation);
@@ -203,7 +213,7 @@ void RigidBody::addForceAtPoint(const vec3& force, const vec3& point)
     pt -= position;
 
     forceAccum += force;
-    torqueAccum += pt % force;
+    //torqueAccum += pt % force;
 }
 
 glm::vec3 RigidBody::getPointInWorldSpace(const glm::vec3& point) const

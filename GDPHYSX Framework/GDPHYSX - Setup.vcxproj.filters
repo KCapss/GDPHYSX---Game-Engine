@@ -135,6 +135,9 @@
     <ClCompile Include="Physics\RigidBody.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject\RigidBodyObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stb_image.h">
@@ -257,6 +260,9 @@
     <ClInclude Include="Physics\RigidBody.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameObject\RigidBodyObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="Shaders\ball.frag" />
@@ -277,5 +283,7 @@
     <CopyFileToFolders Include="Shaders\statue2.vert" />
     <CopyFileToFolders Include="Shaders\tower.frag" />
     <CopyFileToFolders Include="Shaders\tower.vert" />
+    <CopyFileToFolders Include="Shaders\cube.frag" />
+    <CopyFileToFolders Include="Shaders\cube.vert" />
   </ItemGroup>
 </Project>

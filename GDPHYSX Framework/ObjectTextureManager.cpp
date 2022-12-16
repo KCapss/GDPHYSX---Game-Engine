@@ -25,6 +25,7 @@ void ObjectTextureManager::loadAll()
 	loadObj("statue2", "3D/statue2Debri.obj");
 	loadObj("statue", "3D/statueDebri.obj");
 	loadObj("spaceRock", "3D/spaceRockDebri.obj");
+	loadObj("cube", "3D/cube.obj");
 	
 	//loadObj
 

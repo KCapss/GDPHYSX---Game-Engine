@@ -14,6 +14,8 @@ class RigidBody
 {
 public:
 
+    RigidBody();
+
     // ... Other RigidBody code as before ...
 
 

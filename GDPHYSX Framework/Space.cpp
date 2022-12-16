@@ -76,6 +76,10 @@ void Space::initializeObj()
     cube = new CubeObject("ball", NoTexture, this->window);
 
 
+    //Rigid Body
+    rbObj = new RigidBodyObject("cube", NoTexture, this->window);
+
+
     //Reference Particle
     refParticle->retrieveSource(lightSrc, mainCam, alterCam);
     refParticle->setPosition(vec3(0));
@@ -154,6 +158,11 @@ void Space::initializeObj()
     cube->retrieveSource(lightSrc, mainCam, alterCam);
     cube->init(10.0f, 10.0f, 10.0f, vec3(7.5f, 7.5f, 150.0f), 1.0f);
     cube->addListContact(objectContainer);
+
+    //Rigid Body Setup
+    rbObj->retrieveSource(lightSrc, mainCam, alterCam);
+    rbObj->setInitialScale(vec3(10.0f));
+    
 
 }
 
@@ -309,6 +318,10 @@ void Space::update(float deltaTime)
     //springObject->update(deltaTime);
     //bungeeObject->update(deltaTime);
 
+
+    //Rigid Body Update
+    rbObj->update(deltaTime);
+
     //special Case = reference object acting as point light
     planet->updateLight();
 
@@ -333,14 +346,19 @@ void Space::draw()
     //planet->draw();
 
     projectileContainer->draw();
-    cube->draw();
+    //cube->draw(); == Still Active
     springContainer->draw();
     
-    refParticle->draw();
-    testParticle->draw();
+    //refParticle->draw(); == Still Active
+    //testParticle->draw(); == Still Active 
+
+
     /*springObject->draw();
     ASpringObject->draw();
     bungeeObject->draw();*/
+
+    //Rigid Body Update
+    rbObj->draw();
 
     
 
