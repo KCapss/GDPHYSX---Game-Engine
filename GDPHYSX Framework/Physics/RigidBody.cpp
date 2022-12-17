@@ -1,4 +1,5 @@
 #include "RigidBody.h"
+#include <math.h> 
 
 /**
  * Inline function that creates a transform matrix from a
@@ -154,9 +155,9 @@ void RigidBody::setInertiaTensorCuboid(float dimensionx, float dimensiony, float
 
     // Create cuboid intertia tensor
     // Diagonal
-    inertiaTensor[0][0] = 1.0/12.0 * getMass() * pow(dimensiony, 2.0f) * pow(dimensionz, 2.0f);
-    inertiaTensor[1][1] = 1.0 / 12.0 * getMass() * pow(dimensionx, 2.0f) * pow(dimensionz, 2.0f);
-    inertiaTensor[2][2] = 1.0 / 12.0 * getMass() * pow(dimensionx, 2.0f) * pow(dimensiony, 2.0f);
+    inertiaTensor[0][0] = 1.0/12.0 * getMass() * pow(dimensiony, 2.0f) + pow(dimensionz, 2.0f);
+    inertiaTensor[1][1] = 1.0 / 12.0 * getMass() * pow(dimensionx, 2.0f) + pow(dimensionz, 2.0f);
+    inertiaTensor[2][2] = 1.0 / 12.0 * getMass() * pow(dimensionx, 2.0f) + pow(dimensiony, 2.0f);
 
     inverseInertiaTensor = glm::inverse(inertiaTensor);
     _checkInverseInertiaTensor(inverseInertiaTensor);
@@ -227,11 +228,13 @@ void RigidBody::addForce(const vec3& force)
 void RigidBody::addForceAtPoint(const vec3& force, const vec3& point)
 {
     // Convert to coordinates relative to center of mass.
-    glm::vec3 pt = point;
+    vec3 pt = point;
     pt -= position;
 
     forceAccum += force;
-    //torqueAccum += pt % force;
+    torqueAccum.x += fmodf(pt.x, force.x);
+    torqueAccum.y += fmodf(pt.y, force.y);
+    torqueAccum.z += fmodf(pt.z, force.z);
 }
 
 glm::vec3 RigidBody::getPointInWorldSpace(const glm::vec3& point) const
