@@ -2,6 +2,73 @@
 #include <math.h> 
 
 /**
+ * Internal function to do an intertia tensor transform by a quaternion.
+ * Note that the implementation of this function was created by an
+ * automated code-generator and optimizer.
+ */
+static inline void _transformInertiaTensor(glm::mat3& iitWorld,
+    const glm::quat& q,
+    const glm::mat3& iitBody,
+    const glm::mat4& rotmat)
+{
+    float t4 = rotmat[0][0] * iitBody[0][0] +
+        rotmat[1][0] * iitBody[0][1] +
+        rotmat[2][0] * iitBody[0][2];
+    float t9 = rotmat[0][0] * iitBody[1][0] +
+        rotmat[1][0] * iitBody[1][1] +
+        rotmat[2][0] * iitBody[1][2];
+    float t14 = rotmat[0][0] * iitBody[2][0] +
+        rotmat[1][0] * iitBody[2][1] +
+        rotmat[2][0] * iitBody[2][2];
+    float t28 = rotmat[0][1] * iitBody[0][0] +
+        rotmat[1][1] * iitBody[0][1] +
+        rotmat[2][1] * iitBody[0][2];
+    float t33 = rotmat[0][1] * iitBody[1][0] +
+        rotmat[1][1] * iitBody[1][1] +
+        rotmat[2][1] * iitBody[1][2];
+    float t38 = rotmat[0][1] * iitBody[2][0] +
+        rotmat[1][1] * iitBody[2][1] +
+        rotmat[2][1] * iitBody[2][2];
+    float t52 = rotmat[0][2] * iitBody[0][0] +
+        rotmat[1][2] * iitBody[0][1] +
+        rotmat[2][2] * iitBody[0][2];
+    float t57 = rotmat[0][2] * iitBody[1][0] +
+        rotmat[1][2] * iitBody[1][1] +
+        rotmat[2][2] * iitBody[1][2];
+    float t62 = rotmat[0][2] * iitBody[2][0] +
+        rotmat[1][2] * iitBody[2][1] +
+        rotmat[2][2] * iitBody[2][2];
+
+    iitWorld[0][0] = t4 * rotmat[0][0] +
+        t9 * rotmat[1][0] +
+        t14 * rotmat[2][0];
+    iitWorld[1][0] = t4 * rotmat[0][1] +
+        t9 * rotmat[1][1] +
+        t14 * rotmat[2][1];
+    iitWorld[2][0] = t4 * rotmat[0][2] +
+        t9 * rotmat[1][2] +
+        t14 * rotmat[2][2];
+    iitWorld[0][1] = t28 * rotmat[0][0] +
+        t33 * rotmat[1][0] +
+        t38 * rotmat[2][0];
+    iitWorld[1][1] = t28 * rotmat[0][1] +
+        t33 * rotmat[1][1] +
+        t38 * rotmat[2][1];
+    iitWorld[2][1] = t28 * rotmat[0][2] +
+        t33 * rotmat[1][2] +
+        t38 * rotmat[2][2];
+    iitWorld[0][2] = t52 * rotmat[0][0] +
+        t57 * rotmat[1][0] +
+        t62 * rotmat[2][0];
+    iitWorld[1][2] = t52 * rotmat[0][1] +
+        t57 * rotmat[1][1] +
+        t62 * rotmat[2][1];
+    iitWorld[2][2] = t52 * rotmat[0][2] +
+        t57 * rotmat[1][2] +
+        t62 * rotmat[2][2];
+}
+
+/**
  * Inline function that creates a transform matrix from a
  * position and orientation.
  */
@@ -49,13 +116,12 @@ void RigidBody::calculateDerivedData()
     // Calculate the transform matrix for the body.
     _calculateTransformMatrix(transformMatrix, position, orientation);
 
-    /*
+    
     // Calculate the inertiaTensor in world space.
     _transformInertiaTensor(inverseInertiaTensorWorld,
         orientation,
         inverseInertiaTensor,
         transformMatrix);
-    */
 }
 
 void RigidBody::integrate(float deltaTime)
@@ -106,7 +172,7 @@ void RigidBody::setMass(const float mass)
 float RigidBody::getMass() const
 {
     if (inverseMass == 0) {
-        //return REAL_MAX;
+        //return float_MAX;
         return inverseMass;
     }
     else {
@@ -153,9 +219,9 @@ void RigidBody::setInertiaTensorCuboid(float dimensionx, float dimensiony, float
 
     // Create cuboid intertia tensor
     // Diagonal
-    inertiaTensor[0][0] = 1.0/12.0 * getMass() * pow(dimensiony, 2.0f) + pow(dimensionz, 2.0f);
-    inertiaTensor[1][1] = 1.0 / 12.0 * getMass() * pow(dimensionx, 2.0f) + pow(dimensionz, 2.0f);
-    inertiaTensor[2][2] = 1.0 / 12.0 * getMass() * pow(dimensionx, 2.0f) + pow(dimensiony, 2.0f);
+    inertiaTensor[0][0] = 1.0f/ 12.0f * getMass() * pow(dimensiony, 2.0f) + pow(dimensionz, 2.0f);
+    inertiaTensor[1][1] = 1.0f / 12.0f * getMass() * pow(dimensionx, 2.0f) + pow(dimensionz, 2.0f);
+    inertiaTensor[2][2] = 1.0f / 12.0f * getMass() * pow(dimensionx, 2.0f) + pow(dimensiony, 2.0f);
 
     inverseInertiaTensor = glm::inverse(inertiaTensor);
     _checkInverseInertiaTensor(inverseInertiaTensor);
