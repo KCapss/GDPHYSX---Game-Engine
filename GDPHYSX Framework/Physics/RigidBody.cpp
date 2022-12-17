@@ -39,9 +39,7 @@ RigidBody::RigidBody()
     this->setPosition(vec3(0));
     this->setMass(1);
     this->rotation = vec3(0);
-    
-
-
+    this->setDamping(1.0f, 1.0f);
 }
 
 void RigidBody::calculateDerivedData()

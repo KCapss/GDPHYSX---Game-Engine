@@ -74,12 +74,10 @@ void ObjectContainer::updateParticleContainer(float deltaTime)
 void ObjectContainer::updateRBObjContainer(float deltaTime)
 {
 	for (int i = 0; i < rigidBodyObjContainer.size(); i++) {
-		
 		for (int j = 0; j < particleContainer.size(); j++) {
 
-			rigidBodyObjContainer[i]->calculateDerivedData();
+			//rigidBodyObjContainer[i]->calculateDerivedData();
 			rigidBodyObjContainer[i]->integrate(deltaTime);
-
 
 			if (rigidBodyObjContainer[i]->isParticleInside(particleContainer[j]->getPosition())) {
 				cout << "Found Collision " << endl;

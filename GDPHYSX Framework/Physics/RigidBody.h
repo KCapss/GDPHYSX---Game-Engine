@@ -53,19 +53,19 @@ protected:
       Holds the angular orientation of the rigid body in
       world space.
      */
-    glm::quat orientation;
+    glm::quat orientation = vec3(0.0f);
 
     /*
       Holds the linear velocity of the rigid body in
       world space.
      */
-    vec3 velocity;
+    vec3 velocity = vec3(0.0f);
 
     /*
       Holds the angular velocity, or rotation, or the
       rigid body in world space.
      */
-    vec3 rotation;
+    vec3 rotation = vec3(0.0f);
 
      /*
        Holds the inverse inertia tensor of the body in world
@@ -85,26 +85,26 @@ protected:
       * Holds the accumulated force to be applied at the next
       * integration step.
       */
-    vec3 forceAccum;
+    vec3 forceAccum = vec3(0.0f);
 
     /*
       Holds the accumulated torque to be applied at the next
       integration step.
      */
-    vec3 torqueAccum;
+    vec3 torqueAccum = vec3(0.0f);
 
     /*
       Holds the acceleration of the rigid body.  This value
       can be used to set acceleration due to gravity (its primary
       use), or any other constant acceleration.
      */
-    vec3 acceleration;
+    vec3 acceleration = vec3(0.0f);
 
     /**
      * Holds the linear acceleration of the rigid body, for the
      * previous frame.
      */
-    vec3 lastFrameAcceleration;
+    vec3 lastFrameAcceleration = vec3(0.0f);
 
 public:
 
