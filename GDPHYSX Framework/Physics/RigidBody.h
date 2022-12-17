@@ -149,6 +149,13 @@ public:
      */
     void setInertiaTensor(const glm::mat3& inertiaTensor);
 
+
+    /*
+    *IMPORTANT:
+    *For cuboid, set massand set length first
+    */
+    void setInertiaTensorCuboid(float dimensionx, float dimensiony, float dimensionz);
+
     /**
      * Copies the current inertia tensor of the rigid body into
      * the given matrix.

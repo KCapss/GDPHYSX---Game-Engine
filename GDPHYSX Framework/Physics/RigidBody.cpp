@@ -144,6 +144,24 @@ void RigidBody::setInertiaTensor(const glm::mat3& inertiaTensor)
    _checkInverseInertiaTensor(inverseInertiaTensor);
 }
 
+void RigidBody::setInertiaTensorCuboid(float dimensionx, float dimensiony, float dimensionz)
+{
+    glm::mat3 inertiaTensor;
+    // Set columns to 0
+    inertiaTensor[0] = glm::vec4(0.0);
+    inertiaTensor[1] = glm::vec4(0.0);
+    inertiaTensor[2] = glm::vec4(0.0);
+
+    // Create cuboid intertia tensor
+    // Diagonal
+    inertiaTensor[0][0] = 1.0/12.0 * getMass() * pow(dimensiony, 2.0f) * pow(dimensionz, 2.0f);
+    inertiaTensor[1][1] = 1.0 / 12.0 * getMass() * pow(dimensionx, 2.0f) * pow(dimensionz, 2.0f);
+    inertiaTensor[2][2] = 1.0 / 12.0 * getMass() * pow(dimensionx, 2.0f) * pow(dimensiony, 2.0f);
+
+    inverseInertiaTensor = glm::inverse(inertiaTensor);
+    _checkInverseInertiaTensor(inverseInertiaTensor);
+}
+
 void RigidBody::getInertiaTensor(glm::mat3 *inertiaTensor) const
 {
     *inertiaTensor = glm::inverse(inverseInertiaTensor);
