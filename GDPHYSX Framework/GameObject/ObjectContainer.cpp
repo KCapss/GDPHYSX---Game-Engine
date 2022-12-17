@@ -76,8 +76,14 @@ void ObjectContainer::updateRBObjContainer(float deltaTime)
 	for (int i = 0; i < rigidBodyObjContainer.size(); i++) {
 		
 		for (int j = 0; j < particleContainer.size(); j++) {
+			rigidBodyObjContainer[i]->calculateDerivedData();
+			rigidBodyObjContainer[i]->integrate(deltaTime);
 			if (rigidBodyObjContainer[i]->isParticleInside(particleContainer[j]->getPosition())) {
 				cout << "Found Collision " << endl;
+				vec3 force = particleContainer[j]->getPosition() * particleContainer[j]->getAcceleraation() * 5.0f;
+				cout << "Force: " << force.x << ", " << force.y << ", " << force.z << endl;
+
+				rigidBodyObjContainer[i]->addForceAtBodyPoint(force, particleContainer[j]->getPosition());
 			}
 
 			else {

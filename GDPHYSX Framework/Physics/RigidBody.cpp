@@ -10,27 +10,27 @@ static inline void _calculateTransformMatrix(glm::mat4& transformMatrix,
 {
     transformMatrix[0][0] = 1.0f - 2.0f * orientation.y * orientation.y - 
         2.0f * orientation.z * orientation.z;
-    transformMatrix[0][1] = 2.0f * orientation.x * orientation.y -
+    transformMatrix[1][0] = 2.0f * orientation.x * orientation.y -
         2.0f * orientation.w * orientation.z;
-    transformMatrix[0][2] = 2.0f * orientation.x * orientation.z +
+    transformMatrix[2][0] = 2.0f * orientation.x * orientation.z +
         2.0f * orientation.w * orientation.y;
-    transformMatrix[0][3] = position.x;
+    transformMatrix[3][0] = position.x;
 
-    transformMatrix[1][0] = 2.0f * orientation.x * orientation.y +
+    transformMatrix[0][1] = 2.0f * orientation.x * orientation.y +
         2.0f * orientation.w * orientation.z;
     transformMatrix[1][1] = 1 - 2.0f * orientation.x * orientation.x -
         2.0f * orientation.z * orientation.z;
-    transformMatrix[1][2] = 2.0f * orientation.y * orientation.z -
+    transformMatrix[2][1] = 2.0f * orientation.y * orientation.z -
         2.0f * orientation.w * orientation.x;
-    transformMatrix[1][3] = position.y;
+    transformMatrix[3][1] = position.y;
 
-    transformMatrix[2][0] = 2.0f * orientation.x * orientation.z -
+    transformMatrix[0][2] = 2.0f * orientation.x * orientation.z -
         2.0f * orientation.w * orientation.y;
-    transformMatrix[2][1] = 2.0f * orientation.y * orientation.z +
+    transformMatrix[1][2] = 2.0f * orientation.y * orientation.z +
         2.0f * orientation.w * orientation.x;
     transformMatrix[2][2] = 1 - 2.0f * orientation.x * orientation.x -
         2.0f * orientation.y * orientation.y;
-    transformMatrix[2][3] = position.z;
+    transformMatrix[3][2] = position.z;
 }
 
 RigidBody::RigidBody()
