@@ -111,7 +111,7 @@ RigidBody::RigidBody()
 
 void RigidBody::calculateDerivedData()
 {
-    glm::normalize(orientation);
+    orientation = glm::normalize(orientation);
 
     // Calculate the transform matrix for the body.
     _calculateTransformMatrix(transformMatrix, position, orientation);
@@ -296,9 +296,21 @@ void RigidBody::addForceAtPoint(const vec3& force, const vec3& point)
     pt -= position;
 
     forceAccum += force;
+
     torqueAccum.x += fmodf(pt.x, force.x);
+    if (torqueAccum.x != torqueAccum.x) {
+        torqueAccum.x = 0;
+    }
+
     torqueAccum.y += fmodf(pt.y, force.y);
+    if (torqueAccum.y != torqueAccum.y) {
+        torqueAccum.y = 0;
+    }
+
     torqueAccum.z += fmodf(pt.z, force.z);
+    if (torqueAccum.z != torqueAccum.z) {
+        torqueAccum.z = 0;
+    }
 }
 
 glm::vec3 RigidBody::getPointInWorldSpace(const glm::vec3& point) const

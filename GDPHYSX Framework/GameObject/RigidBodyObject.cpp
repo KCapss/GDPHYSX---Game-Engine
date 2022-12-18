@@ -28,9 +28,9 @@ void RigidBodyObject::draw()
 
     
     //With Rigid Bodies
-    //transform = glm::rotate(transform, glm::radians(this->rotation.x), glm::vec3(0, 1, 0));
-    //transform = glm::rotate(transform, glm::radians(this->rotation.y), glm::vec3(1, 0, 0));
-    //transform = glm::rotate(transform, glm::radians(this->rotation.z), glm::vec3(0, 0, 1));
+    transform = glm::rotate(transform, glm::radians(this->orientation.x), glm::vec3(0, 1, 0));
+    transform = glm::rotate(transform, glm::radians(this->orientation.y), glm::vec3(1, 0, 0));
+    transform = glm::rotate(transform, glm::radians(this->orientation.z), glm::vec3(0, 0, 1));
 
 
 
