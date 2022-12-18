@@ -145,7 +145,7 @@ void RigidBody::integrate(float deltaTime)
 
     // Calculate angular acceleration from torque inputs.
     //glm::vec3 angularAcceleration = inverseInertiaTensorWorld * torqueAccum * 10000.0f;
-    angularAcceleration += inverseInertiaTensorWorld * torqueAccum * 100.0f;
+    angularAcceleration += inverseInertiaTensorWorld * torqueAccum * 200.0f;
 
     // Adjust velocities
     // Update linear velocity from both acceleration and impulse.

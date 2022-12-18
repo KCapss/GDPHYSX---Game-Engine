@@ -78,6 +78,5 @@ void BallisticObject::onReset()
 {
     this->setActive(false);
     this->setShotType(ShotTypes::UNUSED);
-   
-   
+    this->isHit = false;
 ;}
