@@ -164,6 +164,7 @@
     <ClCompile Include="GameObject\ParticleObject.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="Physics\Quaterions.cpp" />
     <ClCompile Include="Physics\RigidBody.cpp" />
     <ClCompile Include="Render\LineRenderer.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="GameObject\FireworkObject.h" />
     <ClInclude Include="GameObject\ParticleObject.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Physics\Quaterions.h" />
     <ClInclude Include="Physics\RigidBody.h" />
     <ClInclude Include="Render\LineRenderer.h" />
     <ClInclude Include="Model.h" />

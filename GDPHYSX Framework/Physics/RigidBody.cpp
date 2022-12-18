@@ -329,6 +329,17 @@ void RigidBody::addForceAtPoint(const vec3& force, const vec3& point)
     if (torqueAccum.z != torqueAccum.z) {
         torqueAccum.z = 0;
     }
+
+
+    /*Experimental Changes*/
+
+    //Extra
+    pointImpact = point;
+    Quaterions calc;
+    speed = calc.retrieveSpeed(this->position, pointImpact);
+    axisRotation = glm::cross(this->position, pointImpact);
+    
+    
 }
 
 glm::vec3 RigidBody::getPointInWorldSpace(const glm::vec3& point) const

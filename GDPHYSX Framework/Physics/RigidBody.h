@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include "Quaterions.h"
 
 #include <iostream>
 
@@ -116,6 +117,16 @@ protected:
      * previous frame.
      */
     vec3 lastFrameAcceleration = vec3(0.0f);
+
+
+    /*External Resource for computing Quat*/
+    vec3 pointImpact = vec3(0.0f);
+    vec3 axisRotation = vec3(0.0f);
+    float speed = 0;
+    float theta = 0;
+    glm::mat4 extraTransformMat = glm::mat4(1.0f);
+
+
 
 public:
 

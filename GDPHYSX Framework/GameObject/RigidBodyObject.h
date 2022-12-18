@@ -25,7 +25,7 @@ protected:
 
 
 private:
-    
+    void adjustTransFormMat(float timeStep);
 
 };
 

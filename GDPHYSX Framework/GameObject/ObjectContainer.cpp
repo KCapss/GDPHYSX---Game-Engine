@@ -88,8 +88,8 @@ void ObjectContainer::updateRBObjContainer(float deltaTime)
 				//cout << "Force: " << force.x << ", " << force.y << ", " << force.z << endl;
 
 				rigidBodyObjContainer[i]->addForceAtBodyPoint(force, particleContainer[j]->getPosition());
-				//cout << "Rigidbody Pos: " << rigidBodyObjContainer[i]->getPosition().x << ", " << rigidBodyObjContainer[i]->getPosition().y 
-					//<< ", " << rigidBodyObjContainer[i]->getPosition().z << endl;
+				cout << "Rigidbody Pos: " << rigidBodyObjContainer[i]->getPosition().x << ", " << rigidBodyObjContainer[i]->getPosition().y 
+					<< ", " << rigidBodyObjContainer[i]->getPosition().z << endl;
 				particleContainer[j]->isHit = true;
 			}
 
