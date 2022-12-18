@@ -1,4 +1,6 @@
 #include "RigidBodyObject.h"
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 RigidBodyObject::RigidBodyObject(std::string name, ObjectType objType, GLFWwindow* currWindow) : Model(name, objType, currWindow), RigidBody()
 {
@@ -19,8 +21,6 @@ void RigidBodyObject::draw()
     glm::mat4 identity = glm::mat4(1.0f);
     glm::mat4 transform = glm::translate(identity, this->getPosition());
 
-    transform = glm::scale(transform, objScale);
-
     //Default
    /* transform = glm::rotate(transform, glm::radians(objRotation.x), glm::vec3(0, 1, 0));
     transform = glm::rotate(transform, glm::radians(objRotation.y), glm::vec3(1, 0, 0));
@@ -28,12 +28,13 @@ void RigidBodyObject::draw()
 
     
     //With Rigid Bodies
-    //transform = glm::rotate(transform, glm::radians(this->rotation.x), glm::vec3(0, 1, 0));
-    //transform = glm::rotate(transform, glm::radians(this->rotation.y), glm::vec3(1, 0, 0));
-    //transform = glm::rotate(transform, glm::radians(this->rotation.z), glm::vec3(0, 0, 1));
-
-
-
+    transform = glm::rotate(transform, glm::radians(this->rotation.x), glm::vec3(0, 1, 0));
+    transform = glm::rotate(transform, glm::radians(this->rotation.y), glm::vec3(1, 0, 0));
+    transform = glm::rotate(transform, glm::radians(this->rotation.z), glm::vec3(0, 0, 1));
+    glm::mat4 rotationMatrix = (glm::mat4)orientation;
+    transform *= rotationMatrix;
+    transform = transformMatrix;
+    transform = glm::scale(transform, objScale);
 
     glUseProgram(shader->getShaderProg());
     glBindVertexArray(VAO); // Render on the active

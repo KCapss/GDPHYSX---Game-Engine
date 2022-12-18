@@ -74,19 +74,22 @@ void ObjectContainer::updateParticleContainer(float deltaTime)
 void ObjectContainer::updateRBObjContainer(float deltaTime)
 {
 	for (int i = 0; i < rigidBodyObjContainer.size(); i++) {
+		//rigidBodyObjContainer[i]->addTorque(vec3(0,10000000,0));
 		for (int j = 0; j < particleContainer.size(); j++) {
 
 			//rigidBodyObjContainer[i]->calculateDerivedData();
 			rigidBodyObjContainer[i]->integrate(deltaTime);
 
 			if (rigidBodyObjContainer[i]->isParticleInside(particleContainer[j]->getPosition())) {
-				cout << "Found Collision " << endl;
+				//cout << "Found Collision " << endl;
 				vec3 force = particleContainer[j]->getMass() * particleContainer[j]->getVelocity();
-				cout << "Force: " << force.x << ", " << force.y << ", " << force.z << endl;
+				//cout << "Velocity: " << particleContainer[j]->getVelocity().x << ", " << particleContainer[j]->getVelocity().y
+					//<< ", " << particleContainer[j]->getVelocity().z << endl;
+				//cout << "Force: " << force.x << ", " << force.y << ", " << force.z << endl;
 
 				rigidBodyObjContainer[i]->addForceAtBodyPoint(force, particleContainer[j]->getPosition());
-				cout << "Rigidbody Pos: " << rigidBodyObjContainer[i]->getPosition().x << ", " << rigidBodyObjContainer[i]->getPosition().y 
-					<< ", " << rigidBodyObjContainer[i]->getPosition().z << endl;
+				//cout << "Rigidbody Pos: " << rigidBodyObjContainer[i]->getPosition().x << ", " << rigidBodyObjContainer[i]->getPosition().y 
+					//<< ", " << rigidBodyObjContainer[i]->getPosition().z << endl;
 			}
 
 			else {

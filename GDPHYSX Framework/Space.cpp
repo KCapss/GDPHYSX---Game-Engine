@@ -80,7 +80,6 @@ void Space::initializeObj()
     rbObj = new RigidBodyObject("cube", NoTexture, this->window);
     rbObj->setPosition(vec3(0, 0, 100.0f));
     rbObj->setMass(1.0f);
-    rbObj->setInertiaTensorCuboid(rbObj->getLength(), rbObj->getLength(), rbObj->getLength());
     objectContainer->addRBObject(rbObj);
 
 
@@ -166,8 +165,7 @@ void Space::initializeObj()
     //Rigid Body Setup
     rbObj->retrieveSource(lightSrc, mainCam, alterCam);
     rbObj->setLength(50.0f);
-    
-
+    rbObj->setInertiaTensorCuboid(rbObj->getLength(), rbObj->getLength(), rbObj->getLength());
 }
 
 

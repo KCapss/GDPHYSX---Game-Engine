@@ -107,11 +107,24 @@ RigidBody::RigidBody()
     this->setMass(1);
     this->rotation = vec3(0);
     this->setDamping(1.0f, 1.0f);
+    this->orientation.x = 0.0f;
+    this->orientation.y = 0.0f;
+    this->orientation.z = 0.0f;
+    this->orientation.w = 0.0f;
+    this->transformMatrix[0] = glm::vec4(0);
+    this->transformMatrix[1] = glm::vec4(0);
+    this->transformMatrix[2] = glm::vec4(0);
+    this->transformMatrix[3] = glm::vec4(0);
+    this->transformMatrix[0][0] = 1;
+    this->transformMatrix[1][1] = 1;
+    this->transformMatrix[2][2] = 1;
+    this->transformMatrix[3][3] = 1; 
+    this->transformMatrix[3][0] = 1;
 }
 
 void RigidBody::calculateDerivedData()
 {
-    glm::normalize(orientation);
+    orientation = glm::normalize(orientation);
 
     // Calculate the transform matrix for the body.
     _calculateTransformMatrix(transformMatrix, position, orientation);
@@ -131,7 +144,8 @@ void RigidBody::integrate(float deltaTime)
     lastFrameAcceleration += forceAccum * inverseMass;
 
     // Calculate angular acceleration from torque inputs.
-    glm::vec3 angularAcceleration = inverseInertiaTensorWorld * torqueAccum;
+    //glm::vec3 angularAcceleration = inverseInertiaTensorWorld * torqueAccum * 10000.0f;
+    angularAcceleration += inverseInertiaTensorWorld * torqueAccum;
 
     // Adjust velocities
     // Update linear velocity from both acceleration and impulse.
@@ -163,6 +177,7 @@ void RigidBody::integrate(float deltaTime)
 
 void RigidBody::setMass(const float mass)
 {
+    this->mass = mass;
     if (mass != 0)
     {
         inverseMass = 1.0f / mass;
@@ -171,6 +186,8 @@ void RigidBody::setMass(const float mass)
 
 float RigidBody::getMass() const
 {
+    return mass;
+    /*
     if (inverseMass == 0) {
         //return float_MAX;
         return inverseMass;
@@ -178,6 +195,7 @@ float RigidBody::getMass() const
     else {
         return 1.0f / inverseMass;
     }
+    */
 }
 
 void RigidBody::setInverseMass(const float inverseMass)
@@ -213,9 +231,9 @@ void RigidBody::setInertiaTensorCuboid(float dimensionx, float dimensiony, float
 {
     glm::mat3 inertiaTensor;
     // Set columns to 0
-    inertiaTensor[0] = glm::vec4(0.0);
-    inertiaTensor[1] = glm::vec4(0.0);
-    inertiaTensor[2] = glm::vec4(0.0);
+    inertiaTensor[0] = vec3(0);
+    inertiaTensor[1] = vec3(0);
+    inertiaTensor[2] = vec3(0);
 
     // Create cuboid intertia tensor
     // Diagonal
@@ -296,9 +314,21 @@ void RigidBody::addForceAtPoint(const vec3& force, const vec3& point)
     pt -= position;
 
     forceAccum += force;
+
     torqueAccum.x += fmodf(pt.x, force.x);
+    if (torqueAccum.x != torqueAccum.x) {
+        torqueAccum.x = 0;
+    }
+
     torqueAccum.y += fmodf(pt.y, force.y);
-    torqueAccum.z += fmodf(pt.z, force.z);
+    if (torqueAccum.y != torqueAccum.y) {
+        torqueAccum.y = 0;
+    }
+
+    torqueAccum.z += fmodf(pt.y, force.y);
+    if (torqueAccum.z != torqueAccum.z) {
+        torqueAccum.z = 0;
+    }
 }
 
 glm::vec3 RigidBody::getPointInWorldSpace(const glm::vec3& point) const
@@ -390,7 +420,7 @@ vec3 RigidBody::getLastFrameAcceleration() const
 
 void RigidBody::addForceAtBodyPoint(const vec3& force, const vec3& point)
 {
-    // Convert to coordinates relative to center of mass.
+   //Convert to coordinates relative to center of mass.
     glm::vec3 pt = getPointInWorldSpace(point);
     addForceAtPoint(force, pt);
 }
@@ -473,7 +503,7 @@ vec3 RigidBody::getPosition() const
 void RigidBody::setOrientation(const glm::quat& orientation)
 {
     RigidBody::orientation = orientation;
-    glm::normalize(RigidBody::orientation);
+    RigidBody::orientation = glm::normalize(RigidBody::orientation);
 }
 
 void RigidBody::setOrientation(const float r, const float i, const float j, const float k)
@@ -482,7 +512,7 @@ void RigidBody::setOrientation(const float r, const float i, const float j, cons
     orientation.y = i;
     orientation.z = j;
     orientation.w = k;
-    glm::normalize(orientation);
+    orientation = glm::normalize(orientation);
 }
 
 void RigidBody::getOrientation(glm::quat* orientation) const

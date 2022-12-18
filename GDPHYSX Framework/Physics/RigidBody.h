@@ -18,6 +18,12 @@ public:
 
     // ... Other RigidBody code as before ...
 
+    /*
+      Holds the angular orientation of the rigid body in
+      world space.
+     */
+    glm::quat orientation;
+
 
 protected:
    
@@ -25,6 +31,11 @@ protected:
       Holds the inverse of the mass of the rigid body. 
       */
     float inverseMass;
+
+    /*
+    Holds mass
+    */
+    float mass;
 
     /*
      Holds the inverse of the body's inertia tensor. 
@@ -49,11 +60,6 @@ protected:
      */
     vec3 position;
 
-    /*
-      Holds the angular orientation of the rigid body in
-      world space.
-     */
-    glm::quat orientation = vec3(0.0f);
 
     /*
       Holds the linear velocity of the rigid body in
@@ -66,6 +72,11 @@ protected:
       rigid body in world space.
      */
     vec3 rotation = vec3(0.0f);
+
+    /*
+      Holds the angular acceleration
+     */
+    vec3 angularAcceleration = vec3(0.0f);
 
      /*
        Holds the inverse inertia tensor of the body in world
