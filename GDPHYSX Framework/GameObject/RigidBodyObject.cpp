@@ -17,25 +17,11 @@ void RigidBodyObject::update(float timeStep)
 void RigidBodyObject::draw()
 {
     glBindVertexArray(0);
-    //float time = glfwGetTime();
+    
     //Apply Linear Transformation (Default)
     glm::mat4 identity = glm::mat4(1.0f);
     glm::mat4 transform = identity;
-    //transform = glm::translate(identity, this->getPosition());
-
-   // //Default
-   ///* transform = glm::rotate(transform, glm::radians(objRotation.x), glm::vec3(0, 1, 0));
-   // transform = glm::rotate(transform, glm::radians(objRotation.y), glm::vec3(1, 0, 0));
-   // transform = glm::rotate(transform, glm::radians(objRotation.z), glm::vec3(0, 0, 1));*/
-
-   // 
-   // //With Rigid Bodies
-   // transform = glm::rotate(transform, glm::radians(this->rotation.x), glm::vec3(0, 1, 0));
-   // transform = glm::rotate(transform, glm::radians(this->rotation.y), glm::vec3(1, 0, 0));
-   // transform = glm::rotate(transform, glm::radians(this->rotation.z), glm::vec3(0, 0, 1));
-   // glm::mat4 rotationMatrix = (glm::mat4)orientation;
-   // transform *= rotationMatrix;
-   // transform = glm::scale(transform, objScale);
+    
 
     transform = glm::translate(transform, this->getPosition());
     transform[0].x = 0;
@@ -46,7 +32,6 @@ void RigidBodyObject::draw()
     transform = this->extraTransformMat + transform;
     transform[3].w = 1;
 
-    //transform = glm::mat4(transform[0], transform[1], transform[2], this->getPosition());
    
     transform = glm::scale(transform, objScale);
 
@@ -109,8 +94,5 @@ void RigidBodyObject::adjustTransFormMat(float timeStep)
         extraTransformMat = calc.getRotationMatrix(this->objPosition, this->axisRotation, theta);
 
         theta += speed * 1000 * timeStep;
-
-
-
     }
 }

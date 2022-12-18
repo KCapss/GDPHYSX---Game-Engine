@@ -20,7 +20,7 @@ public:
 
 
 protected:
-    float length = 20.0f; //fixed dimenstion in ...
+    float length = 1.0f; //fixed dimenstion in ...
     
 
 
