@@ -91,7 +91,7 @@ void RigidBodyObject::adjustTransFormMat(float timeStep)
 {
     if(speed != 0){
         Quaterions calc;
-        extraTransformMat = calc.getRotationMatrix(this->objPosition, this->axisRotation, theta);
+        extraTransformMat = calc.getRotationMatrix(this->objPosition, this->axisRotation, -theta);
 
         theta += speed * 1000 * timeStep;
     }

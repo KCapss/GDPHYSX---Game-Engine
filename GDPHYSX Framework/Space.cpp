@@ -78,7 +78,7 @@ void Space::initializeObj()
 
     //Rigid Body
     rbObj = new RigidBodyObject("cube", NoTexture, this->window);
-    rbObj->setPosition(vec3(0.0f, 0.0f, 200.0f));
+    rbObj->setPosition(vec3(0.0f, 10.0f, 200.0f));
     rbObj->setMass(1.0f);
     objectContainer->addRBObject(rbObj);
 
