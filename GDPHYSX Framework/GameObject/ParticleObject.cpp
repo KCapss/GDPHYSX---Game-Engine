@@ -16,6 +16,9 @@ ParticleObject::ParticleObject(std::string name, ObjectType objType, GLFWwindow*
 
 void ParticleObject::update(float timeStep)
 {
+    if (isHit)
+        setActive(false);
+
     if (this->isSetActive()) {
         this->updatePosition(timeStep);
     }

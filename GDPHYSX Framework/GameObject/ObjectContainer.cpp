@@ -90,6 +90,7 @@ void ObjectContainer::updateRBObjContainer(float deltaTime)
 				rigidBodyObjContainer[i]->addForceAtBodyPoint(force, particleContainer[j]->getPosition());
 				//cout << "Rigidbody Pos: " << rigidBodyObjContainer[i]->getPosition().x << ", " << rigidBodyObjContainer[i]->getPosition().y 
 					//<< ", " << rigidBodyObjContainer[i]->getPosition().z << endl;
+				particleContainer[j]->isHit = true;
 			}
 
 			else {

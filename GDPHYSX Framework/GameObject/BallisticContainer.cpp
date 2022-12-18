@@ -30,10 +30,10 @@ void BallisticContainer::updateBallisticContainer(float deltaTime)
 			magazine[i]->updateBallistic(deltaTime);
 
 
-	/*	 Now checks if out of bounds or is past its age*/
+	/*	 Now checks if out of bounds or is past its age or collides with RB*/
 	if (magazine[i]->getPosition().y < -2000.0f ||
 				magazine[i]->getAge() <= 0 ||
-				magazine[i]->getPosition().z > 2000.0f)
+				magazine[i]->getPosition().z > 2000.0f || magazine[i]->isHit)
 			{
 				// Set to unused if invalid
 				magazine[i]->onReset();
