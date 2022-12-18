@@ -1,10 +1,8 @@
 #include "RigidBody.h"
 #include <math.h> 
 
-/**
- * Internal function to do an intertia tensor transform by a quaternion.
- * Note that the implementation of this function was created by an
- * automated code-generator and optimizer.
+/*
+  Internal function to do an intertia tensor transform by a quaternion.
  */
 static inline void _transformInertiaTensor(glm::mat3& iitWorld,
     const glm::quat& q,
@@ -68,9 +66,8 @@ static inline void _transformInertiaTensor(glm::mat3& iitWorld,
         t62 * rotmat[2][2];
 }
 
-/**
- * Inline function that creates a transform matrix from a
- * position and orientation.
+/*
+ Inline function that creates a transform matrix from a position and orientation.
  */
 static inline void _calculateTransformMatrix(glm::mat4& transformMatrix,
     const glm::vec3& position,
@@ -107,19 +104,12 @@ RigidBody::RigidBody()
     this->setMass(1);
     this->rotation = vec3(0);
     this->setDamping(1.0f, 1.0f);
+    // Did not use in favor of alternate method
     this->orientation.x = 0.0f;
     this->orientation.y = 0.0f;
     this->orientation.z = 0.0f;
     this->orientation.w = 0.0f;
-    this->transformMatrix[0] = glm::vec4(0);
-    this->transformMatrix[1] = glm::vec4(0);
-    this->transformMatrix[2] = glm::vec4(0);
-    this->transformMatrix[3] = glm::vec4(0);
-    this->transformMatrix[0][0] = 1;
-    this->transformMatrix[1][1] = 1;
-    this->transformMatrix[2][2] = 1;
-    this->transformMatrix[3][3] = 1; 
-    this->transformMatrix[3][0] = 1;
+    this->transformMatrix = glm::mat4(1.0);
 }
 
 void RigidBody::calculateDerivedData()
@@ -144,8 +134,8 @@ void RigidBody::integrate(float deltaTime)
     lastFrameAcceleration += forceAccum * inverseMass;
 
     // Calculate angular acceleration from torque inputs.
-    //glm::vec3 angularAcceleration = inverseInertiaTensorWorld * torqueAccum * 10000.0f;
-    angularAcceleration += inverseInertiaTensorWorld * torqueAccum * 200.0f;
+    //glm::vec3 angularAcceleration = inverseInertiaTensorWorld * torqueAccum;
+    angularAcceleration += inverseInertiaTensorWorld * torqueAccum;
 
     // Adjust velocities
     // Update linear velocity from both acceleration and impulse.
@@ -187,15 +177,6 @@ void RigidBody::setMass(const float mass)
 float RigidBody::getMass() const
 {
     return mass;
-    /*
-    if (inverseMass == 0) {
-        //return float_MAX;
-        return inverseMass;
-    }
-    else {
-        return 1.0f / inverseMass;
-    }
-    */
 }
 
 void RigidBody::setInverseMass(const float inverseMass)
@@ -213,12 +194,11 @@ bool RigidBody::hasFiniteMass() const
     return inverseMass >= 0.0f;
 }
 
-/**
- * Internal function that checks the validity of an inverse inertia tensor.
+/*
+  Internal function that checks the validity of an inverse inertia tensor.
  */
 static inline void _checkInverseInertiaTensor(const glm::mat3& iitWorld)
 {
-    // TODO: Perform a validity check in an assert.
 }
 
 void RigidBody::setInertiaTensor(const glm::mat3& inertiaTensor)
@@ -227,6 +207,7 @@ void RigidBody::setInertiaTensor(const glm::mat3& inertiaTensor)
    _checkInverseInertiaTensor(inverseInertiaTensor);
 }
 
+// 
 void RigidBody::setInertiaTensorCuboid(float dimensionx, float dimensiony, float dimensionz)
 {
     glm::mat3 inertiaTensor;
@@ -348,21 +329,6 @@ glm::vec3 RigidBody::getPointInWorldSpace(const glm::vec3& point) const
     glm::vec4 vec4point = transformMatrix * glm::vec4(point.x, point.y, point.z, 1.0f);
     return glm::vec3(vec4point);
     
-}
-
-vec3 RigidBody::getDirectionInLocalSpace(const vec3& direction) const
-{
-    /* original code
-    return transformMatrix.transformInverseDirection(direction);
-    */
-    glm::vec4 vec4point = glm::inverse(transformMatrix) * glm::vec4(direction.x, direction.y, direction.z, 1.0f);
-    return glm::vec3(vec4point);
-}
-
-vec3 RigidBody::getDirectionInWorldSpace(const vec3& direction) const
-{
-    glm::vec4 vec4point = transformMatrix * glm::vec4(direction.x, direction.y, direction.z, 1.0f);
-    return glm::vec3(vec4point);
 }
 
 void RigidBody::setVelocity(const vec3& velocity)
@@ -511,75 +477,9 @@ vec3 RigidBody::getPosition() const
     return position;
 }
 
-void RigidBody::setOrientation(const glm::quat& orientation)
-{
-    RigidBody::orientation = orientation;
-    RigidBody::orientation = glm::normalize(RigidBody::orientation);
-}
-
-void RigidBody::setOrientation(const float r, const float i, const float j, const float k)
-{
-    orientation.x = r;
-    orientation.y = i;
-    orientation.z = j;
-    orientation.w = k;
-    orientation = glm::normalize(orientation);
-}
-
-void RigidBody::getOrientation(glm::quat* orientation) const
-{
-    *orientation = RigidBody::orientation;
-}
-
-glm::quat RigidBody::getOrientation() const
-{
-    return orientation;
-}
-
-void RigidBody::getOrientation(glm::mat3* matrix) const
-{
-    getOrientation(matrix);
-}
-
-void RigidBody::getOrientation(float matrix[9]) const
-{
-    matrix[0] = transformMatrix[0][0];
-    matrix[1] = transformMatrix[0][1];
-    matrix[2] = transformMatrix[0][2];
-
-    matrix[3] = transformMatrix[1][0];
-    matrix[4] = transformMatrix[1][1];
-    matrix[5] = transformMatrix[1][2];
-
-    matrix[6] = transformMatrix[2][0];
-    matrix[7] = transformMatrix[2][1];
-    matrix[8] = transformMatrix[2][2];
-}
-
-void RigidBody::getTransform(glm::mat4* transform) const
-{
-    // omitted
-}
-
-void RigidBody::getTransform(float matrix[16]) const
-{
-    // omitted
-
-}
-
-void RigidBody::getGLTransform(float matrix[16]) const
-{
-    // omitted
-
-}
 
 glm::mat4 RigidBody::getTransform() const
 {
     return transformMatrix;
 }
 
-vec3 RigidBody::getPointInLocalSpace(const vec3& point) const
-{
-    glm::vec4 vec4point = glm::inverse(transformMatrix) * glm::vec4(point.x, point.y, point.z, 1.0f);
-    return glm::vec3(vec4point);
-}
