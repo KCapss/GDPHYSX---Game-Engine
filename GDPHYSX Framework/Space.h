@@ -28,6 +28,9 @@
 //Mass Aggregate
 #include "GameObject/CubeObject.h"
 
+//Rigid Bodies
+#include "GameObject/RigidBodyObject.h"
+
 
 
 //Manager
@@ -90,6 +93,8 @@ private:
 	//Mass Aggregate
 	CubeObject* cube;
 	
+	//Rigid Bodies
+	RigidBodyObject* rbObj;
 
 
 	//Debris

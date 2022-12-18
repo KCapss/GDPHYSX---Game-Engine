@@ -19,7 +19,7 @@ void ParticleContactResolver::resolveContacts(ParticleContact* contactArray, uns
     while (iterationsUsed < iterations)
     {
         // Find the contact with the largest closing velocity;
-        float max = 28.0f;//REAL_MAX;
+        float max = 28.0f;//float_MAX;
         unsigned maxIndex = numContacts;
         for (i = 0; i < numContacts; i++)
         {

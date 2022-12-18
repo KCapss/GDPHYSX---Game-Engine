@@ -58,6 +58,9 @@ public:
 	// Boolean methods
 	bool hasFiniteMass();
 
+	// collision
+	bool isHit = false;
+
 
 private:
 	

@@ -11,6 +11,8 @@ BallisticObject::BallisticObject(std::string name, ObjectType objType, GLFWwindo
 
 void BallisticObject::update(float timeStep)
 {
+    if (isHit)
+        setActive(false);
 
 	if (this->isSetActive()) {
 		this->updatePosition(timeStep);
@@ -76,6 +78,5 @@ void BallisticObject::onReset()
 {
     this->setActive(false);
     this->setShotType(ShotTypes::UNUSED);
-   
-   
+    this->isHit = false;
 ;}

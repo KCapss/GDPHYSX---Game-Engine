@@ -17,7 +17,7 @@ void Ballistic::setShotType(ShotTypes chosenShotType)
 		case PISTOL:
 			this->setMass(2.0f);
 			this->setVelocity(vec3(0.0f, 0.0f, 100.0f));
-			this->setAcceleration(vec3(0.0f, -1.0f, 0.0f));
+			this->setAcceleration(vec3(0.0f, 0.0f, 0.0f));
 			this->setDamping(0.99f);
 			break;
 		case ARTILLERY:
