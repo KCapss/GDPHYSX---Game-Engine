@@ -74,7 +74,7 @@ void ObjectContainer::updateParticleContainer(float deltaTime)
 void ObjectContainer::updateRBObjContainer(float deltaTime)
 {
 	for (int i = 0; i < rigidBodyObjContainer.size(); i++) {
-		//rigidBodyObjContainer[i]->addTorque(vec3(0,10000000,0));
+		//rigidBodyObjContainer[i]->addTorque(vec3(0,10000 * deltaTime,0));
 		for (int j = 0; j < particleContainer.size(); j++) {
 
 			//rigidBodyObjContainer[i]->calculateDerivedData();

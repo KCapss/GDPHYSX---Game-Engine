@@ -28,12 +28,12 @@ void RigidBodyObject::draw()
 
     
     //With Rigid Bodies
+    transform = transformMatrix;
     transform = glm::rotate(transform, glm::radians(this->rotation.x), glm::vec3(0, 1, 0));
     transform = glm::rotate(transform, glm::radians(this->rotation.y), glm::vec3(1, 0, 0));
     transform = glm::rotate(transform, glm::radians(this->rotation.z), glm::vec3(0, 0, 1));
     glm::mat4 rotationMatrix = (glm::mat4)orientation;
     transform *= rotationMatrix;
-    transform = transformMatrix;
     transform = glm::scale(transform, objScale);
 
     glUseProgram(shader->getShaderProg());
