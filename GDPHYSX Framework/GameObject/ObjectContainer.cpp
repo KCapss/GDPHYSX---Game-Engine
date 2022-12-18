@@ -81,7 +81,7 @@ void ObjectContainer::updateRBObjContainer(float deltaTime)
 			rigidBodyObjContainer[i]->integrate(deltaTime);
 
 			if (rigidBodyObjContainer[i]->isParticleInside(particleContainer[j]->getPosition())) {
-				//cout << "Found Collision " << endl;
+				cout << "Found Collision " << endl;
 				vec3 force = particleContainer[j]->getMass() * particleContainer[j]->getVelocity();
 				//cout << "Velocity: " << particleContainer[j]->getVelocity().x << ", " << particleContainer[j]->getVelocity().y
 					//<< ", " << particleContainer[j]->getVelocity().z << endl;

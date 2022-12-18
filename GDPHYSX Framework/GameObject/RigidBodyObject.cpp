@@ -37,16 +37,18 @@ void RigidBodyObject::draw()
    // transform *= rotationMatrix;
    // transform = glm::scale(transform, objScale);
 
-
     transform = glm::translate(transform, this->getPosition());
     transform[0].x = 0;
     transform[1].y = 0;
     transform[2].z = 0;
+    transform[3].w = 0;
+
     transform = this->extraTransformMat + transform;
+    transform[3].w = 1;
 
     //transform = glm::mat4(transform[0], transform[1], transform[2], this->getPosition());
    
-    transform = glm::scale(transform, objScale * 3.0f);
+    transform = glm::scale(transform, objScale);
 
 
     glUseProgram(shader->getShaderProg());
