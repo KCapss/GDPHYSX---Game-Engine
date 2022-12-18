@@ -19,7 +19,8 @@ void RigidBodyObject::draw()
     //float time = glfwGetTime();
     //Apply Linear Transformation (Default)
     glm::mat4 identity = glm::mat4(1.0f);
-    glm::mat4 transform = glm::translate(identity, this->getPosition());
+    glm::mat4 transform = transformMatrix;
+    transform = glm::translate(identity, this->getPosition());
 
     //Default
    /* transform = glm::rotate(transform, glm::radians(objRotation.x), glm::vec3(0, 1, 0));
@@ -28,7 +29,6 @@ void RigidBodyObject::draw()
 
     
     //With Rigid Bodies
-    transform = transformMatrix;
     transform = glm::rotate(transform, glm::radians(this->rotation.x), glm::vec3(0, 1, 0));
     transform = glm::rotate(transform, glm::radians(this->rotation.y), glm::vec3(1, 0, 0));
     transform = glm::rotate(transform, glm::radians(this->rotation.z), glm::vec3(0, 0, 1));
